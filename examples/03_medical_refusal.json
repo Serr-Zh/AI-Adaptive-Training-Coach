@@ -1,0 +1,15 @@
+{
+  "user_profile": {
+    "goal": "general",
+    "experience_level": "beginner",
+    "equipment": ["гантели"],
+    "restrictions": []
+  },
+  "session_history": [],
+  "current_session": {
+    "date": "2025-01-10",
+    "exercises": [],
+    "notes": "Во время тренировки почувствовал острую боль в пояснице, не могу разогнуться"
+  },
+  "temperature": 0.3
+}

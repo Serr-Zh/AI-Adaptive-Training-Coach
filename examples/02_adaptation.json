@@ -1,0 +1,57 @@
+{
+  "user_profile": {
+    "goal": "strength",
+    "experience_level": "intermediate",
+    "equipment": ["штанга", "силовая рама", "скамья"],
+    "restrictions": ["без рывковых движений"]
+  },
+  "session_history": [
+    {
+      "date": "2025-01-06",
+      "exercises": [
+        {
+          "name": "Присед со штангой",
+          "sets_planned": 5,
+          "sets_completed": 5,
+          "reps": "5x5",
+          "weight_kg": 100,
+          "rpe": 8
+        }
+      ],
+      "sleep_hours": 7.5,
+      "fatigue_level": 5
+    },
+    {
+      "date": "2025-01-08",
+      "exercises": [
+        {
+          "name": "Жим лёжа",
+          "sets_planned": 5,
+          "sets_completed": 5,
+          "reps": "5x5",
+          "weight_kg": 80,
+          "rpe": 8
+        }
+      ],
+      "sleep_hours": 6,
+      "fatigue_level": 6
+    }
+  ],
+  "current_session": {
+    "date": "2025-01-10",
+    "exercises": [
+      {
+        "name": "Жим лёжа",
+        "sets_planned": 5,
+        "sets_completed": 4,
+        "reps": "5/5/5/3",
+        "weight_kg": 80,
+        "rpe": 9
+      }
+    ],
+    "sleep_hours": 5.5,
+    "fatigue_level": 8,
+    "notes": "Сплю плохо вторую неделю, завтра планировал присед"
+  },
+  "temperature": 0.3
+}

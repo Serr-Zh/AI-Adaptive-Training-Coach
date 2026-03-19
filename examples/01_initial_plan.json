@@ -1,0 +1,11 @@
+{
+  "user_profile": {
+    "goal": "hypertrophy",
+    "experience_level": "intermediate",
+    "equipment": ["штанга", "гантели", "тренажёры", "турник"],
+    "restrictions": []
+  },
+  "session_history": [],
+  "current_session": null,
+  "temperature": 0.3
+}
