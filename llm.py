@@ -2,12 +2,17 @@ import json
 import os
 import re
 import logging
+from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
 from openai import AsyncOpenAI, BadRequestError
 
 from models import CoachResponse
 from prompts import SYSTEM_PROMPT, build_user_prompt
+
+
+load_dotenv(Path(__file__).resolve().parent / ".env")
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +50,7 @@ def extract_json_from_model_answer(raw_answer: str) -> str:
     if json_start == -1 or json_end == -1:
         raise ValueError(f"JSON не найден в ответе модели: {raw_answer[:300]}")
 
-    return raw_answer[json_start:json_end + 1]
+    return raw_answer[json_start : json_end + 1]
 
 
 def _stringify_value(value: Any) -> str | None:
@@ -114,9 +119,18 @@ def _normalize_exercise_changes(value: Any) -> list[dict[str, str]]:
         if isinstance(item, dict):
             normalized.append(
                 {
-                    "exercise_name": _stringify_value(item.get("exercise_name") or item.get("name")) or "Не указано",
-                    "change_type": _stringify_value(item.get("change_type") or item.get("type")) or "изменить",
-                    "details": _stringify_value(item.get("details") or item.get("description")) or "Без деталей",
+                    "exercise_name": _stringify_value(
+                        item.get("exercise_name") or item.get("name")
+                    )
+                    or "Не указано",
+                    "change_type": _stringify_value(
+                        item.get("change_type") or item.get("type")
+                    )
+                    or "изменить",
+                    "details": _stringify_value(
+                        item.get("details") or item.get("description")
+                    )
+                    or "Без деталей",
                 }
             )
         else:
@@ -140,20 +154,27 @@ def normalize_coach_response_shape(response_data: dict) -> dict:
         response_data["mode"] = response_data["mode"].strip().replace(" ", "_").lower()
 
     if response_data.get("mode") not in {"initial_plan", "adaptation"}:
-        if response_data.get("session_assessment") or response_data.get("current_session_assessment"):
+        if (
+            response_data.get("session_assessment")
+            or response_data.get("current_session_assessment")
+        ):
             response_data["mode"] = "adaptation"
         else:
             response_data["mode"] = "initial_plan"
 
     if "session_assessment" in response_data:
-        response_data["session_assessment"] = _stringify_value(response_data.get("session_assessment"))
+        response_data["session_assessment"] = _stringify_value(
+            response_data.get("session_assessment")
+        )
 
     if "long_term_recommendation" in response_data:
         response_data["long_term_recommendation"] = _stringify_value(
             response_data.get("long_term_recommendation")
         )
 
-    response_data["safety_warnings"] = _normalize_warnings(response_data.get("safety_warnings"))
+    response_data["safety_warnings"] = _normalize_warnings(
+        response_data.get("safety_warnings")
+    )
 
     if isinstance(response_data.get("refused"), str):
         response_data["refused"] = response_data["refused"].strip().lower() in {
@@ -165,7 +186,9 @@ def normalize_coach_response_shape(response_data: dict) -> dict:
     else:
         response_data["refused"] = bool(response_data.get("refused", False))
 
-    response_data["refuse_reason"] = _stringify_value(response_data.get("refuse_reason"))
+    response_data["refuse_reason"] = _stringify_value(
+        response_data.get("refuse_reason")
+    )
 
     if "next_session" not in response_data:
         session_decision = (
@@ -180,10 +203,9 @@ def normalize_coach_response_shape(response_data: dict) -> dict:
             or response_data.pop("rationale", None)
             or ""
         )
-        exercise_adjustments = (
-            response_data.pop("exercise_changes", None)
-            or response_data.pop("changes", [])
-        )
+        exercise_adjustments = response_data.pop(
+            "exercise_changes", None
+        ) or response_data.pop("changes", [])
 
         response_data["next_session"] = {
             "decision": _stringify_value(session_decision) or "",
@@ -201,10 +223,16 @@ def normalize_coach_response_shape(response_data: dict) -> dict:
         }
 
     if not next_session_block.get("reasoning") and response_data.get("reasoning"):
-        next_session_block["reasoning"] = _stringify_value(response_data.pop("reasoning")) or ""
+        next_session_block["reasoning"] = (
+            _stringify_value(response_data.pop("reasoning")) or ""
+        )
 
-    next_session_block["decision"] = _stringify_value(next_session_block.get("decision")) or ""
-    next_session_block["reasoning"] = _stringify_value(next_session_block.get("reasoning")) or ""
+    next_session_block["decision"] = (
+        _stringify_value(next_session_block.get("decision")) or ""
+    )
+    next_session_block["reasoning"] = (
+        _stringify_value(next_session_block.get("reasoning")) or ""
+    )
     next_session_block["exercise_changes"] = _normalize_exercise_changes(
         next_session_block.get("exercise_changes")
     )
