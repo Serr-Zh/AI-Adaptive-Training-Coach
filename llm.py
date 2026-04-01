@@ -1,14 +1,13 @@
 import json
+import logging
 import os
 import re
-import logging
 from pathlib import Path
-from typing import Any
 
 from dotenv import load_dotenv
 from openai import AsyncOpenAI, BadRequestError
 
-from models import CoachResponse
+from models import CoachResponse, CoachSGRResponse, sgr_to_coach_response
 from prompts import SYSTEM_PROMPT, build_user_prompt
 
 
@@ -20,9 +19,6 @@ _openai_client: AsyncOpenAI | None = None
 
 
 def get_training_llm_client() -> AsyncOpenAI:
-    """
-    Возвращает общий клиент для обращения к LLM.
-    """
     global _openai_client
 
     if _openai_client is None:
@@ -40,9 +36,6 @@ def get_training_llm_client() -> AsyncOpenAI:
 
 
 def extract_json_from_model_answer(raw_answer: str) -> str:
-    """
-    Достаёт JSON из ответа модели.
-    """
     raw_answer = re.sub(r"```(?:json)?\s*", "", raw_answer).strip()
     json_start = raw_answer.find("{")
     json_end = raw_answer.rfind("}")
@@ -53,199 +46,464 @@ def extract_json_from_model_answer(raw_answer: str) -> str:
     return raw_answer[json_start : json_end + 1]
 
 
-def _stringify_value(value: Any) -> str | None:
-    """
-    Приводит произвольное значение к строке.
-    Нужно для случаев, когда LLM возвращает dict/list вместо строки.
-    """
+def _as_list(value):
     if value is None:
-        return None
-
-    if isinstance(value, str):
-        text = value.strip()
-        return text or None
-
-    if isinstance(value, (int, float, bool)):
-        return str(value)
-
+        return []
     if isinstance(value, list):
-        parts: list[str] = []
-        for item in value:
-            text = _stringify_value(item)
-            if text:
-                parts.append(text)
-        return "; ".join(parts) if parts else None
+        return value
+    return [value]
 
-    if isinstance(value, dict):
-        parts: list[str] = []
-        for key, val in value.items():
-            text = _stringify_value(val)
-            if text:
-                parts.append(f"{key}: {text}")
-        return "; ".join(parts) if parts else None
 
+def _as_bool(value, default=False):
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"true", "1", "yes", "да"}
+    if value is None:
+        return default
+    return bool(value)
+
+
+def _as_str(value, default=""):
+    if value is None:
+        return default
+    if isinstance(value, str):
+        return value.strip()
     return str(value)
 
 
-def _normalize_warnings(value: Any) -> list[str]:
+def _normalize_sgr_exercise_changes(value):
     """
-    Приводит safety_warnings к list[str].
-    """
-    if value is None:
-        return []
-
-    if isinstance(value, list):
-        result: list[str] = []
-        for item in value:
-            text = _stringify_value(item)
-            if text:
-                result.append(text)
-        return result
-
-    text = _stringify_value(value)
-    return [text] if text else []
-
-
-def _normalize_exercise_changes(value: Any) -> list[dict[str, str]]:
-    """
-    Приводит exercise_changes к ожидаемому формату list[dict].
+    Приводит exercise_changes к формату:
+    {
+        "exercise_name": str,
+        "change_type": str,
+        "details": str
+    }
     """
     if not isinstance(value, list):
         return []
 
-    normalized: list[dict[str, str]] = []
+    normalized = []
 
     for item in value:
-        if isinstance(item, dict):
-            normalized.append(
-                {
-                    "exercise_name": _stringify_value(
-                        item.get("exercise_name") or item.get("name")
-                    )
-                    or "Не указано",
-                    "change_type": _stringify_value(
-                        item.get("change_type") or item.get("type")
-                    )
-                    or "изменить",
-                    "details": _stringify_value(
-                        item.get("details") or item.get("description")
-                    )
-                    or "Без деталей",
-                }
-            )
-        else:
-            text = _stringify_value(item) or "Без деталей"
+        if not isinstance(item, dict):
             normalized.append(
                 {
                     "exercise_name": "Не указано",
-                    "change_type": "изменить",
-                    "details": text,
+                    "change_type": "modify",
+                    "details": str(item),
                 }
             )
+            continue
+
+        exercise_name = (
+            item.get("exercise_name")
+            or item.get("exercise")
+            or item.get("name")
+            or "Не указано"
+        )
+
+        change_type = item.get("change_type") or item.get("type")
+        details = item.get("details") or item.get("description")
+
+        if not change_type:
+            if "new_weight_kg" in item:
+                change_type = "increase_weight"
+            elif "remove" in item:
+                change_type = "remove_exercise"
+            elif "replace_with" in item:
+                change_type = "replace_exercise"
+            else:
+                change_type = "modify"
+
+        if not details:
+            if "new_weight_kg" in item:
+                details = f"Новый рабочий вес: {item['new_weight_kg']} кг"
+            elif "replace_with" in item:
+                details = f"Заменить на {item['replace_with']}"
+            elif "remove" in item:
+                details = "Убрать упражнение"
+            else:
+                extra_parts = []
+                for key, val in item.items():
+                    if key not in {
+                        "exercise_name",
+                        "exercise",
+                        "name",
+                        "change_type",
+                        "type",
+                    }:
+                        extra_parts.append(f"{key}: {val}")
+                details = "; ".join(extra_parts) if extra_parts else "Без деталей"
+
+        normalized.append(
+            {
+                "exercise_name": str(exercise_name),
+                "change_type": str(change_type),
+                "details": str(details),
+            }
+        )
 
     return normalized
 
 
-def normalize_coach_response_shape(response_data: dict) -> dict:
+def normalize_sgr_response_shape(response_data: dict) -> dict:
     """
-    Приводит ответ модели к ожидаемой схеме CoachResponse.
-    """
-    if "mode" in response_data and isinstance(response_data["mode"], str):
-        response_data["mode"] = response_data["mode"].strip().replace(" ", "_").lower()
+    Нормализация реального ответа модели к CoachSGRResponse.
 
-    if response_data.get("mode") not in {"initial_plan", "adaptation"}:
-        if (
-            response_data.get("session_assessment")
-            or response_data.get("current_session_assessment")
-        ):
-            response_data["mode"] = "adaptation"
+    Нужна потому, что при fallback на json_object модель может вернуть
+    близкую по смыслу, но нестрогую структуру.
+    """
+    if not isinstance(response_data, dict):
+        return response_data
+
+    # mode
+    mode = _as_str(response_data.get("mode"), "initial_plan").lower()
+    if mode not in {"initial_plan", "adaptation"}:
+        mode = "initial_plan"
+    response_data["mode"] = mode
+
+    # -------------------------
+    # input_summary
+    # -------------------------
+    input_summary = response_data.get("input_summary", {})
+    if not isinstance(input_summary, dict):
+        input_summary = {}
+
+    response_data["input_summary"] = {
+        "brief_goal": _as_str(
+            input_summary.get("brief_goal")
+            or input_summary.get("goal")
+            or input_summary.get("goal_summary"),
+            "Не указано",
+        ),
+        "experience_level": _as_str(
+            input_summary.get("experience_level"),
+            "beginner",
+        ),
+        "equipment_summary": _as_str(
+            input_summary.get("equipment_summary")
+            or input_summary.get("equipment"),
+            "Не указано",
+        ),
+        "restrictions_summary": _as_str(
+            input_summary.get("restrictions_summary")
+            or input_summary.get("restrictions"),
+            "нет",
+        ),
+        "has_history": _as_bool(
+            input_summary.get("has_history")
+            if "has_history" in input_summary
+            else input_summary.get("history_exists"),
+            False,
+        ),
+        "has_current_session": _as_bool(
+            input_summary.get("has_current_session")
+            if "has_current_session" in input_summary
+            else input_summary.get("current_session"),
+            False,
+        ),
+    }
+
+    # -------------------------
+    # progress_assessment
+    # -------------------------
+    progress = response_data.get("progress_assessment", {})
+    if not isinstance(progress, dict):
+        progress = {}
+
+    response_data["progress_assessment"] = {
+        "progress_detected": _as_bool(
+            progress.get("progress_detected")
+            if "progress_detected" in progress
+            else progress.get("progress_signs_exist"),
+            False,
+        ),
+        "supporting_facts": _as_list(
+            progress.get("supporting_facts")
+            or progress.get("progress_signs")
+            or []
+        ),
+        "recommended_progression": (
+            _as_str(
+                progress.get("recommended_progression")
+                or progress.get("progression")
+                or progress.get("suggested_progression"),
+                "",
+            )
+            or None
+        ),
+    }
+
+    # -------------------------
+    # overload_assessment
+    # -------------------------
+    overload = response_data.get("overload_assessment", {})
+    if not isinstance(overload, dict):
+        overload = {}
+
+    recommended_adjustment = (
+        overload.get("recommended_adjustment")
+        or overload.get("adjustment_type")
+        or overload.get("suggested_adjustment")
+    )
+    recommended_adjustment = _as_str(recommended_adjustment, "")
+
+    if recommended_adjustment not in {"reduce_intensity", "reduce_volume"}:
+        recommended_adjustment = None
+
+    response_data["overload_assessment"] = {
+        "overload_detected": _as_bool(
+            overload.get("overload_detected")
+            if "overload_detected" in overload
+            else overload.get("overload_signs_exist"),
+            False,
+        ),
+        "overload_signals": _as_list(
+            overload.get("overload_signals")
+            or overload.get("signals")
+            or []
+        ),
+        "recommended_adjustment": recommended_adjustment,
+    }
+
+    # -------------------------
+    # medical_risk_assessment
+    # -------------------------
+    medical = response_data.get("medical_risk_assessment", {})
+    if not isinstance(medical, dict):
+        medical = {}
+
+    medical_risk_detected = _as_bool(
+        medical.get("medical_risk_detected")
+        if "medical_risk_detected" in medical
+        else medical.get("risk_detected"),
+        False,
+    )
+
+    refusal_required = _as_bool(
+        medical.get("refusal_required"),
+        medical_risk_detected,
+    )
+
+    response_data["medical_risk_assessment"] = {
+        "medical_risk_detected": medical_risk_detected,
+        "risk_signals": _as_list(
+            medical.get("risk_signals")
+            or medical.get("medical_signals")
+            or []
+        ),
+        "refusal_required": refusal_required,
+        "refuse_reason": (
+            _as_str(medical.get("refuse_reason"), "") or None
+        ),
+    }
+
+    # -------------------------
+    # restriction_assessment
+    # -------------------------
+    restriction = response_data.get("restriction_assessment", {})
+    if not isinstance(restriction, dict):
+        restriction = {}
+
+    response_data["restriction_assessment"] = {
+        "restrictions_present": _as_bool(
+            restriction.get("restrictions_present")
+            if "restrictions_present" in restriction
+            else restriction.get("restrictions_exist"),
+            False,
+        ),
+        "limiting_factors": _as_list(
+            restriction.get("limiting_factors")
+            or restriction.get("restriction_factors")
+            or []
+        ),
+        "restriction_impact_summary": _as_str(
+            restriction.get("restriction_impact_summary")
+            or restriction.get("impact_summary"),
+            "Ограничения не влияют на решение",
+        ),
+    }
+
+    # -------------------------
+    # decision_trace
+    # -------------------------
+    trace = response_data.get("decision_trace", {})
+    if not isinstance(trace, dict):
+        trace = {}
+
+    selected_policy = _as_str(
+        trace.get("selected_policy") or trace.get("main_rule"),
+        "",
+    )
+    policy_map = {
+        "medical_refusal": "medical_refusal",
+        "restriction_limited": "restriction_limited",
+        "overload_reduction": "overload_reduction",
+        "progressive_overload": "progressive_overload",
+        "maintain_plan": "maintain_plan",
+        "initial_plan_generation": "initial_plan_generation",
+        "medical safety": "medical_refusal",
+        "medical_refusal_policy": "medical_refusal",
+        "progression": "progressive_overload",
+        "progressive overload": "progressive_overload",
+        "overload": "overload_reduction",
+        "initial plan": "initial_plan_generation",
+    }
+    selected_policy = policy_map.get(selected_policy.lower(), selected_policy)
+
+    if selected_policy not in {
+        "medical_refusal",
+        "restriction_limited",
+        "overload_reduction",
+        "progressive_overload",
+        "maintain_plan",
+        "initial_plan_generation",
+    }:
+        if response_data["medical_risk_assessment"]["medical_risk_detected"]:
+            selected_policy = "medical_refusal"
+        elif response_data["mode"] == "initial_plan":
+            selected_policy = "initial_plan_generation"
+        elif response_data["overload_assessment"]["overload_detected"]:
+            selected_policy = "overload_reduction"
+        elif response_data["progress_assessment"]["progress_detected"]:
+            selected_policy = "progressive_overload"
         else:
-            response_data["mode"] = "initial_plan"
+            selected_policy = "maintain_plan"
 
-    if "session_assessment" in response_data:
-        response_data["session_assessment"] = _stringify_value(
-            response_data.get("session_assessment")
-        )
+    final_action = _as_str(trace.get("final_action"), "")
+    action_map = {
+        "proceed": (
+            "create_initial_plan"
+            if response_data["mode"] == "initial_plan"
+            else "maintain"
+        ),
+        "continue": "maintain",
+        "adapt": "maintain",
+        "increase": "increase_load",
+        "increase_weight": "increase_load",
+        "reduce_load": "reduce_intensity",
+        "reduce_intensity": "reduce_intensity",
+        "reduce_volume": "reduce_volume",
+        "maintain": "maintain",
+        "refuse": "refuse",
+        "create_initial_plan": "create_initial_plan",
+        "modify_for_restrictions": "modify_for_restrictions",
+    }
+    final_action = action_map.get(final_action, final_action)
 
-    if "long_term_recommendation" in response_data:
-        response_data["long_term_recommendation"] = _stringify_value(
-            response_data.get("long_term_recommendation")
-        )
+    if final_action not in {
+        "refuse",
+        "create_initial_plan",
+        "increase_load",
+        "reduce_intensity",
+        "reduce_volume",
+        "maintain",
+        "modify_for_restrictions",
+    }:
+        if response_data["medical_risk_assessment"]["medical_risk_detected"]:
+            final_action = "refuse"
+        elif response_data["mode"] == "initial_plan":
+            final_action = "create_initial_plan"
+        elif response_data["overload_assessment"]["recommended_adjustment"] == "reduce_volume":
+            final_action = "reduce_volume"
+        elif response_data["overload_assessment"]["overload_detected"]:
+            final_action = "reduce_intensity"
+        elif response_data["progress_assessment"]["progress_detected"]:
+            final_action = "increase_load"
+        else:
+            final_action = "maintain"
 
-    response_data["safety_warnings"] = _normalize_warnings(
-        response_data.get("safety_warnings")
+    response_data["decision_trace"] = {
+        "selected_policy": selected_policy,
+        "final_action": final_action,
+        "policy_reasoning": _as_str(
+            trace.get("policy_reasoning")
+            or trace.get("rule_reasoning")
+            or trace.get("main_rule")
+            or "Решение выбрано на основе анализа входных данных",
+            "Решение выбрано на основе анализа входных данных",
+        ),
+    }
+
+    # -------------------------
+    # final_recommendation
+    # -------------------------
+    final = response_data.get("final_recommendation", {})
+    if not isinstance(final, dict):
+        final = {}
+
+    exercise_changes = _normalize_sgr_exercise_changes(
+        final.get("exercise_changes") or final.get("changes") or []
     )
 
-    if isinstance(response_data.get("refused"), str):
-        response_data["refused"] = response_data["refused"].strip().lower() in {
-            "true",
-            "1",
-            "yes",
-            "да",
-        }
-    else:
-        response_data["refused"] = bool(response_data.get("refused", False))
-
-    response_data["refuse_reason"] = _stringify_value(
-        response_data.get("refuse_reason")
+    final_decision = _as_str(
+        final.get("decision")
+        or final.get("final_decision")
+        or final.get("recommendation")
+        or trace.get("final_decision"),
+        "",
     )
 
-    if "next_session" not in response_data:
-        session_decision = (
-            response_data.pop("decision", None)
-            or response_data.pop("recommendation", None)
-            or response_data.pop("plan_summary", None)
-            or ""
-        )
-        decision_reasoning = (
-            response_data.pop("reasoning", None)
-            or response_data.pop("explanation", None)
-            or response_data.pop("rationale", None)
-            or ""
-        )
-        exercise_adjustments = response_data.pop(
-            "exercise_changes", None
-        ) or response_data.pop("changes", [])
+    response_data["final_recommendation"] = {
+        "session_assessment": (
+            _as_str(
+                final.get("session_assessment")
+                or final.get("session_evaluation"),
+                "",
+            )
+            or None
+        ),
+        "decision": final_decision or "Решение сформировано на основе анализа",
+        "exercise_changes": exercise_changes,
+        "reasoning": _as_str(
+            final.get("reasoning")
+            or final.get("explanation")
+            or response_data["decision_trace"]["policy_reasoning"],
+            response_data["decision_trace"]["policy_reasoning"],
+        ),
+        "long_term_recommendation": (
+            _as_str(final.get("long_term_recommendation"), "") or None
+        ),
+        "safety_warnings": _as_list(final.get("safety_warnings") or []),
+        "refused": _as_bool(
+            final.get("refused"),
+            response_data["medical_risk_assessment"]["refusal_required"],
+        ),
+        "refuse_reason": (
+            _as_str(
+                final.get("refuse_reason")
+                or response_data["medical_risk_assessment"]["refuse_reason"],
+                "",
+            )
+            or None
+        ),
+    }
 
-        response_data["next_session"] = {
-            "decision": _stringify_value(session_decision) or "",
-            "exercise_changes": _normalize_exercise_changes(exercise_adjustments),
-            "reasoning": _stringify_value(decision_reasoning) or "",
-        }
+    # -------------------------
+    # Жёсткая коррекция safety-согласованности
+    # -------------------------
+    if response_data["medical_risk_assessment"]["medical_risk_detected"]:
+        response_data["decision_trace"]["selected_policy"] = "medical_refusal"
+        response_data["decision_trace"]["final_action"] = "refuse"
+        response_data["final_recommendation"]["refused"] = True
+        response_data["final_recommendation"]["exercise_changes"] = []
 
-    next_session_block = response_data.get("next_session")
+        if not response_data["final_recommendation"]["refuse_reason"]:
+            response_data["final_recommendation"]["refuse_reason"] = (
+                "Обнаружен медицинский риск"
+            )
 
-    if not isinstance(next_session_block, dict):
-        next_session_block = {
-            "decision": _stringify_value(next_session_block) or "",
-            "exercise_changes": [],
-            "reasoning": "",
-        }
-
-    if not next_session_block.get("reasoning") and response_data.get("reasoning"):
-        next_session_block["reasoning"] = (
-            _stringify_value(response_data.pop("reasoning")) or ""
-        )
-
-    next_session_block["decision"] = (
-        _stringify_value(next_session_block.get("decision")) or ""
-    )
-    next_session_block["reasoning"] = (
-        _stringify_value(next_session_block.get("reasoning")) or ""
-    )
-    next_session_block["exercise_changes"] = _normalize_exercise_changes(
-        next_session_block.get("exercise_changes")
-    )
-
-    response_data["next_session"] = next_session_block
+        if not response_data["final_recommendation"]["decision"]:
+            response_data["final_recommendation"]["decision"] = (
+                "Отказ от тренировочной рекомендации из-за медицинского риска"
+            )
 
     return response_data
 
 
 async def get_coach_response(request_data: dict) -> CoachResponse:
-    """
-    Главная точка входа для получения ответа от AI Adaptive Training Coach.
-    """
     client = get_training_llm_client()
     model_name = os.getenv("LLM_MODEL")
 
@@ -266,11 +524,40 @@ async def get_coach_response(request_data: dict) -> CoachResponse:
         messages=dialog,
     )
 
-    normalized_data = normalize_coach_response_shape(
+    sgr_data = normalize_sgr_response_shape(
         json.loads(extract_json_from_model_answer(raw_answer))
     )
 
-    return CoachResponse(**normalized_data)
+    sgr_response = CoachSGRResponse(**sgr_data)
+    return sgr_to_coach_response(sgr_response)
+
+
+async def get_sgr_response(request_data: dict) -> CoachSGRResponse:
+    client = get_training_llm_client()
+    model_name = os.getenv("LLM_MODEL")
+
+    if not model_name:
+        raise RuntimeError("Не задан LLM_MODEL — проверь .env файл")
+
+    temperature = request_data.get("temperature", 0.3)
+
+    dialog = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": build_user_prompt(request_data)},
+    ]
+
+    raw_answer = await _request_model_response(
+        client=client,
+        model_name=model_name,
+        temperature=temperature,
+        messages=dialog,
+    )
+
+    sgr_data = normalize_sgr_response_shape(
+        json.loads(extract_json_from_model_answer(raw_answer))
+    )
+
+    return CoachSGRResponse(**sgr_data)
 
 
 async def _request_model_response(
@@ -279,10 +566,7 @@ async def _request_model_response(
     temperature: float,
     messages: list[dict],
 ) -> str:
-    """
-    Пытается получить ответ модели в максимально строгом формате.
-    """
-    response_schema = CoachResponse.model_json_schema()
+    response_schema = CoachSGRResponse.model_json_schema()
 
     try:
         response = await client.chat.completions.create(
@@ -292,7 +576,7 @@ async def _request_model_response(
             response_format={
                 "type": "json_schema",
                 "json_schema": {
-                    "name": "CoachResponse",
+                    "name": "CoachSGRResponse",
                     "strict": True,
                     "schema": response_schema,
                 },
@@ -325,7 +609,7 @@ async def _request_model_response(
                 {
                     "role": "user",
                     "content": messages[-1]["content"]
-                    + "\n\nВерни только JSON, без markdown и без дополнительных пояснений.",
+                    + "\n\nВерни только JSON по схеме SGR, без markdown и без дополнительных пояснений.",
                 }
             ]
 
