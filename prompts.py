@@ -1,5 +1,7 @@
 import json
 
+from retriever import format_retrieved_knowledge, retrieve_for_request
+
 
 SYSTEM_PROMPT = """
 <role>
@@ -23,6 +25,17 @@ SYSTEM_PROMPT = """
 Schema-Guided Reasoning обязателен.
 Финальное решение должно логически следовать из промежуточных шагов.
 </important_note>
+
+<retrieval_rules>
+Во входном сообщении может присутствовать блок <retrieved_knowledge>.
+Если он присутствует, используй извлечённые знания как вспомогательный
+контекст для выбора упражнений, безопасных замен и общей логики
+адаптации. Если извлечённые знания конфликтуют с ограничениями
+пользователя, текущими входными данными или правилами безопасности,
+приоритет всегда у безопасности и фактическим данным пользователя.
+Никогда не отменяй medical refusal только потому, что в retrieved
+knowledge есть общие тренировочные советы.
+</retrieval_rules>
 
 <critical_schema_rule>
 Используй ТОЧНО те имена полей, которые заданы схемой.
@@ -188,13 +201,17 @@ Schema-Guided Reasoning обязателен.
 - Финальный ответ должен быть согласован с assessment-блоками.
 </requirements>
 
+<response_format>
+Ответ должен быть сформирован строго по схеме SGR.
+</response_format>
+
 <output_instruction>
 Верни только JSON по схеме SGR.
 </output_instruction>
 """.strip()
 
 
-def build_user_prompt(request_data: dict) -> str:
+def _build_structured_input(request_data: dict) -> tuple[str, dict]:
     profile = request_data["user_profile"]
     history = request_data.get("session_history", [])
     current = request_data.get("current_session")
@@ -212,29 +229,53 @@ def build_user_prompt(request_data: dict) -> str:
         "session_history": history[-5:] if history else [],
         "current_session": current if current else None,
     }
+    return mode, structured_input
 
+
+def build_user_prompt(request_data: dict) -> str:
+    mode, structured_input = _build_structured_input(request_data)
     input_json = json.dumps(structured_input, ensure_ascii=False, indent=2)
 
-    return f"""
+    retrieved_docs = retrieve_for_request(structured_input, top_k=3)
+    retrieved_knowledge = format_retrieved_knowledge(retrieved_docs)
+
+    retrieval_block = ""
+    if retrieved_knowledge:
+        retrieval_block = f"""
+<retrieved_knowledge>
+Ниже приведены знания, извлечённые ретривером.
+Используй их только как вспомогательный контекст.
+Не противоречь входным данным пользователя и safety-правилам.
+
+{retrieved_knowledge}
+</retrieved_knowledge>
+""".strip()
+
+    parts = [
+        f"""
 <input_data>
 Ниже приведены входные данные для анализа.
 Используй только их.
 
 {input_json}
 </input_data>
-
+""".strip(),
+        retrieval_block,
+        f"""
 <mode_instruction>
 Режим уже определён на основе входных данных.
 Используй mode = "{mode}".
 Не изменяй это значение.
 </mode_instruction>
-
+""".strip(),
+        """
 <sgr_instruction>
 Верни структурированное рассуждение по схеме SGR.
 Используй точные имена полей из схемы.
 Не используй альтернативные названия полей.
 </sgr_instruction>
-
+""".strip(),
+        """
 <safety_instruction>
 Если обнаружена острая боль, травма или иной медицинский риск,
 обязательно оформи отказ через reasoning-схему:
@@ -245,9 +286,13 @@ def build_user_prompt(request_data: dict) -> str:
 - final_recommendation.refuse_reason заполнен
 - final_recommendation.exercise_changes = []
 </safety_instruction>
-
+""".strip(),
+        """
 <output_instruction>
 Верни только JSON по схеме SGR.
 Не добавляй никакой текст вне JSON.
 </output_instruction>
-""".strip()
+""".strip(),
+    ]
+
+    return "\n\n".join(part for part in parts if part)

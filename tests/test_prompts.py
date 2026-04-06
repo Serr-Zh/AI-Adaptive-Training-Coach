@@ -1,3 +1,7 @@
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 import json
 from prompts import SYSTEM_PROMPT, build_user_prompt
 
@@ -9,10 +13,12 @@ def print_header(title: str) -> None:
     print("=" * 100)
 
 
+
 def assert_true(condition: bool, message: str) -> None:
     if not condition:
         raise AssertionError(message)
     print(f"[OK] {message}")
+
 
 
 def check_system_prompt() -> None:
@@ -30,12 +36,11 @@ def check_system_prompt() -> None:
         "</response_format>" in SYSTEM_PROMPT,
         "В SYSTEM_PROMPT корректно закрывается блок <response_format>",
     )
+    assert_true(
+        "<retrieval_rules>" in SYSTEM_PROMPT,
+        "В SYSTEM_PROMPT есть блок <retrieval_rules>",
+    )
 
-    print("\nНачало SYSTEM_PROMPT:")
-    print(SYSTEM_PROMPT[:500])
-
-    print("\nКонец SYSTEM_PROMPT:")
-    print(SYSTEM_PROMPT[-500:])
 
 
 def build_initial_plan_request() -> dict:
@@ -47,6 +52,7 @@ def build_initial_plan_request() -> dict:
             "restrictions": [],
         }
     }
+
 
 
 def build_adaptation_request() -> dict:
@@ -84,6 +90,7 @@ def build_adaptation_request() -> dict:
     }
 
 
+
 def build_long_history_request() -> dict:
     history = []
     for i in range(7):
@@ -117,6 +124,7 @@ def build_long_history_request() -> dict:
     }
 
 
+
 def extract_json_inside_input_data(prompt_text: str) -> dict:
     start_tag = "<input_data>"
     end_tag = "</input_data>"
@@ -141,6 +149,7 @@ def extract_json_inside_input_data(prompt_text: str) -> dict:
         ) from exc
 
     return parsed
+
 
 
 def check_initial_plan_prompt() -> None:
@@ -172,8 +181,8 @@ def check_initial_plan_prompt() -> None:
         'В mode_instruction указан режим "initial_plan"',
     )
     assert_true(
-        "```json" not in prompt_text,
-        "В пользовательском промпте нет markdown-блока ```json",
+        "<retrieved_knowledge>" in prompt_text,
+        "Для initial_plan retrieval-блок добавляется в prompt",
     )
 
     parsed_input = extract_json_inside_input_data(prompt_text)
@@ -191,8 +200,6 @@ def check_initial_plan_prompt() -> None:
         "Для initial_plan session_history пустой",
     )
 
-    print("\nСформированный промпт:")
-    print(prompt_text)
 
 
 def check_adaptation_prompt() -> None:
@@ -204,6 +211,14 @@ def check_adaptation_prompt() -> None:
     assert_true(
         'Используй mode = "adaptation".' in prompt_text,
         'В mode_instruction указан режим "adaptation"',
+    )
+    assert_true(
+        "<retrieved_knowledge>" in prompt_text,
+        "Для adaptation retrieval-блок добавляется в prompt",
+    )
+    assert_true(
+        "reduce intensity" in prompt_text.lower() or "knee" in prompt_text.lower(),
+        "В prompt попадает содержимое, найденное ретривером",
     )
 
     parsed_input = extract_json_inside_input_data(prompt_text)
@@ -221,8 +236,6 @@ def check_adaptation_prompt() -> None:
         "Поля user_profile корректно сериализуются в JSON",
     )
 
-    print("\nСформированный промпт:")
-    print(prompt_text)
 
 
 def check_history_trimming() -> None:
@@ -247,8 +260,6 @@ def check_history_trimming() -> None:
         "Последняя сохранённая запись после обрезки корректна",
     )
 
-    print("\nJSON внутри <input_data> после обрезки истории:")
-    print(json.dumps(parsed_input, ensure_ascii=False, indent=2))
 
 
 def main() -> None:

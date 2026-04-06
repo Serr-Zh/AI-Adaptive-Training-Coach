@@ -1,0 +1,65 @@
+[
+  {
+    "id": "kb-001",
+    "category": "initial_plan",
+    "title": "Beginner general plan with dumbbells and pull-up bar",
+    "tags": ["beginner", "general", "dumbbells", "pull-up bar", "home"],
+    "content": "For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve."
+  },
+  {
+    "id": "kb-002",
+    "category": "initial_plan",
+    "title": "Strength plan with barbell, rack and bench",
+    "tags": ["strength", "intermediate", "barbell", "rack", "bench"],
+    "content": "If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression."
+  },
+  {
+    "id": "kb-003",
+    "category": "restrictions",
+    "title": "Knee pain and no deep squats",
+    "tags": ["restriction", "knee pain", "no deep squats", "replace exercise"],
+    "content": "With knee pain or a restriction against deep squats, avoid recommending deep squat patterns. Prefer box squat to pain-free depth, split squat with reduced range, hip hinge patterns, glute bridge, Romanian deadlift, step-up with conservative depth and leg work that does not aggravate symptoms."
+  },
+  {
+    "id": "kb-004",
+    "category": "restrictions",
+    "title": "No explosive or jerky movements",
+    "tags": ["restriction", "technique", "no jerky movements"],
+    "content": "If the user must avoid explosive or jerky movements, prefer controlled tempo strength exercises and remove power cleans, snatches, kipping and aggressive ballistic work."
+  },
+  {
+    "id": "kb-005",
+    "category": "adaptation",
+    "title": "High fatigue, poor sleep and underperformance",
+    "tags": ["adaptation", "fatigue", "sleep", "reduce intensity", "reduce volume"],
+    "content": "If sleep is below 6 hours, fatigue is high, RPE is above 9, or the athlete misses planned sets, treat this as overload. The next session should usually reduce intensity by roughly 10-15 percent or reduce volume by removing some sets and accessories."
+  },
+  {
+    "id": "kb-006",
+    "category": "adaptation",
+    "title": "Progressive overload after confident execution",
+    "tags": ["adaptation", "progression", "increase load", "rpe 7"],
+    "content": "If the athlete completes all planned sets with solid technique and RPE at or below 7, a small progression in the next session is acceptable. Increase load slightly, add a repetition, or keep the same load with tighter execution."
+  },
+  {
+    "id": "kb-007",
+    "category": "equipment",
+    "title": "Bodyweight and pull-up bar only",
+    "tags": ["equipment", "bodyweight", "pull-up bar", "general"],
+    "content": "If equipment is limited to bodyweight and a pull-up bar, recommendations should stay within pull-up variations, rows under a sturdy setup, push-ups, split squats, lunges, hinges without a barbell, planks and tempo-based progression. Do not prescribe barbell lifts."
+  },
+  {
+    "id": "kb-008",
+    "category": "safety",
+    "title": "Sharp lower back pain during pulling",
+    "tags": ["medical risk", "lower back", "sharp pain", "refusal"],
+    "content": "Sharp lower back pain during deadlift, row or hinge work is a medical risk signal. The system should not prescribe ordinary progression or routine adaptation. It should refuse normal training recommendation and advise caution."
+  },
+  {
+    "id": "kb-009",
+    "category": "hypertrophy",
+    "title": "Hypertrophy recommendations with dumbbells and machines",
+    "tags": ["hypertrophy", "intermediate", "dumbbells", "machines"],
+    "content": "For hypertrophy with dumbbells and machines, build a balanced plan around presses, rows, split squats or leg press, hinges, lateral raises and arm work. Use moderate repetition ranges, controlled form and enough weekly volume without forcing failure on every set."
+  }
+]
