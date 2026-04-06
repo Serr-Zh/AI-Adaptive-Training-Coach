@@ -1,0 +1,450 @@
+{
+  "aggregate": {
+    "top_k": 3,
+    "query_count": 24,
+    "mean_precision@3": 0.3472,
+    "mean_recall@3": 1.0,
+    "mrr@3": 1.0,
+    "map@3": 1.0,
+    "mean_ndcg@3": 1.0,
+    "avg_latency_ms": 0.27,
+    "p95_latency_ms": 0.317,
+    "retriever": "lexical_overlap_v1"
+  },
+  "per_query": [
+    {
+      "query_id": "q1",
+      "query": "beginner general dumbbells pull-up bar home program",
+      "relevant_doc_ids": [
+        "kb-001",
+        "kb-007"
+      ],
+      "retrieved_doc_ids": [
+        "kb-001",
+        "kb-007",
+        "kb-009"
+      ],
+      "precision@3": 0.6666666666666666,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.478
+    },
+    {
+      "query_id": "q2",
+      "query": "strength plan barbell rack bench initial program",
+      "relevant_doc_ids": [
+        "kb-002"
+      ],
+      "retrieved_doc_ids": [
+        "kb-002",
+        "kb-001",
+        "kb-004"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.309
+    },
+    {
+      "query_id": "q3",
+      "query": "knee pain no deep squats replace squat",
+      "relevant_doc_ids": [
+        "kb-003"
+      ],
+      "retrieved_doc_ids": [
+        "kb-003",
+        "kb-004",
+        "kb-008"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.317
+    },
+    {
+      "query_id": "q4",
+      "query": "avoid explosive jerky movements controlled tempo",
+      "relevant_doc_ids": [
+        "kb-004"
+      ],
+      "retrieved_doc_ids": [
+        "kb-004",
+        "kb-003",
+        "kb-009"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.269
+    },
+    {
+      "query_id": "q5",
+      "query": "poor sleep high fatigue missed sets reduce intensity",
+      "relevant_doc_ids": [
+        "kb-005"
+      ],
+      "retrieved_doc_ids": [
+        "kb-005",
+        "kb-006"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.251
+    },
+    {
+      "query_id": "q6",
+      "query": "all sets completed rpe 7 increase load progression",
+      "relevant_doc_ids": [
+        "kb-006"
+      ],
+      "retrieved_doc_ids": [
+        "kb-006",
+        "kb-005",
+        "kb-002"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.253
+    },
+    {
+      "query_id": "q7",
+      "query": "bodyweight and pull-up bar only exercises",
+      "relevant_doc_ids": [
+        "kb-007"
+      ],
+      "retrieved_doc_ids": [
+        "kb-007",
+        "kb-001",
+        "kb-004"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.251
+    },
+    {
+      "query_id": "q8",
+      "query": "sharp lower back pain during deadlift refuse training",
+      "relevant_doc_ids": [
+        "kb-008"
+      ],
+      "retrieved_doc_ids": [
+        "kb-008",
+        "kb-003",
+        "kb-001"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.251
+    },
+    {
+      "query_id": "q9",
+      "query": "hypertrophy dumbbells machines moderate reps",
+      "relevant_doc_ids": [
+        "kb-009"
+      ],
+      "retrieved_doc_ids": [
+        "kb-009",
+        "kb-001"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.242
+    },
+    {
+      "query_id": "q10",
+      "query": "home full body beginner dumbbells assisted pull-up",
+      "relevant_doc_ids": [
+        "kb-001"
+      ],
+      "retrieved_doc_ids": [
+        "kb-001",
+        "kb-007",
+        "kb-009"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.317
+    },
+    {
+      "query_id": "q11",
+      "query": "restriction knee pain split squat reduced range",
+      "relevant_doc_ids": [
+        "kb-003"
+      ],
+      "retrieved_doc_ids": [
+        "kb-003",
+        "kb-008",
+        "kb-004"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.296
+    },
+    {
+      "query_id": "q12",
+      "query": "high rpe overload deload remove accessories",
+      "relevant_doc_ids": [
+        "kb-005"
+      ],
+      "retrieved_doc_ids": [
+        "kb-005",
+        "kb-006",
+        "kb-004"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.265
+    },
+    {
+      "query_id": "q13",
+      "query": "confident execution small progression next session",
+      "relevant_doc_ids": [
+        "kb-006"
+      ],
+      "retrieved_doc_ids": [
+        "kb-006",
+        "kb-005",
+        "kb-002"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.257
+    },
+    {
+      "query_id": "q14",
+      "query": "lower back pain during row or hinge medical risk",
+      "relevant_doc_ids": [
+        "kb-008"
+      ],
+      "retrieved_doc_ids": [
+        "kb-008",
+        "kb-003",
+        "kb-001"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.252
+    },
+    {
+      "query_id": "q15",
+      "query": "general training only bodyweight no barbell lifts",
+      "relevant_doc_ids": [
+        "kb-007"
+      ],
+      "retrieved_doc_ids": [
+        "kb-007",
+        "kb-001",
+        "kb-002"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.249
+    },
+    {
+      "query_id": "q16",
+      "query": "intermediate strength bench squat deadlift rack",
+      "relevant_doc_ids": [
+        "kb-002"
+      ],
+      "retrieved_doc_ids": [
+        "kb-002",
+        "kb-001",
+        "kb-009"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.248
+    },
+    {
+      "query_id": "q17",
+      "query": "sleep below 6 hours and underperformance overload",
+      "relevant_doc_ids": [
+        "kb-005"
+      ],
+      "retrieved_doc_ids": [
+        "kb-005",
+        "kb-006"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.255
+    },
+    {
+      "query_id": "q18",
+      "query": "no deep squat patterns due to knee symptoms",
+      "relevant_doc_ids": [
+        "kb-003"
+      ],
+      "retrieved_doc_ids": [
+        "kb-003",
+        "kb-004",
+        "kb-001"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.244
+    },
+    {
+      "query_id": "q19",
+      "query": "explosive lifts forbidden no snatches power cleans",
+      "relevant_doc_ids": [
+        "kb-004"
+      ],
+      "retrieved_doc_ids": [
+        "kb-004",
+        "kb-003",
+        "kb-007"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.244
+    },
+    {
+      "query_id": "q20",
+      "query": "light romanian deadlift dumbbells beginner general",
+      "relevant_doc_ids": [
+        "kb-001"
+      ],
+      "retrieved_doc_ids": [
+        "kb-001",
+        "kb-009",
+        "kb-007"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.248
+    },
+    {
+      "query_id": "q21",
+      "query": "presses rows split squat leg press hypertrophy",
+      "relevant_doc_ids": [
+        "kb-009"
+      ],
+      "retrieved_doc_ids": [
+        "kb-009",
+        "kb-002",
+        "kb-003"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.245
+    },
+    {
+      "query_id": "q22",
+      "query": "solid technique all planned sets completed increase weight",
+      "relevant_doc_ids": [
+        "kb-006"
+      ],
+      "retrieved_doc_ids": [
+        "kb-006",
+        "kb-004",
+        "kb-005"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.247
+    },
+    {
+      "query_id": "q23",
+      "query": "pain-free box squat step-up conservative depth knee pain",
+      "relevant_doc_ids": [
+        "kb-003"
+      ],
+      "retrieved_doc_ids": [
+        "kb-003",
+        "kb-008",
+        "kb-002"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.246
+    },
+    {
+      "query_id": "q24",
+      "query": "pull-up variations push-ups lunges plank with bar only",
+      "relevant_doc_ids": [
+        "kb-007"
+      ],
+      "retrieved_doc_ids": [
+        "kb-007",
+        "kb-001"
+      ],
+      "precision@3": 0.3333333333333333,
+      "recall@3": 1.0,
+      "mrr@3": 1.0,
+      "map@3": 1.0,
+      "ndcg@3": 1.0,
+      "latency_ms": 0.249
+    }
+  ],
+  "artifacts": {
+    "queries": "benchmark\\queries.jsonl",
+    "qrels": "benchmark\\qrels\\test.tsv",
+    "run": "benchmark\\runs\\current_lexical.tsv"
+  }
+}
