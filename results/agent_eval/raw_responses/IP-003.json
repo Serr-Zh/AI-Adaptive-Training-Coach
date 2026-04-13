@@ -1,0 +1,89 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "hypertrophy",
+      "experience_level": "beginner",
+      "equipment": [
+        "dumbbells",
+        "bench",
+        "bands"
+      ],
+      "restrictions": [
+        "knee pain",
+        "no deep squats"
+      ]
+    },
+    "session_history": [],
+    "current_session": null,
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "initial_plan",
+    "input_summary": {
+      "brief_goal": "hypertrophy",
+      "experience_level": "beginner",
+      "equipment_summary": "dumbbells, bench, bands",
+      "restrictions_summary": "knee pain, no deep squats",
+      "has_history": false,
+      "has_current_session": false
+    },
+    "progress_assessment": {
+      "progress_detected": false,
+      "supporting_facts": [],
+      "recommended_progression": null
+    },
+    "overload_assessment": {
+      "overload_detected": false,
+      "overload_signals": [],
+      "recommended_adjustment": null
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": true,
+      "limiting_factors": [
+        "knee pain",
+        "no deep squats"
+      ],
+      "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки."
+    },
+    "decision_trace": {
+      "selected_policy": "initial_plan_generation",
+      "final_action": "create_initial_plan",
+      "policy_reasoning": "Нет истории тренировок и текущей тренировки, требуется создание начального плана."
+    },
+    "final_recommendation": {
+      "session_assessment": "История и текущая тренировка отсутствуют, оценивается только стартовый план.",
+      "decision": "create_initial_plan",
+      "exercise_changes": [],
+      "reasoning": "Учитывая ограничения и цель, рекомендуется создать начальный план с безопасными упражнениями.",
+      "long_term_recommendation": "Использовать упражнения, которые не нагружают колени, такие как гоблет-приседания с ограниченной глубиной, жим гантелей на скамье и румынская тяга.",
+      "safety_warnings": [
+        "Избегать глубоких приседаний и высоких нагрузок на колени."
+      ],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "initial_plan",
+    "session_assessment": "История и текущая тренировка отсутствуют, оценивается только стартовый план.",
+    "next_session": {
+      "decision": "create_initial_plan",
+      "exercise_changes": [],
+      "reasoning": "Учитывая ограничения и цель, рекомендуется создать начальный план с безопасными упражнениями."
+    },
+    "long_term_recommendation": "Использовать упражнения, которые не нагружают колени, такие как гоблет-приседания с ограниченной глубиной, жим гантелей на скамье и румынская тяга.",
+    "safety_warnings": [
+      "Избегать глубоких приседаний и высоких нагрузок на колени."
+    ],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

@@ -1,0 +1,104 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "general",
+      "experience_level": "beginner",
+      "equipment": [
+        "bodyweight",
+        "bands",
+        "bench"
+      ],
+      "restrictions": [
+        "knee discomfort on lunges"
+      ]
+    },
+    "session_history": [],
+    "current_session": {
+      "date": "2026-03-25",
+      "exercises": [
+        {
+          "name": "Reverse Lunge",
+          "sets_planned": 3,
+          "sets_completed": 3,
+          "reps": "10/10/10",
+          "weight_kg": null,
+          "rpe": 7
+        }
+      ],
+      "sleep_hours": 7.5,
+      "fatigue_level": 4,
+      "notes": "Slight knee discomfort on deeper range, not sharp, walking is fine"
+    },
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "adaptation",
+    "input_summary": {
+      "brief_goal": "general",
+      "experience_level": "beginner",
+      "equipment_summary": "bodyweight, bands, bench",
+      "restrictions_summary": "knee discomfort on lunges",
+      "has_history": false,
+      "has_current_session": true
+    },
+    "progress_assessment": {
+      "progress_detected": true,
+      "supporting_facts": [
+        "Reverse Lunge: все подходы выполнены при RPE 7"
+      ],
+      "recommended_progression": "Можно повысить нагрузку на 2.5-5% или добавить 1 повторение в основных упражнениях."
+    },
+    "overload_assessment": {
+      "overload_detected": false,
+      "overload_signals": [],
+      "recommended_adjustment": null
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": true,
+      "limiting_factors": [
+        "knee discomfort on lunges"
+      ],
+      "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки."
+    },
+    "decision_trace": {
+      "selected_policy": "restriction_limited",
+      "final_action": "maintain",
+      "policy_reasoning": "Во входе есть неоднозначные жалобы на дискомфорт без явного описания острой травмы. Без подтверждения состояния нельзя повышать нагрузку."
+    },
+    "final_recommendation": {
+      "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 7.5 ч; усталость 4/10",
+      "decision": "maintain",
+      "exercise_changes": [],
+      "reasoning": "Из-за ограничений на колени и необходимости подтверждения состояния, рекомендуется сохранить текущую нагрузку.",
+      "long_term_recommendation": "Следите за состоянием колена и избегайте глубоких приседаний. Рассмотрите возможность модификации упражнений.",
+      "safety_warnings": [
+        "Ограничения нужно учитывать при выборе упражнений."
+      ],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "adaptation",
+    "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 7.5 ч; усталость 4/10",
+    "next_session": {
+      "decision": "maintain",
+      "exercise_changes": [],
+      "reasoning": "Из-за ограничений на колени и необходимости подтверждения состояния, рекомендуется сохранить текущую нагрузку."
+    },
+    "long_term_recommendation": "Следите за состоянием колена и избегайте глубоких приседаний. Рассмотрите возможность модификации упражнений.",
+    "safety_warnings": [
+      "Ограничения нужно учитывать при выборе упражнений."
+    ],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

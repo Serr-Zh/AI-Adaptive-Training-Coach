@@ -1,0 +1,405 @@
+{
+  "tool_calls": [
+    {
+      "tool_name": "build_training_context",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "advanced",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack",
+              "bench"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-15",
+              "exercises": [
+                {
+                  "name": "Squat",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 8.0,
+              "fatigue_level": 3,
+              "notes": "Moved fast"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-20",
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "5/5/5/5",
+                "weight_kg": 142.5,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8.5,
+            "fatigue_level": 3,
+            "notes": "Strong session, no issues"
+          }
+        }
+      },
+      "result": {
+        "mode": "adaptation",
+        "brief_goal": "strength",
+        "experience_level": "advanced",
+        "equipment_summary": "barbell, plates, rack, bench",
+        "restrictions_summary": "нет ограничений",
+        "has_history": true,
+        "has_current_session": true,
+        "latest_session_excerpt": "2026-03-20: Squat: 4/4 подходов, reps=5/5/5/5, rpe=7; сон 8.5 ч; усталость 3/10; заметки: Strong session, no issues",
+        "history_size": 1
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "advanced",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack",
+              "bench"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-15",
+              "exercises": [
+                {
+                  "name": "Squat",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 8.0,
+              "fatigue_level": 3,
+              "notes": "Moved fast"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-20",
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "5/5/5/5",
+                "weight_kg": 142.5,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8.5,
+            "fatigue_level": 3,
+            "notes": "Strong session, no issues"
+          }
+        }
+      },
+      "result": {
+        "progress_detected": true,
+        "supporting_facts": [
+          "Squat: все подходы выполнены при RPE 7"
+        ],
+        "recommended_progression": "Можно повысить нагрузку на 2.5-5% или добавить 1 повторение в основных упражнениях.",
+        "overload_detected": false,
+        "overload_signals": [],
+        "recommended_adjustment": null,
+        "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 8.5 ч; усталость 3/10"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "advanced",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack",
+              "bench"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-15",
+              "exercises": [
+                {
+                  "name": "Squat",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 8.0,
+              "fatigue_level": 3,
+              "notes": "Moved fast"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-20",
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "5/5/5/5",
+                "weight_kg": 142.5,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8.5,
+            "fatigue_level": 3,
+            "notes": "Strong session, no issues"
+          }
+        }
+      },
+      "result": {
+        "medical_risk_detected": false,
+        "risk_signals": [],
+        "refusal_required": false,
+        "refuse_reason": null
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "retrieve_training_knowledge",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "advanced",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack",
+              "bench"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-15",
+              "exercises": [
+                {
+                  "name": "Squat",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 8.0,
+              "fatigue_level": 3,
+              "notes": "Moved fast"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-20",
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "5/5/5/5",
+                "weight_kg": 142.5,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8.5,
+            "fatigue_level": 3,
+            "notes": "Strong session, no issues"
+          }
+        },
+        "top_k": 3
+      },
+      "result": {
+        "query": "goal Goal.strength experience ExperienceLevel.advanced equipment barbell plates rack bench exercises Squat Strong session, no issues progression increase load exercises Squat Moved fast progression increase load",
+        "documents": [
+          {
+            "title": "Strength plan with barbell, rack and bench",
+            "category": "initial_plan",
+            "tags": [
+              "strength",
+              "intermediate",
+              "barbell",
+              "rack",
+              "bench"
+            ],
+            "content": "If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.",
+            "score": 17.8
+          },
+          {
+            "title": "Progressive overload after confident execution",
+            "category": "adaptation",
+            "tags": [
+              "adaptation",
+              "progression",
+              "increase load",
+              "rpe 7"
+            ],
+            "content": "If the athlete completes all planned sets with solid technique and RPE at or below 7, a small progression in the next session is acceptable. Increase load slightly, add a repetition, or keep the same load with tighter execution.",
+            "score": 7.6
+          },
+          {
+            "title": "No explosive or jerky movements",
+            "category": "restrictions",
+            "tags": [
+              "restriction",
+              "technique",
+              "no jerky movements"
+            ],
+            "content": "If the user must avoid explosive or jerky movements, prefer controlled tempo strength exercises and remove power cleans, snatches, kipping and aggressive ballistic work.",
+            "score": 5.7
+          }
+        ],
+        "formatted_knowledge": "[1] Strength plan with barbell, rack and bench\ncategory: initial_plan\ntags: strength, intermediate, barbell, rack, bench\ncontent: If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.\n\n[2] Progressive overload after confident execution\ncategory: adaptation\ntags: adaptation, progression, increase load, rpe 7\ncontent: If the athlete completes all planned sets with solid technique and RPE at or below 7, a small progression in the next session is acceptable. Increase load slightly, add a repetition, or keep the same load with tighter execution.\n\n[3] No explosive or jerky movements\ncategory: restrictions\ntags: restriction, technique, no jerky movements\ncontent: If the user must avoid explosive or jerky movements, prefer controlled tempo strength exercises and remove power cleans, snatches, kipping and aggressive ballistic work."
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "assess_restrictions",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "advanced",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack",
+              "bench"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-15",
+              "exercises": [
+                {
+                  "name": "Squat",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 8.0,
+              "fatigue_level": 3,
+              "notes": "Moved fast"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-20",
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "5/5/5/5",
+                "weight_kg": 142.5,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8.5,
+            "fatigue_level": 3,
+            "notes": "Strong session, no issues"
+          }
+        }
+      },
+      "result": {
+        "restrictions_present": false,
+        "limiting_factors": [],
+        "restriction_impact_summary": "Явные ограничения пользователя отсутствуют.",
+        "suggested_exercise_cautions": []
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "request_confirmation",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "advanced",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack",
+              "bench"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-15",
+              "exercises": [
+                {
+                  "name": "Squat",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 8.0,
+              "fatigue_level": 3,
+              "notes": "Moved fast"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-20",
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "5/5/5/5",
+                "weight_kg": 142.5,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8.5,
+            "fatigue_level": 3,
+            "notes": "Strong session, no issues"
+          }
+        },
+        "medical_risk_detected": false
+      },
+      "result": {
+        "confirmation_required": false,
+        "confirmation_reason": null,
+        "safe_default_action": "maintain"
+      },
+      "source": "forced_completion"
+    }
+  ]
+}

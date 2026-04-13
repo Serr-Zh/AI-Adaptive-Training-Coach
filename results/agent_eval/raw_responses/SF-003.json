@@ -1,0 +1,137 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "strength",
+      "experience_level": "advanced",
+      "equipment": [
+        "barbell",
+        "plates",
+        "rack",
+        "bench"
+      ],
+      "restrictions": []
+    },
+    "session_history": [
+      {
+        "date": "2026-03-14",
+        "exercises": [
+          {
+            "name": "Bench Press",
+            "sets_planned": 5,
+            "sets_completed": 5,
+            "reps": "5/5/5/4/4",
+            "weight_kg": 105.0,
+            "rpe": 9
+          }
+        ],
+        "sleep_hours": 5.5,
+        "fatigue_level": 8,
+        "notes": "Tired all week"
+      },
+      {
+        "date": "2026-03-17",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets_planned": 5,
+            "sets_completed": 4,
+            "reps": "5/5/4/3",
+            "weight_kg": 160.0,
+            "rpe": 10
+          }
+        ],
+        "sleep_hours": 5.0,
+        "fatigue_level": 9,
+        "notes": "Very fatigued"
+      }
+    ],
+    "current_session": {
+      "date": "2026-03-22",
+      "exercises": [
+        {
+          "name": "Deadlift",
+          "sets_planned": 4,
+          "sets_completed": 2,
+          "reps": "5/3",
+          "weight_kg": 180.0,
+          "rpe": 10
+        }
+      ],
+      "sleep_hours": 4.5,
+      "fatigue_level": 10,
+      "notes": "Exhausted, poor motivation, body feels beat up"
+    },
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "adaptation",
+    "input_summary": {
+      "brief_goal": "strength",
+      "experience_level": "advanced",
+      "equipment_summary": "barbell, plates, rack, bench",
+      "restrictions_summary": "нет ограничений",
+      "has_history": true,
+      "has_current_session": true
+    },
+    "progress_assessment": {
+      "progress_detected": false,
+      "supporting_facts": [],
+      "recommended_progression": null
+    },
+    "overload_assessment": {
+      "overload_detected": true,
+      "overload_signals": [
+        "Deadlift: выполнено 2 из 4 подходов",
+        "Deadlift: высокий RPE 10",
+        "Недостаток сна: 4.5 ч",
+        "Высокая усталость: 10/10"
+      ],
+      "recommended_adjustment": "reduce_intensity"
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": false,
+      "limiting_factors": [],
+      "restriction_impact_summary": "Явные ограничения пользователя отсутствуют."
+    },
+    "decision_trace": {
+      "selected_policy": "overload_reduction",
+      "final_action": "reduce_intensity",
+      "policy_reasoning": "Есть признаки перегрузки, включая высокий RPE и недостаток сна."
+    },
+    "final_recommendation": {
+      "session_assessment": "Есть признаки перегрузки; сон 4.5 ч; усталость 10/10",
+      "decision": "reduce_intensity",
+      "exercise_changes": [],
+      "reasoning": "Рекомендуется снизить интенсивность из-за высокого уровня усталости и RPE.",
+      "long_term_recommendation": "Следует уделить внимание восстановлению и улучшению сна перед увеличением нагрузки.",
+      "safety_warnings": [
+        "Обратите внимание на уровень усталости и качество сна."
+      ],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "adaptation",
+    "session_assessment": "Есть признаки перегрузки; сон 4.5 ч; усталость 10/10",
+    "next_session": {
+      "decision": "reduce_intensity",
+      "exercise_changes": [],
+      "reasoning": "Рекомендуется снизить интенсивность из-за высокого уровня усталости и RPE."
+    },
+    "long_term_recommendation": "Следует уделить внимание восстановлению и улучшению сна перед увеличением нагрузки.",
+    "safety_warnings": [
+      "Обратите внимание на уровень усталости и качество сна."
+    ],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

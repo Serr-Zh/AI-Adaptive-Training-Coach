@@ -1,0 +1,130 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "strength",
+      "experience_level": "advanced",
+      "equipment": [
+        "barbell",
+        "plates",
+        "rack",
+        "bench"
+      ],
+      "restrictions": []
+    },
+    "session_history": [
+      {
+        "date": "2026-03-15",
+        "exercises": [
+          {
+            "name": "Squat",
+            "sets_planned": 4,
+            "sets_completed": 4,
+            "reps": "5/5/5/5",
+            "weight_kg": 140.0,
+            "rpe": 7
+          }
+        ],
+        "sleep_hours": 8.0,
+        "fatigue_level": 3,
+        "notes": "Moved fast"
+      }
+    ],
+    "current_session": {
+      "date": "2026-03-20",
+      "exercises": [
+        {
+          "name": "Squat",
+          "sets_planned": 4,
+          "sets_completed": 4,
+          "reps": "5/5/5/5",
+          "weight_kg": 142.5,
+          "rpe": 7
+        }
+      ],
+      "sleep_hours": 8.5,
+      "fatigue_level": 3,
+      "notes": "Strong session, no issues"
+    },
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "adaptation",
+    "input_summary": {
+      "brief_goal": "strength",
+      "experience_level": "advanced",
+      "equipment_summary": "barbell, plates, rack, bench",
+      "restrictions_summary": "нет ограничений",
+      "has_history": true,
+      "has_current_session": true
+    },
+    "progress_assessment": {
+      "progress_detected": true,
+      "supporting_facts": [
+        "Squat: все подходы выполнены при RPE 7"
+      ],
+      "recommended_progression": "Можно повысить нагрузку на 2.5-5% или добавить 1 повторение в основных упражнениях."
+    },
+    "overload_assessment": {
+      "overload_detected": false,
+      "overload_signals": [],
+      "recommended_adjustment": null
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": false,
+      "limiting_factors": [],
+      "restriction_impact_summary": "Явные ограничения пользователя отсутствуют."
+    },
+    "decision_trace": {
+      "selected_policy": "progressive_overload",
+      "final_action": "increase_load",
+      "policy_reasoning": "Пользователь выполнил все подходы с RPE 7, что позволяет увеличить нагрузку."
+    },
+    "final_recommendation": {
+      "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 8.5 ч; усталость 3/10",
+      "decision": "increase_load",
+      "exercise_changes": [
+        {
+          "exercise_name": "Squat",
+          "change_type": "modify",
+          "details": "change: увеличить вес на 2.5-5%"
+        }
+      ],
+      "reasoning": "Пользователь успешно завершил тренировку с RPE 7, что позволяет безопасно увеличить нагрузку.",
+      "long_term_recommendation": "Продолжать следить за RPE и прогрессией, увеличивая нагрузку по мере готовности.",
+      "safety_warnings": [
+        "Следить за техникой выполнения упражнений."
+      ],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "adaptation",
+    "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 8.5 ч; усталость 3/10",
+    "next_session": {
+      "decision": "increase_load",
+      "exercise_changes": [
+        {
+          "exercise_name": "Squat",
+          "change_type": "modify",
+          "details": "change: увеличить вес на 2.5-5%"
+        }
+      ],
+      "reasoning": "Пользователь успешно завершил тренировку с RPE 7, что позволяет безопасно увеличить нагрузку."
+    },
+    "long_term_recommendation": "Продолжать следить за RPE и прогрессией, увеличивая нагрузку по мере готовности.",
+    "safety_warnings": [
+      "Следить за техникой выполнения упражнений."
+    ],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

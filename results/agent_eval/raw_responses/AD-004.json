@@ -1,0 +1,110 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "general",
+      "experience_level": "intermediate",
+      "equipment": [
+        "pull-up bar",
+        "bodyweight"
+      ],
+      "restrictions": []
+    },
+    "session_history": [
+      {
+        "date": "2026-03-16",
+        "exercises": [
+          {
+            "name": "Pull-Up",
+            "sets_planned": 4,
+            "sets_completed": 4,
+            "reps": "8/8/7/6",
+            "weight_kg": null,
+            "rpe": 8
+          }
+        ],
+        "sleep_hours": 7.5,
+        "fatigue_level": 4,
+        "notes": "Solid bodyweight day"
+      }
+    ],
+    "current_session": {
+      "date": "2026-03-23",
+      "exercises": [
+        {
+          "name": "Pull-Up",
+          "sets_planned": 4,
+          "sets_completed": 4,
+          "reps": "9/8/8/7",
+          "weight_kg": null,
+          "rpe": 8
+        }
+      ],
+      "sleep_hours": 7.0,
+      "fatigue_level": 4,
+      "notes": "Progress is steady"
+    },
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "adaptation",
+    "input_summary": {
+      "brief_goal": "general",
+      "experience_level": "intermediate",
+      "equipment_summary": "pull-up bar, bodyweight",
+      "restrictions_summary": "нет ограничений",
+      "has_history": true,
+      "has_current_session": true
+    },
+    "progress_assessment": {
+      "progress_detected": false,
+      "supporting_facts": [],
+      "recommended_progression": null
+    },
+    "overload_assessment": {
+      "overload_detected": false,
+      "overload_signals": [],
+      "recommended_adjustment": null
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": false,
+      "limiting_factors": [],
+      "restriction_impact_summary": "Явные ограничения пользователя отсутствуют."
+    },
+    "decision_trace": {
+      "selected_policy": "maintain_plan",
+      "final_action": "maintain",
+      "policy_reasoning": "Явных сигналов для прогрессии нет, уместен консервативный подход."
+    },
+    "final_recommendation": {
+      "session_assessment": "Явных сигналов для прогрессии нет, уместен консервативный подход; сон 7.0 ч; усталость 4/10",
+      "decision": "maintain",
+      "exercise_changes": [],
+      "reasoning": "Текущая тренировка не показывает признаков перегрузки или необходимости в увеличении нагрузки.",
+      "long_term_recommendation": "Продолжать тренироваться с текущей нагрузкой, следить за прогрессом.",
+      "safety_warnings": [],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "adaptation",
+    "session_assessment": "Явных сигналов для прогрессии нет, уместен консервативный подход; сон 7.0 ч; усталость 4/10",
+    "next_session": {
+      "decision": "maintain",
+      "exercise_changes": [],
+      "reasoning": "Текущая тренировка не показывает признаков перегрузки или необходимости в увеличении нагрузки."
+    },
+    "long_term_recommendation": "Продолжать тренироваться с текущей нагрузкой, следить за прогрессом.",
+    "safety_warnings": [],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

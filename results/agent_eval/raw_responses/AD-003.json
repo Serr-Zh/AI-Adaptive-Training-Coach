@@ -1,0 +1,117 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "endurance",
+      "experience_level": "intermediate",
+      "equipment": [
+        "kettlebell",
+        "pull-up bar",
+        "bodyweight"
+      ],
+      "restrictions": []
+    },
+    "session_history": [
+      {
+        "date": "2026-03-17",
+        "exercises": [
+          {
+            "name": "Kettlebell Swing",
+            "sets_planned": 6,
+            "sets_completed": 6,
+            "reps": "15/15/15/15/15/15",
+            "weight_kg": 20.0,
+            "rpe": 7
+          }
+        ],
+        "sleep_hours": 7.0,
+        "fatigue_level": 5,
+        "notes": "Normal session"
+      }
+    ],
+    "current_session": {
+      "date": "2026-03-22",
+      "exercises": [
+        {
+          "name": "Kettlebell Swing",
+          "sets_planned": 6,
+          "sets_completed": 5,
+          "reps": "15/15/15/15/12",
+          "weight_kg": 20.0,
+          "rpe": 8
+        }
+      ],
+      "sleep_hours": 6.5,
+      "fatigue_level": 6,
+      "notes": "A bit tired, grip faded"
+    },
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "adaptation",
+    "input_summary": {
+      "brief_goal": "endurance",
+      "experience_level": "intermediate",
+      "equipment_summary": "kettlebell, pull-up bar, bodyweight",
+      "restrictions_summary": "нет ограничений",
+      "has_history": true,
+      "has_current_session": true
+    },
+    "progress_assessment": {
+      "progress_detected": false,
+      "supporting_facts": [],
+      "recommended_progression": null
+    },
+    "overload_assessment": {
+      "overload_detected": true,
+      "overload_signals": [
+        "Kettlebell Swing: выполнено 5 из 6 подходов"
+      ],
+      "recommended_adjustment": "reduce_volume"
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": false,
+      "limiting_factors": [],
+      "restriction_impact_summary": "Явные ограничения пользователя отсутствуют."
+    },
+    "decision_trace": {
+      "selected_policy": "overload_reduction",
+      "final_action": "reduce_volume",
+      "policy_reasoning": "Обнаружены признаки перегрузки, необходимо снизить объём."
+    },
+    "final_recommendation": {
+      "session_assessment": "Есть признаки перегрузки; сон 6.5 ч; усталость 6/10",
+      "decision": "reduce_volume",
+      "exercise_changes": [],
+      "reasoning": "Уменьшение объёма необходимо из-за недовыполненных подходов и повышенного уровня усталости.",
+      "long_term_recommendation": "Следует следить за уровнем усталости и качеством сна, чтобы избежать перегрузки в будущем.",
+      "safety_warnings": [
+        "Обратите внимание на уровень усталости и качество сна."
+      ],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "adaptation",
+    "session_assessment": "Есть признаки перегрузки; сон 6.5 ч; усталость 6/10",
+    "next_session": {
+      "decision": "reduce_volume",
+      "exercise_changes": [],
+      "reasoning": "Уменьшение объёма необходимо из-за недовыполненных подходов и повышенного уровня усталости."
+    },
+    "long_term_recommendation": "Следует следить за уровнем усталости и качеством сна, чтобы избежать перегрузки в будущем.",
+    "safety_warnings": [
+      "Обратите внимание на уровень усталости и качество сна."
+    ],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

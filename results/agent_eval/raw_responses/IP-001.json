@@ -1,0 +1,79 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "general",
+      "experience_level": "beginner",
+      "equipment": [
+        "dumbbells",
+        "pull-up bar",
+        "bench"
+      ],
+      "restrictions": []
+    },
+    "session_history": [],
+    "current_session": null,
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "initial_plan",
+    "input_summary": {
+      "brief_goal": "general",
+      "experience_level": "beginner",
+      "equipment_summary": "dumbbells, pull-up bar, bench",
+      "restrictions_summary": "нет ограничений",
+      "has_history": false,
+      "has_current_session": false
+    },
+    "progress_assessment": {
+      "progress_detected": false,
+      "supporting_facts": [],
+      "recommended_progression": null
+    },
+    "overload_assessment": {
+      "overload_detected": false,
+      "overload_signals": [],
+      "recommended_adjustment": null
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": false,
+      "limiting_factors": [],
+      "restriction_impact_summary": "Явные ограничения пользователя отсутствуют."
+    },
+    "decision_trace": {
+      "selected_policy": "initial_plan_generation",
+      "final_action": "create_initial_plan",
+      "policy_reasoning": "Нет медицинских рисков и ограничений, можно создать начальный план."
+    },
+    "final_recommendation": {
+      "session_assessment": "История и текущая тренировка отсутствуют, оценивается только стартовый план.",
+      "decision": "create_initial_plan",
+      "exercise_changes": [],
+      "reasoning": "Рекомендуется использовать простой общий план тренировок для начинающих с использованием доступного оборудования.",
+      "long_term_recommendation": "Проводить тренировки 2-3 раза в неделю, включая базовые упражнения.",
+      "safety_warnings": [],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "initial_plan",
+    "session_assessment": "История и текущая тренировка отсутствуют, оценивается только стартовый план.",
+    "next_session": {
+      "decision": "create_initial_plan",
+      "exercise_changes": [],
+      "reasoning": "Рекомендуется использовать простой общий план тренировок для начинающих с использованием доступного оборудования."
+    },
+    "long_term_recommendation": "Проводить тренировки 2-3 раза в неделю, включая базовые упражнения.",
+    "safety_warnings": [],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

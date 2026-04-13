@@ -1,0 +1,123 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "hypertrophy",
+      "experience_level": "beginner",
+      "equipment": [
+        "dumbbells",
+        "bench",
+        "bands"
+      ],
+      "restrictions": [
+        "knee pain",
+        "no deep squats"
+      ]
+    },
+    "session_history": [
+      {
+        "date": "2026-03-20",
+        "exercises": [
+          {
+            "name": "Goblet Squat",
+            "sets_planned": 4,
+            "sets_completed": 3,
+            "reps": "12/12/10",
+            "weight_kg": 16.0,
+            "rpe": 9
+          }
+        ],
+        "sleep_hours": 7.0,
+        "fatigue_level": 6,
+        "notes": "Knee discomfort increased on deep range"
+      }
+    ],
+    "current_session": {
+      "date": "2026-03-23",
+      "exercises": [
+        {
+          "name": "Goblet Squat",
+          "sets_planned": 4,
+          "sets_completed": 2,
+          "reps": "12/9",
+          "weight_kg": 16.0,
+          "rpe": 9
+        }
+      ],
+      "sleep_hours": 7.5,
+      "fatigue_level": 6,
+      "notes": "Knee pain at bottom position"
+    },
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "adaptation",
+    "input_summary": {
+      "brief_goal": "hypertrophy",
+      "experience_level": "beginner",
+      "equipment_summary": "dumbbells, bench, bands",
+      "restrictions_summary": "knee pain, no deep squats",
+      "has_history": true,
+      "has_current_session": true
+    },
+    "progress_assessment": {
+      "progress_detected": false,
+      "supporting_facts": [],
+      "recommended_progression": null
+    },
+    "overload_assessment": {
+      "overload_detected": true,
+      "overload_signals": [
+        "Goblet Squat: выполнено 2 из 4 подходов"
+      ],
+      "recommended_adjustment": "reduce_volume"
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": true,
+      "limiting_factors": [
+        "knee pain",
+        "no deep squats"
+      ],
+      "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки."
+    },
+    "decision_trace": {
+      "selected_policy": "overload_reduction",
+      "final_action": "maintain",
+      "policy_reasoning": "Во входе есть неоднозначные жалобы на дискомфорт без явного описания острой травмы. Без подтверждения состояния нельзя повышать нагрузку."
+    },
+    "final_recommendation": {
+      "session_assessment": "Есть признаки перегрузки; сон 7.5 ч; усталость 6/10",
+      "decision": "maintain",
+      "exercise_changes": [],
+      "reasoning": "Рекомендуется сохранить текущую нагрузку из-за признаков перегрузки и необходимости подтверждения состояния.",
+      "long_term_recommendation": "Избегать глубоких приседаний и рассмотреть альтернативные упражнения для ног, такие как боковые приседы или румынская тяга.",
+      "safety_warnings": [
+        "Ограничить глубокие приседания под высокой нагрузкой. С осторожностью использовать выпады и плиометрику."
+      ],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "adaptation",
+    "session_assessment": "Есть признаки перегрузки; сон 7.5 ч; усталость 6/10",
+    "next_session": {
+      "decision": "maintain",
+      "exercise_changes": [],
+      "reasoning": "Рекомендуется сохранить текущую нагрузку из-за признаков перегрузки и необходимости подтверждения состояния."
+    },
+    "long_term_recommendation": "Избегать глубоких приседаний и рассмотреть альтернативные упражнения для ног, такие как боковые приседы или румынская тяга.",
+    "safety_warnings": [
+      "Ограничить глубокие приседания под высокой нагрузкой. С осторожностью использовать выпады и плиометрику."
+    ],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

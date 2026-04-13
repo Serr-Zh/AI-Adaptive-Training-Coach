@@ -1,0 +1,119 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "hypertrophy",
+      "experience_level": "intermediate",
+      "equipment": [
+        "dumbbells",
+        "bench",
+        "bands"
+      ],
+      "restrictions": [
+        "shoulder discomfort on overhead range"
+      ]
+    },
+    "session_history": [
+      {
+        "date": "2026-03-18",
+        "exercises": [
+          {
+            "name": "Dumbbell Press",
+            "sets_planned": 4,
+            "sets_completed": 4,
+            "reps": "10/10/10/9",
+            "weight_kg": 24.0,
+            "rpe": 8
+          }
+        ],
+        "sleep_hours": 7.5,
+        "fatigue_level": 4,
+        "notes": "Mostly fine"
+      }
+    ],
+    "current_session": {
+      "date": "2026-03-21",
+      "exercises": [
+        {
+          "name": "Dumbbell Press",
+          "sets_planned": 4,
+          "sets_completed": 4,
+          "reps": "10/10/9/8",
+          "weight_kg": 24.0,
+          "rpe": 8
+        }
+      ],
+      "sleep_hours": 7.0,
+      "fatigue_level": 5,
+      "notes": "Mild shoulder discomfort overhead, not sharp"
+    },
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "adaptation",
+    "input_summary": {
+      "brief_goal": "hypertrophy",
+      "experience_level": "intermediate",
+      "equipment_summary": "dumbbells, bench, bands",
+      "restrictions_summary": "shoulder discomfort on overhead range",
+      "has_history": true,
+      "has_current_session": true
+    },
+    "progress_assessment": {
+      "progress_detected": false,
+      "supporting_facts": [],
+      "recommended_progression": null
+    },
+    "overload_assessment": {
+      "overload_detected": false,
+      "overload_signals": [],
+      "recommended_adjustment": null
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": true,
+      "limiting_factors": [
+        "shoulder discomfort on overhead range"
+      ],
+      "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки."
+    },
+    "decision_trace": {
+      "selected_policy": "restriction_limited",
+      "final_action": "maintain",
+      "policy_reasoning": "Во входе есть неоднозначные жалобы на дискомфорт без явного описания острой травмы. Без подтверждения состояния нельзя повышать нагрузку."
+    },
+    "final_recommendation": {
+      "session_assessment": "Явных сигналов для прогрессии нет, уместен консервативный подход; сон 7.0 ч; усталость 5/10",
+      "decision": "maintain",
+      "exercise_changes": [],
+      "reasoning": "Учитывая ограничения и отсутствие прогресса, рекомендуется сохранить текущую нагрузку.",
+      "long_term_recommendation": "Следует учитывать ограничения при планировании будущих тренировок и избегать жимов над головой.",
+      "safety_warnings": [
+        "С осторожностью использовать жимы над головой, избегать провоцирующей амплитуды в жимовых движениях."
+      ],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "adaptation",
+    "session_assessment": "Явных сигналов для прогрессии нет, уместен консервативный подход; сон 7.0 ч; усталость 5/10",
+    "next_session": {
+      "decision": "maintain",
+      "exercise_changes": [],
+      "reasoning": "Учитывая ограничения и отсутствие прогресса, рекомендуется сохранить текущую нагрузку."
+    },
+    "long_term_recommendation": "Следует учитывать ограничения при планировании будущих тренировок и избегать жимов над головой.",
+    "safety_warnings": [
+      "С осторожностью использовать жимы над головой, избегать провоцирующей амплитуды в жимовых движениях."
+    ],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

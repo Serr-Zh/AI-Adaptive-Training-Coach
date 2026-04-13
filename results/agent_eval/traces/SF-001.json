@@ -1,0 +1,403 @@
+{
+  "tool_calls": [
+    {
+      "tool_name": "build_training_context",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-19",
+              "exercises": [
+                {
+                  "name": "Deadlift",
+                  "sets_planned": 5,
+                  "sets_completed": 5,
+                  "reps": "5/5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 9
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 6,
+              "notes": "Hard but completed"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Deadlift",
+                "sets_planned": 5,
+                "sets_completed": 2,
+                "reps": "5/3",
+                "weight_kg": 145.0,
+                "rpe": 10
+              }
+            ],
+            "sleep_hours": 6.0,
+            "fatigue_level": 9,
+            "notes": "Sharp lower back pain during pulls"
+          }
+        }
+      },
+      "result": {
+        "mode": "adaptation",
+        "brief_goal": "strength",
+        "experience_level": "intermediate",
+        "equipment_summary": "barbell, plates, rack",
+        "restrictions_summary": "нет ограничений",
+        "has_history": true,
+        "has_current_session": true,
+        "latest_session_excerpt": "2026-03-22: Deadlift: 2/5 подходов, reps=5/3, rpe=10; сон 6.0 ч; усталость 9/10; заметки: Sharp lower back pain during pulls",
+        "history_size": 1
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-19",
+              "exercises": [
+                {
+                  "name": "Deadlift",
+                  "sets_planned": 5,
+                  "sets_completed": 5,
+                  "reps": "5/5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 9
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 6,
+              "notes": "Hard but completed"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Deadlift",
+                "sets_planned": 5,
+                "sets_completed": 2,
+                "reps": "5/3",
+                "weight_kg": 145.0,
+                "rpe": 10
+              }
+            ],
+            "sleep_hours": 6.0,
+            "fatigue_level": 9,
+            "notes": "Sharp lower back pain during pulls"
+          }
+        }
+      },
+      "result": {
+        "progress_detected": false,
+        "supporting_facts": [],
+        "recommended_progression": null,
+        "overload_detected": true,
+        "overload_signals": [
+          "Deadlift: выполнено 2 из 5 подходов",
+          "Deadlift: высокий RPE 10",
+          "Высокая усталость: 9/10"
+        ],
+        "recommended_adjustment": "reduce_intensity",
+        "session_assessment": "Есть признаки перегрузки; сон 6.0 ч; усталость 9/10"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-19",
+              "exercises": [
+                {
+                  "name": "Deadlift",
+                  "sets_planned": 5,
+                  "sets_completed": 5,
+                  "reps": "5/5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 9
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 6,
+              "notes": "Hard but completed"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Deadlift",
+                "sets_planned": 5,
+                "sets_completed": 2,
+                "reps": "5/3",
+                "weight_kg": 145.0,
+                "rpe": 10
+              }
+            ],
+            "sleep_hours": 6.0,
+            "fatigue_level": 9,
+            "notes": "Sharp lower back pain during pulls"
+          }
+        }
+      },
+      "result": {
+        "medical_risk_detected": false,
+        "risk_signals": [],
+        "refusal_required": false,
+        "refuse_reason": null
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "request_confirmation",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-19",
+              "exercises": [
+                {
+                  "name": "Deadlift",
+                  "sets_planned": 5,
+                  "sets_completed": 5,
+                  "reps": "5/5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 9
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 6,
+              "notes": "Hard but completed"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Deadlift",
+                "sets_planned": 5,
+                "sets_completed": 2,
+                "reps": "5/3",
+                "weight_kg": 145.0,
+                "rpe": 10
+              }
+            ],
+            "sleep_hours": 6.0,
+            "fatigue_level": 9,
+            "notes": "Sharp lower back pain during pulls"
+          }
+        },
+        "medical_risk_detected": false
+      },
+      "result": {
+        "confirmation_required": false,
+        "confirmation_reason": null,
+        "safe_default_action": "maintain"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "retrieve_training_knowledge",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-19",
+              "exercises": [
+                {
+                  "name": "Deadlift",
+                  "sets_planned": 5,
+                  "sets_completed": 5,
+                  "reps": "5/5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 9
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 6,
+              "notes": "Hard but completed"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Deadlift",
+                "sets_planned": 5,
+                "sets_completed": 2,
+                "reps": "5/3",
+                "weight_kg": 145.0,
+                "rpe": 10
+              }
+            ],
+            "sleep_hours": 6.0,
+            "fatigue_level": 9,
+            "notes": "Sharp lower back pain during pulls"
+          }
+        },
+        "top_k": 3
+      },
+      "result": {
+        "query": "goal Goal.strength experience ExperienceLevel.intermediate equipment barbell plates rack exercises Deadlift Sharp lower back pain during pulls high fatigue overload reduce intensity underperformance reduce volume high rpe overload deload reduce intensity exercises Deadlift Hard but completed high rpe overload deload reduce intensity",
+        "documents": [
+          {
+            "title": "Sharp lower back pain during pulling",
+            "category": "safety",
+            "tags": [
+              "medical risk",
+              "lower back",
+              "sharp pain",
+              "refusal"
+            ],
+            "content": "Sharp lower back pain during deadlift, row or hinge work is a medical risk signal. The system should not prescribe ordinary progression or routine adaptation. It should refuse normal training recommendation and advise caution.",
+            "score": 18.3
+          },
+          {
+            "title": "High fatigue, poor sleep and underperformance",
+            "category": "adaptation",
+            "tags": [
+              "adaptation",
+              "fatigue",
+              "sleep",
+              "reduce intensity",
+              "reduce volume"
+            ],
+            "content": "If sleep is below 6 hours, fatigue is high, RPE is above 9, or the athlete misses planned sets, treat this as overload. The next session should usually reduce intensity by roughly 10-15 percent or reduce volume by removing some sets and accessories.",
+            "score": 17.3
+          },
+          {
+            "title": "Strength plan with barbell, rack and bench",
+            "category": "initial_plan",
+            "tags": [
+              "strength",
+              "intermediate",
+              "barbell",
+              "rack",
+              "bench"
+            ],
+            "content": "If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.",
+            "score": 15.3
+          }
+        ],
+        "formatted_knowledge": "[1] Sharp lower back pain during pulling\ncategory: safety\ntags: medical risk, lower back, sharp pain, refusal\ncontent: Sharp lower back pain during deadlift, row or hinge work is a medical risk signal. The system should not prescribe ordinary progression or routine adaptation. It should refuse normal training recommendation and advise caution.\n\n[2] High fatigue, poor sleep and underperformance\ncategory: adaptation\ntags: adaptation, fatigue, sleep, reduce intensity, reduce volume\ncontent: If sleep is below 6 hours, fatigue is high, RPE is above 9, or the athlete misses planned sets, treat this as overload. The next session should usually reduce intensity by roughly 10-15 percent or reduce volume by removing some sets and accessories.\n\n[3] Strength plan with barbell, rack and bench\ncategory: initial_plan\ntags: strength, intermediate, barbell, rack, bench\ncontent: If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression."
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "assess_restrictions",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "barbell",
+              "plates",
+              "rack"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-19",
+              "exercises": [
+                {
+                  "name": "Deadlift",
+                  "sets_planned": 5,
+                  "sets_completed": 5,
+                  "reps": "5/5/5/5/5",
+                  "weight_kg": 140.0,
+                  "rpe": 9
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 6,
+              "notes": "Hard but completed"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Deadlift",
+                "sets_planned": 5,
+                "sets_completed": 2,
+                "reps": "5/3",
+                "weight_kg": 145.0,
+                "rpe": 10
+              }
+            ],
+            "sleep_hours": 6.0,
+            "fatigue_level": 9,
+            "notes": "Sharp lower back pain during pulls"
+          }
+        }
+      },
+      "result": {
+        "restrictions_present": false,
+        "limiting_factors": [],
+        "restriction_impact_summary": "Явные ограничения пользователя отсутствуют.",
+        "suggested_exercise_cautions": []
+      },
+      "source": "forced_completion"
+    }
+  ]
+}

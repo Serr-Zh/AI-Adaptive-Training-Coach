@@ -1,0 +1,230 @@
+{
+  "tool_calls": [
+    {
+      "tool_name": "build_training_context",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "beginner",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "knee pain",
+              "no deep squats"
+            ]
+          },
+          "session_history": [],
+          "current_session": null
+        }
+      },
+      "result": {
+        "mode": "initial_plan",
+        "brief_goal": "hypertrophy",
+        "experience_level": "beginner",
+        "equipment_summary": "dumbbells, bench, bands",
+        "restrictions_summary": "knee pain, no deep squats",
+        "has_history": false,
+        "has_current_session": false,
+        "latest_session_excerpt": null,
+        "history_size": 0
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "beginner",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "knee pain",
+              "no deep squats"
+            ]
+          },
+          "session_history": [],
+          "current_session": null
+        }
+      },
+      "result": {
+        "progress_detected": false,
+        "supporting_facts": [],
+        "recommended_progression": null,
+        "overload_detected": false,
+        "overload_signals": [],
+        "recommended_adjustment": null,
+        "session_assessment": "История и текущая тренировка отсутствуют, оценивается только стартовый план."
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "beginner",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "knee pain",
+              "no deep squats"
+            ]
+          },
+          "session_history": [],
+          "current_session": null
+        }
+      },
+      "result": {
+        "medical_risk_detected": false,
+        "risk_signals": [],
+        "refusal_required": false,
+        "refuse_reason": null
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_restrictions",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "beginner",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "knee pain",
+              "no deep squats"
+            ]
+          },
+          "session_history": [],
+          "current_session": null
+        }
+      },
+      "result": {
+        "restrictions_present": true,
+        "limiting_factors": [
+          "knee pain",
+          "no deep squats"
+        ],
+        "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки.",
+        "suggested_exercise_cautions": [
+          "Ограничить глубокие приседания под высокой нагрузкой",
+          "С осторожностью использовать выпады и плиометрику"
+        ]
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "retrieve_training_knowledge",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "beginner",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "knee pain",
+              "no deep squats"
+            ]
+          },
+          "session_history": [],
+          "current_session": null
+        },
+        "top_k": 3
+      },
+      "result": {
+        "query": "goal Goal.hypertrophy experience ExperienceLevel.beginner equipment dumbbells bench bands restrictions knee pain no deep squats",
+        "documents": [
+          {
+            "title": "Knee pain and no deep squats",
+            "category": "restrictions",
+            "tags": [
+              "restriction",
+              "knee pain",
+              "no deep squats",
+              "replace exercise"
+            ],
+            "content": "With knee pain or a restriction against deep squats, avoid recommending deep squat patterns. Prefer box squat to pain-free depth, split squat with reduced range, hip hinge patterns, glute bridge, Romanian deadlift, step-up with conservative depth and leg work that does not aggravate symptoms.",
+            "score": 20.3
+          },
+          {
+            "title": "Hypertrophy recommendations with dumbbells and machines",
+            "category": "hypertrophy",
+            "tags": [
+              "hypertrophy",
+              "intermediate",
+              "dumbbells",
+              "machines"
+            ],
+            "content": "For hypertrophy with dumbbells and machines, build a balanced plan around presses, rows, split squats or leg press, hinges, lateral raises and arm work. Use moderate repetition ranges, controlled form and enough weekly volume without forcing failure on every set.",
+            "score": 9.2
+          },
+          {
+            "title": "Beginner general plan with dumbbells and pull-up bar",
+            "category": "initial_plan",
+            "tags": [
+              "beginner",
+              "general",
+              "dumbbells",
+              "pull-up bar",
+              "home"
+            ],
+            "content": "For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.",
+            "score": 8.4
+          }
+        ],
+        "formatted_knowledge": "[1] Knee pain and no deep squats\ncategory: restrictions\ntags: restriction, knee pain, no deep squats, replace exercise\ncontent: With knee pain or a restriction against deep squats, avoid recommending deep squat patterns. Prefer box squat to pain-free depth, split squat with reduced range, hip hinge patterns, glute bridge, Romanian deadlift, step-up with conservative depth and leg work that does not aggravate symptoms.\n\n[2] Hypertrophy recommendations with dumbbells and machines\ncategory: hypertrophy\ntags: hypertrophy, intermediate, dumbbells, machines\ncontent: For hypertrophy with dumbbells and machines, build a balanced plan around presses, rows, split squats or leg press, hinges, lateral raises and arm work. Use moderate repetition ranges, controlled form and enough weekly volume without forcing failure on every set.\n\n[3] Beginner general plan with dumbbells and pull-up bar\ncategory: initial_plan\ntags: beginner, general, dumbbells, pull-up bar, home\ncontent: For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve."
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "request_confirmation",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "beginner",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "knee pain",
+              "no deep squats"
+            ]
+          },
+          "session_history": [],
+          "current_session": null
+        },
+        "medical_risk_detected": false
+      },
+      "result": {
+        "confirmation_required": false,
+        "confirmation_reason": null,
+        "safe_default_action": "maintain"
+      },
+      "source": "forced_completion"
+    }
+  ]
+}

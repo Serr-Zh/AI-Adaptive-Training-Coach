@@ -1,0 +1,315 @@
+{
+  "tool_calls": [
+    {
+      "tool_name": "build_training_context",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "bodyweight",
+              "bands",
+              "bench"
+            ],
+            "restrictions": [
+              "knee discomfort on lunges"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-25",
+            "exercises": [
+              {
+                "name": "Reverse Lunge",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "10/10/10",
+                "weight_kg": null,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 7.5,
+            "fatigue_level": 4,
+            "notes": "Slight knee discomfort on deeper range, not sharp, walking is fine"
+          }
+        }
+      },
+      "result": {
+        "mode": "adaptation",
+        "brief_goal": "general",
+        "experience_level": "beginner",
+        "equipment_summary": "bodyweight, bands, bench",
+        "restrictions_summary": "knee discomfort on lunges",
+        "has_history": false,
+        "has_current_session": true,
+        "latest_session_excerpt": "2026-03-25: Reverse Lunge: 3/3 подходов, reps=10/10/10, rpe=7; сон 7.5 ч; усталость 4/10; заметки: Slight knee discomfort on deeper range, not sharp, walking is fine",
+        "history_size": 0
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "bodyweight",
+              "bands",
+              "bench"
+            ],
+            "restrictions": [
+              "knee discomfort on lunges"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-25",
+            "exercises": [
+              {
+                "name": "Reverse Lunge",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "10/10/10",
+                "weight_kg": null,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 7.5,
+            "fatigue_level": 4,
+            "notes": "Slight knee discomfort on deeper range, not sharp, walking is fine"
+          }
+        }
+      },
+      "result": {
+        "progress_detected": true,
+        "supporting_facts": [
+          "Reverse Lunge: все подходы выполнены при RPE 7"
+        ],
+        "recommended_progression": "Можно повысить нагрузку на 2.5-5% или добавить 1 повторение в основных упражнениях.",
+        "overload_detected": false,
+        "overload_signals": [],
+        "recommended_adjustment": null,
+        "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 7.5 ч; усталость 4/10"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "bodyweight",
+              "bands",
+              "bench"
+            ],
+            "restrictions": [
+              "knee discomfort on lunges"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-25",
+            "exercises": [
+              {
+                "name": "Reverse Lunge",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "10/10/10",
+                "weight_kg": null,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 7.5,
+            "fatigue_level": 4,
+            "notes": "Slight knee discomfort on deeper range, not sharp, walking is fine"
+          }
+        }
+      },
+      "result": {
+        "medical_risk_detected": false,
+        "risk_signals": [],
+        "refusal_required": false,
+        "refuse_reason": null
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_restrictions",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "bodyweight",
+              "bands",
+              "bench"
+            ],
+            "restrictions": [
+              "knee discomfort on lunges"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-25",
+            "exercises": [
+              {
+                "name": "Reverse Lunge",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "10/10/10",
+                "weight_kg": null,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 7.5,
+            "fatigue_level": 4,
+            "notes": "Slight knee discomfort on deeper range, not sharp, walking is fine"
+          }
+        }
+      },
+      "result": {
+        "restrictions_present": true,
+        "limiting_factors": [
+          "knee discomfort on lunges"
+        ],
+        "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки.",
+        "suggested_exercise_cautions": [
+          "Ограничить глубокие приседания под высокой нагрузкой",
+          "С осторожностью использовать выпады и плиометрику"
+        ]
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "retrieve_training_knowledge",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "bodyweight",
+              "bands",
+              "bench"
+            ],
+            "restrictions": [
+              "knee discomfort on lunges"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-25",
+            "exercises": [
+              {
+                "name": "Reverse Lunge",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "10/10/10",
+                "weight_kg": null,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 7.5,
+            "fatigue_level": 4,
+            "notes": "Slight knee discomfort on deeper range, not sharp, walking is fine"
+          }
+        },
+        "top_k": 3
+      },
+      "result": {
+        "query": "goal Goal.general experience ExperienceLevel.beginner equipment bodyweight bands bench restrictions knee discomfort on lunges exercises Reverse Lunge Slight knee discomfort on deeper range, not sharp, walking is fine progression increase load",
+        "documents": [
+          {
+            "title": "Bodyweight and pull-up bar only",
+            "category": "equipment",
+            "tags": [
+              "equipment",
+              "bodyweight",
+              "pull-up bar",
+              "general"
+            ],
+            "content": "If equipment is limited to bodyweight and a pull-up bar, recommendations should stay within pull-up variations, rows under a sturdy setup, push-ups, split squats, lunges, hinges without a barbell, planks and tempo-based progression. Do not prescribe barbell lifts.",
+            "score": 11.9
+          },
+          {
+            "title": "Beginner general plan with dumbbells and pull-up bar",
+            "category": "initial_plan",
+            "tags": [
+              "beginner",
+              "general",
+              "dumbbells",
+              "pull-up bar",
+              "home"
+            ],
+            "content": "For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.",
+            "score": 8.4
+          },
+          {
+            "title": "Knee pain and no deep squats",
+            "category": "restrictions",
+            "tags": [
+              "restriction",
+              "knee pain",
+              "no deep squats",
+              "replace exercise"
+            ],
+            "content": "With knee pain or a restriction against deep squats, avoid recommending deep squat patterns. Prefer box squat to pain-free depth, split squat with reduced range, hip hinge patterns, glute bridge, Romanian deadlift, step-up with conservative depth and leg work that does not aggravate symptoms.",
+            "score": 7.5
+          }
+        ],
+        "formatted_knowledge": "[1] Bodyweight and pull-up bar only\ncategory: equipment\ntags: equipment, bodyweight, pull-up bar, general\ncontent: If equipment is limited to bodyweight and a pull-up bar, recommendations should stay within pull-up variations, rows under a sturdy setup, push-ups, split squats, lunges, hinges without a barbell, planks and tempo-based progression. Do not prescribe barbell lifts.\n\n[2] Beginner general plan with dumbbells and pull-up bar\ncategory: initial_plan\ntags: beginner, general, dumbbells, pull-up bar, home\ncontent: For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.\n\n[3] Knee pain and no deep squats\ncategory: restrictions\ntags: restriction, knee pain, no deep squats, replace exercise\ncontent: With knee pain or a restriction against deep squats, avoid recommending deep squat patterns. Prefer box squat to pain-free depth, split squat with reduced range, hip hinge patterns, glute bridge, Romanian deadlift, step-up with conservative depth and leg work that does not aggravate symptoms."
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "request_confirmation",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "bodyweight",
+              "bands",
+              "bench"
+            ],
+            "restrictions": [
+              "knee discomfort on lunges"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-25",
+            "exercises": [
+              {
+                "name": "Reverse Lunge",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "10/10/10",
+                "weight_kg": null,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 7.5,
+            "fatigue_level": 4,
+            "notes": "Slight knee discomfort on deeper range, not sharp, walking is fine"
+          }
+        },
+        "medical_risk_detected": false
+      },
+      "result": {
+        "confirmation_required": true,
+        "confirmation_reason": "Во входе есть неоднозначные жалобы на дискомфорт без явного описания острой травмы. Без подтверждения состояния нельзя повышать нагрузку.",
+        "safe_default_action": "maintain"
+      },
+      "source": "forced_completion"
+    }
+  ]
+}

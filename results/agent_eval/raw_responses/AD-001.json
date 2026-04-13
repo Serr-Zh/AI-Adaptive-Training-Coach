@@ -1,0 +1,120 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "strength",
+      "experience_level": "intermediate",
+      "equipment": [
+        "barbell",
+        "plates",
+        "bench",
+        "rack"
+      ],
+      "restrictions": []
+    },
+    "session_history": [
+      {
+        "date": "2026-03-18",
+        "exercises": [
+          {
+            "name": "Bench Press",
+            "sets_planned": 5,
+            "sets_completed": 5,
+            "reps": "5/5/5/5/5",
+            "weight_kg": 80.0,
+            "rpe": 8
+          }
+        ],
+        "sleep_hours": 7.0,
+        "fatigue_level": 4,
+        "notes": "Felt okay"
+      }
+    ],
+    "current_session": {
+      "date": "2026-03-21",
+      "exercises": [
+        {
+          "name": "Bench Press",
+          "sets_planned": 5,
+          "sets_completed": 3,
+          "reps": "5/5/4",
+          "weight_kg": 82.5,
+          "rpe": 9
+        }
+      ],
+      "sleep_hours": 5.5,
+      "fatigue_level": 8,
+      "notes": "Poor sleep, bar felt very heavy"
+    },
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "adaptation",
+    "input_summary": {
+      "brief_goal": "strength",
+      "experience_level": "intermediate",
+      "equipment_summary": "barbell, plates, bench, rack",
+      "restrictions_summary": "нет ограничений",
+      "has_history": true,
+      "has_current_session": true
+    },
+    "progress_assessment": {
+      "progress_detected": false,
+      "supporting_facts": [],
+      "recommended_progression": null
+    },
+    "overload_assessment": {
+      "overload_detected": true,
+      "overload_signals": [
+        "Bench Press: выполнено 3 из 5 подходов",
+        "Недостаток сна: 5.5 ч",
+        "Высокая усталость: 8/10"
+      ],
+      "recommended_adjustment": "reduce_volume"
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": false,
+      "risk_signals": [],
+      "refusal_required": false,
+      "refuse_reason": null
+    },
+    "restriction_assessment": {
+      "restrictions_present": false,
+      "limiting_factors": [],
+      "restriction_impact_summary": "Явные ограничения пользователя отсутствуют."
+    },
+    "decision_trace": {
+      "selected_policy": "overload_reduction",
+      "final_action": "reduce_volume",
+      "policy_reasoning": "Есть признаки перегрузки: высокая усталость и недостаток сна, что требует снижения объема."
+    },
+    "final_recommendation": {
+      "session_assessment": "Есть признаки перегрузки; сон 5.5 ч; усталость 8/10",
+      "decision": "reduce_volume",
+      "exercise_changes": [],
+      "reasoning": "Из-за высокой усталости и недостатка сна, рекомендуется снизить объем тренировок.",
+      "long_term_recommendation": "Следите за качеством сна и уровнем усталости, чтобы избежать перегрузки.",
+      "safety_warnings": [
+        "Обратите внимание на уровень усталости и качество сна перед следующими тренировками."
+      ],
+      "refused": false,
+      "refuse_reason": null
+    }
+  },
+  "coach_result": {
+    "mode": "adaptation",
+    "session_assessment": "Есть признаки перегрузки; сон 5.5 ч; усталость 8/10",
+    "next_session": {
+      "decision": "reduce_volume",
+      "exercise_changes": [],
+      "reasoning": "Из-за высокой усталости и недостатка сна, рекомендуется снизить объем тренировок."
+    },
+    "long_term_recommendation": "Следите за качеством сна и уровнем усталости, чтобы избежать перегрузки.",
+    "safety_warnings": [
+      "Обратите внимание на уровень усталости и качество сна перед следующими тренировками."
+    ],
+    "refused": false,
+    "refuse_reason": null
+  },
+  "status": "ok",
+  "error": ""
+}

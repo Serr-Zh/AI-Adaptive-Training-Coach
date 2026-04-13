@@ -1,0 +1,121 @@
+{
+  "request": {
+    "user_profile": {
+      "goal": "strength",
+      "experience_level": "intermediate",
+      "equipment": [
+        "barbell",
+        "plates",
+        "rack"
+      ],
+      "restrictions": []
+    },
+    "session_history": [
+      {
+        "date": "2026-03-19",
+        "exercises": [
+          {
+            "name": "Deadlift",
+            "sets_planned": 5,
+            "sets_completed": 5,
+            "reps": "5/5/5/5/5",
+            "weight_kg": 140.0,
+            "rpe": 9
+          }
+        ],
+        "sleep_hours": 7.0,
+        "fatigue_level": 6,
+        "notes": "Hard but completed"
+      }
+    ],
+    "current_session": {
+      "date": "2026-03-22",
+      "exercises": [
+        {
+          "name": "Deadlift",
+          "sets_planned": 5,
+          "sets_completed": 2,
+          "reps": "5/3",
+          "weight_kg": 145.0,
+          "rpe": 10
+        }
+      ],
+      "sleep_hours": 6.0,
+      "fatigue_level": 9,
+      "notes": "Sharp lower back pain during pulls"
+    },
+    "temperature": 0.3
+  },
+  "sgr_result": {
+    "mode": "adaptation",
+    "input_summary": {
+      "brief_goal": "strength",
+      "experience_level": "intermediate",
+      "equipment_summary": "barbell, plates, rack",
+      "restrictions_summary": "нет ограничений",
+      "has_history": true,
+      "has_current_session": true
+    },
+    "progress_assessment": {
+      "progress_detected": false,
+      "supporting_facts": [],
+      "recommended_progression": null
+    },
+    "overload_assessment": {
+      "overload_detected": true,
+      "overload_signals": [
+        "Deadlift: выполнено 2 из 5 подходов",
+        "Deadlift: высокий RPE 10",
+        "Высокая усталость: 9/10"
+      ],
+      "recommended_adjustment": "reduce_intensity"
+    },
+    "medical_risk_assessment": {
+      "medical_risk_detected": true,
+      "risk_signals": [
+        "Sharp lower back pain during pulls"
+      ],
+      "refusal_required": true,
+      "refuse_reason": "Острая боль в нижней части спины во время выполнения упражнения."
+    },
+    "restriction_assessment": {
+      "restrictions_present": false,
+      "limiting_factors": [],
+      "restriction_impact_summary": "Явные ограничения пользователя отсутствуют."
+    },
+    "decision_trace": {
+      "selected_policy": "medical_refusal",
+      "final_action": "refuse",
+      "policy_reasoning": "Обнаружен медицинский риск, требующий отказа от обычной тренировки."
+    },
+    "final_recommendation": {
+      "session_assessment": "Есть признаки перегрузки; сон 6.0 ч; усталость 9/10",
+      "decision": "refuse",
+      "exercise_changes": [],
+      "reasoning": "Острая боль в нижней части спины во время выполнения упражнения требует немедленного отказа от продолжения тренировок.",
+      "long_term_recommendation": "Рекомендуется обратиться к врачу для оценки состояния спины.",
+      "safety_warnings": [
+        "Избегайте упражнений, вызывающих острую боль в спине."
+      ],
+      "refused": true,
+      "refuse_reason": "Острая боль в нижней части спины во время выполнения упражнения."
+    }
+  },
+  "coach_result": {
+    "mode": "adaptation",
+    "session_assessment": "Есть признаки перегрузки; сон 6.0 ч; усталость 9/10",
+    "next_session": {
+      "decision": "refuse",
+      "exercise_changes": [],
+      "reasoning": "Острая боль в нижней части спины во время выполнения упражнения требует немедленного отказа от продолжения тренировок."
+    },
+    "long_term_recommendation": "Рекомендуется обратиться к врачу для оценки состояния спины.",
+    "safety_warnings": [
+      "Избегайте упражнений, вызывающих острую боль в спине."
+    ],
+    "refused": true,
+    "refuse_reason": "Острая боль в нижней части спины во время выполнения упражнения."
+  },
+  "status": "ok",
+  "error": ""
+}

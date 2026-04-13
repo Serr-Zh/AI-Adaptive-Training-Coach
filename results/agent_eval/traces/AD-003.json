@@ -1,0 +1,401 @@
+{
+  "tool_calls": [
+    {
+      "tool_name": "build_training_context",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "endurance",
+            "experience_level": "intermediate",
+            "equipment": [
+              "kettlebell",
+              "pull-up bar",
+              "bodyweight"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-17",
+              "exercises": [
+                {
+                  "name": "Kettlebell Swing",
+                  "sets_planned": 6,
+                  "sets_completed": 6,
+                  "reps": "15/15/15/15/15/15",
+                  "weight_kg": 20.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 5,
+              "notes": "Normal session"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Kettlebell Swing",
+                "sets_planned": 6,
+                "sets_completed": 5,
+                "reps": "15/15/15/15/12",
+                "weight_kg": 20.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6.5,
+            "fatigue_level": 6,
+            "notes": "A bit tired, grip faded"
+          }
+        }
+      },
+      "result": {
+        "mode": "adaptation",
+        "brief_goal": "endurance",
+        "experience_level": "intermediate",
+        "equipment_summary": "kettlebell, pull-up bar, bodyweight",
+        "restrictions_summary": "нет ограничений",
+        "has_history": true,
+        "has_current_session": true,
+        "latest_session_excerpt": "2026-03-22: Kettlebell Swing: 5/6 подходов, reps=15/15/15/15/12, rpe=8; сон 6.5 ч; усталость 6/10; заметки: A bit tired, grip faded",
+        "history_size": 1
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "endurance",
+            "experience_level": "intermediate",
+            "equipment": [
+              "kettlebell",
+              "pull-up bar",
+              "bodyweight"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-17",
+              "exercises": [
+                {
+                  "name": "Kettlebell Swing",
+                  "sets_planned": 6,
+                  "sets_completed": 6,
+                  "reps": "15/15/15/15/15/15",
+                  "weight_kg": 20.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 5,
+              "notes": "Normal session"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Kettlebell Swing",
+                "sets_planned": 6,
+                "sets_completed": 5,
+                "reps": "15/15/15/15/12",
+                "weight_kg": 20.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6.5,
+            "fatigue_level": 6,
+            "notes": "A bit tired, grip faded"
+          }
+        }
+      },
+      "result": {
+        "progress_detected": false,
+        "supporting_facts": [],
+        "recommended_progression": null,
+        "overload_detected": true,
+        "overload_signals": [
+          "Kettlebell Swing: выполнено 5 из 6 подходов"
+        ],
+        "recommended_adjustment": "reduce_volume",
+        "session_assessment": "Есть признаки перегрузки; сон 6.5 ч; усталость 6/10"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "endurance",
+            "experience_level": "intermediate",
+            "equipment": [
+              "kettlebell",
+              "pull-up bar",
+              "bodyweight"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-17",
+              "exercises": [
+                {
+                  "name": "Kettlebell Swing",
+                  "sets_planned": 6,
+                  "sets_completed": 6,
+                  "reps": "15/15/15/15/15/15",
+                  "weight_kg": 20.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 5,
+              "notes": "Normal session"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Kettlebell Swing",
+                "sets_planned": 6,
+                "sets_completed": 5,
+                "reps": "15/15/15/15/12",
+                "weight_kg": 20.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6.5,
+            "fatigue_level": 6,
+            "notes": "A bit tired, grip faded"
+          }
+        }
+      },
+      "result": {
+        "medical_risk_detected": false,
+        "risk_signals": [],
+        "refusal_required": false,
+        "refuse_reason": null
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "retrieve_training_knowledge",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "endurance",
+            "experience_level": "intermediate",
+            "equipment": [
+              "kettlebell",
+              "pull-up bar",
+              "bodyweight"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-17",
+              "exercises": [
+                {
+                  "name": "Kettlebell Swing",
+                  "sets_planned": 6,
+                  "sets_completed": 6,
+                  "reps": "15/15/15/15/15/15",
+                  "weight_kg": 20.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 5,
+              "notes": "Normal session"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Kettlebell Swing",
+                "sets_planned": 6,
+                "sets_completed": 5,
+                "reps": "15/15/15/15/12",
+                "weight_kg": 20.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6.5,
+            "fatigue_level": 6,
+            "notes": "A bit tired, grip faded"
+          }
+        },
+        "top_k": 3
+      },
+      "result": {
+        "query": "goal Goal.endurance experience ExperienceLevel.intermediate equipment kettlebell pull-up bar bodyweight exercises Kettlebell Swing A bit tired, grip faded underperformance reduce volume exercises Kettlebell Swing Normal session progression increase load",
+        "documents": [
+          {
+            "title": "Bodyweight and pull-up bar only",
+            "category": "equipment",
+            "tags": [
+              "equipment",
+              "bodyweight",
+              "pull-up bar",
+              "general"
+            ],
+            "content": "If equipment is limited to bodyweight and a pull-up bar, recommendations should stay within pull-up variations, rows under a sturdy setup, push-ups, split squats, lunges, hinges without a barbell, planks and tempo-based progression. Do not prescribe barbell lifts.",
+            "score": 15.1
+          },
+          {
+            "title": "Beginner general plan with dumbbells and pull-up bar",
+            "category": "initial_plan",
+            "tags": [
+              "beginner",
+              "general",
+              "dumbbells",
+              "pull-up bar",
+              "home"
+            ],
+            "content": "For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.",
+            "score": 8.4
+          },
+          {
+            "title": "High fatigue, poor sleep and underperformance",
+            "category": "adaptation",
+            "tags": [
+              "adaptation",
+              "fatigue",
+              "sleep",
+              "reduce intensity",
+              "reduce volume"
+            ],
+            "content": "If sleep is below 6 hours, fatigue is high, RPE is above 9, or the athlete misses planned sets, treat this as overload. The next session should usually reduce intensity by roughly 10-15 percent or reduce volume by removing some sets and accessories.",
+            "score": 7.9
+          }
+        ],
+        "formatted_knowledge": "[1] Bodyweight and pull-up bar only\ncategory: equipment\ntags: equipment, bodyweight, pull-up bar, general\ncontent: If equipment is limited to bodyweight and a pull-up bar, recommendations should stay within pull-up variations, rows under a sturdy setup, push-ups, split squats, lunges, hinges without a barbell, planks and tempo-based progression. Do not prescribe barbell lifts.\n\n[2] Beginner general plan with dumbbells and pull-up bar\ncategory: initial_plan\ntags: beginner, general, dumbbells, pull-up bar, home\ncontent: For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.\n\n[3] High fatigue, poor sleep and underperformance\ncategory: adaptation\ntags: adaptation, fatigue, sleep, reduce intensity, reduce volume\ncontent: If sleep is below 6 hours, fatigue is high, RPE is above 9, or the athlete misses planned sets, treat this as overload. The next session should usually reduce intensity by roughly 10-15 percent or reduce volume by removing some sets and accessories."
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "assess_restrictions",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "endurance",
+            "experience_level": "intermediate",
+            "equipment": [
+              "kettlebell",
+              "pull-up bar",
+              "bodyweight"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-17",
+              "exercises": [
+                {
+                  "name": "Kettlebell Swing",
+                  "sets_planned": 6,
+                  "sets_completed": 6,
+                  "reps": "15/15/15/15/15/15",
+                  "weight_kg": 20.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 5,
+              "notes": "Normal session"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Kettlebell Swing",
+                "sets_planned": 6,
+                "sets_completed": 5,
+                "reps": "15/15/15/15/12",
+                "weight_kg": 20.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6.5,
+            "fatigue_level": 6,
+            "notes": "A bit tired, grip faded"
+          }
+        }
+      },
+      "result": {
+        "restrictions_present": false,
+        "limiting_factors": [],
+        "restriction_impact_summary": "Явные ограничения пользователя отсутствуют.",
+        "suggested_exercise_cautions": []
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "request_confirmation",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "endurance",
+            "experience_level": "intermediate",
+            "equipment": [
+              "kettlebell",
+              "pull-up bar",
+              "bodyweight"
+            ],
+            "restrictions": []
+          },
+          "session_history": [
+            {
+              "date": "2026-03-17",
+              "exercises": [
+                {
+                  "name": "Kettlebell Swing",
+                  "sets_planned": 6,
+                  "sets_completed": 6,
+                  "reps": "15/15/15/15/15/15",
+                  "weight_kg": 20.0,
+                  "rpe": 7
+                }
+              ],
+              "sleep_hours": 7.0,
+              "fatigue_level": 5,
+              "notes": "Normal session"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-22",
+            "exercises": [
+              {
+                "name": "Kettlebell Swing",
+                "sets_planned": 6,
+                "sets_completed": 5,
+                "reps": "15/15/15/15/12",
+                "weight_kg": 20.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6.5,
+            "fatigue_level": 6,
+            "notes": "A bit tired, grip faded"
+          }
+        },
+        "medical_risk_detected": false
+      },
+      "result": {
+        "confirmation_required": false,
+        "confirmation_reason": null,
+        "safe_default_action": "maintain"
+      },
+      "source": "forced_completion"
+    }
+  ]
+}

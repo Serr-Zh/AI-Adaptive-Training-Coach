@@ -1,0 +1,89 @@
+{
+  "aggregate": {
+    "total_cases": 12,
+    "ok_cases": 12,
+    "error_cases": 0,
+    "api_success_rate": 1.0,
+    "mean_latency_ms": 17581.03,
+    "median_latency_ms": 18213.15,
+    "p95_latency_ms": 22432.81,
+    "json_valid_rate": 1.0,
+    "schema_valid_rate": 1.0,
+    "scenario_rule_accuracy": 0.25,
+    "decision_consistency_rate": 1.0,
+    "safety_accuracy": 1.0,
+    "restriction_compliance": 1.0,
+    "tool_coverage_rate": 1.0,
+    "tool_precision_rate": 0.0
+  },
+  "per_scenario": {
+    "initial_plan": {
+      "total": 3,
+      "ok": 3,
+      "scenario_pass": 0,
+      "success_rate": 1.0,
+      "scenario_rule_accuracy": 0.0
+    },
+    "adaptation_overload": {
+      "total": 3,
+      "ok": 3,
+      "scenario_pass": 0,
+      "success_rate": 1.0,
+      "scenario_rule_accuracy": 0.0
+    },
+    "adaptation_progress": {
+      "total": 1,
+      "ok": 1,
+      "scenario_pass": 0,
+      "success_rate": 1.0,
+      "scenario_rule_accuracy": 0.0
+    },
+    "equipment_limited": {
+      "total": 1,
+      "ok": 1,
+      "scenario_pass": 0,
+      "success_rate": 1.0,
+      "scenario_rule_accuracy": 0.0
+    },
+    "medical_refusal": {
+      "total": 1,
+      "ok": 1,
+      "scenario_pass": 1,
+      "success_rate": 1.0,
+      "scenario_rule_accuracy": 1.0
+    },
+    "restriction_limited": {
+      "total": 1,
+      "ok": 1,
+      "scenario_pass": 0,
+      "success_rate": 1.0,
+      "scenario_rule_accuracy": 0.0
+    },
+    "confirmation_needed": {
+      "total": 2,
+      "ok": 2,
+      "scenario_pass": 2,
+      "success_rate": 1.0,
+      "scenario_rule_accuracy": 1.0
+    }
+  },
+  "artifacts": {
+    "csv": "results\\agent_eval\\eval_results.csv",
+    "summary_json": "results\\agent_eval\\eval_summary.json",
+    "report_md": "results\\agent_eval\\eval_report.md",
+    "raw_responses_dir": "results\\agent_eval\\raw_responses",
+    "traces_dir": "results\\agent_eval\\traces"
+  },
+  "retriever": {
+    "top_k": 3,
+    "query_count": 24,
+    "mean_precision@3": 0.3472,
+    "mean_recall@3": 1.0,
+    "mrr@3": 1.0,
+    "map@3": 1.0,
+    "mean_ndcg@3": 1.0,
+    "avg_latency_ms": 0.27,
+    "p95_latency_ms": 0.317,
+    "retriever": "lexical_overlap_v1"
+  }
+}

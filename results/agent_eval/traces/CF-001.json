@@ -1,0 +1,416 @@
+{
+  "tool_calls": [
+    {
+      "tool_name": "build_training_context",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "intermediate",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "shoulder discomfort on overhead range"
+            ]
+          },
+          "session_history": [
+            {
+              "date": "2026-03-18",
+              "exercises": [
+                {
+                  "name": "Dumbbell Press",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "10/10/10/9",
+                  "weight_kg": 24.0,
+                  "rpe": 8
+                }
+              ],
+              "sleep_hours": 7.5,
+              "fatigue_level": 4,
+              "notes": "Mostly fine"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-21",
+            "exercises": [
+              {
+                "name": "Dumbbell Press",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "10/10/9/8",
+                "weight_kg": 24.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 7.0,
+            "fatigue_level": 5,
+            "notes": "Mild shoulder discomfort overhead, not sharp"
+          }
+        }
+      },
+      "result": {
+        "mode": "adaptation",
+        "brief_goal": "hypertrophy",
+        "experience_level": "intermediate",
+        "equipment_summary": "dumbbells, bench, bands",
+        "restrictions_summary": "shoulder discomfort on overhead range",
+        "has_history": true,
+        "has_current_session": true,
+        "latest_session_excerpt": "2026-03-21: Dumbbell Press: 4/4 подходов, reps=10/10/9/8, rpe=8; сон 7.0 ч; усталость 5/10; заметки: Mild shoulder discomfort overhead, not sharp",
+        "history_size": 1
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "intermediate",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "shoulder discomfort on overhead range"
+            ]
+          },
+          "session_history": [
+            {
+              "date": "2026-03-18",
+              "exercises": [
+                {
+                  "name": "Dumbbell Press",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "10/10/10/9",
+                  "weight_kg": 24.0,
+                  "rpe": 8
+                }
+              ],
+              "sleep_hours": 7.5,
+              "fatigue_level": 4,
+              "notes": "Mostly fine"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-21",
+            "exercises": [
+              {
+                "name": "Dumbbell Press",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "10/10/9/8",
+                "weight_kg": 24.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 7.0,
+            "fatigue_level": 5,
+            "notes": "Mild shoulder discomfort overhead, not sharp"
+          }
+        }
+      },
+      "result": {
+        "progress_detected": false,
+        "supporting_facts": [],
+        "recommended_progression": null,
+        "overload_detected": false,
+        "overload_signals": [],
+        "recommended_adjustment": null,
+        "session_assessment": "Явных сигналов для прогрессии нет, уместен консервативный подход; сон 7.0 ч; усталость 5/10"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "intermediate",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "shoulder discomfort on overhead range"
+            ]
+          },
+          "session_history": [
+            {
+              "date": "2026-03-18",
+              "exercises": [
+                {
+                  "name": "Dumbbell Press",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "10/10/10/9",
+                  "weight_kg": 24.0,
+                  "rpe": 8
+                }
+              ],
+              "sleep_hours": 7.5,
+              "fatigue_level": 4,
+              "notes": "Mostly fine"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-21",
+            "exercises": [
+              {
+                "name": "Dumbbell Press",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "10/10/9/8",
+                "weight_kg": 24.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 7.0,
+            "fatigue_level": 5,
+            "notes": "Mild shoulder discomfort overhead, not sharp"
+          }
+        }
+      },
+      "result": {
+        "medical_risk_detected": false,
+        "risk_signals": [],
+        "refusal_required": false,
+        "refuse_reason": null
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "request_confirmation",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "intermediate",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "shoulder discomfort on overhead range"
+            ]
+          },
+          "session_history": [
+            {
+              "date": "2026-03-18",
+              "exercises": [
+                {
+                  "name": "Dumbbell Press",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "10/10/10/9",
+                  "weight_kg": 24.0,
+                  "rpe": 8
+                }
+              ],
+              "sleep_hours": 7.5,
+              "fatigue_level": 4,
+              "notes": "Mostly fine"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-21",
+            "exercises": [
+              {
+                "name": "Dumbbell Press",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "10/10/9/8",
+                "weight_kg": 24.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 7.0,
+            "fatigue_level": 5,
+            "notes": "Mild shoulder discomfort overhead, not sharp"
+          }
+        },
+        "medical_risk_detected": false
+      },
+      "result": {
+        "confirmation_required": true,
+        "confirmation_reason": "Во входе есть неоднозначные жалобы на дискомфорт без явного описания острой травмы. Без подтверждения состояния нельзя повышать нагрузку.",
+        "safe_default_action": "maintain"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "retrieve_training_knowledge",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "intermediate",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "shoulder discomfort on overhead range"
+            ]
+          },
+          "session_history": [
+            {
+              "date": "2026-03-18",
+              "exercises": [
+                {
+                  "name": "Dumbbell Press",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "10/10/10/9",
+                  "weight_kg": 24.0,
+                  "rpe": 8
+                }
+              ],
+              "sleep_hours": 7.5,
+              "fatigue_level": 4,
+              "notes": "Mostly fine"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-21",
+            "exercises": [
+              {
+                "name": "Dumbbell Press",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "10/10/9/8",
+                "weight_kg": 24.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 7.0,
+            "fatigue_level": 5,
+            "notes": "Mild shoulder discomfort overhead, not sharp"
+          }
+        },
+        "top_k": 3
+      },
+      "result": {
+        "query": "goal Goal.hypertrophy experience ExperienceLevel.intermediate equipment dumbbells bench bands restrictions shoulder discomfort on overhead range exercises Dumbbell Press Mild shoulder discomfort overhead, not sharp exercises Dumbbell Press Mostly fine",
+        "documents": [
+          {
+            "title": "Hypertrophy recommendations with dumbbells and machines",
+            "category": "hypertrophy",
+            "tags": [
+              "hypertrophy",
+              "intermediate",
+              "dumbbells",
+              "machines"
+            ],
+            "content": "For hypertrophy with dumbbells and machines, build a balanced plan around presses, rows, split squats or leg press, hinges, lateral raises and arm work. Use moderate repetition ranges, controlled form and enough weekly volume without forcing failure on every set.",
+            "score": 11.4
+          },
+          {
+            "title": "Strength plan with barbell, rack and bench",
+            "category": "initial_plan",
+            "tags": [
+              "strength",
+              "intermediate",
+              "barbell",
+              "rack",
+              "bench"
+            ],
+            "content": "If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.",
+            "score": 8.9
+          },
+          {
+            "title": "Beginner general plan with dumbbells and pull-up bar",
+            "category": "initial_plan",
+            "tags": [
+              "beginner",
+              "general",
+              "dumbbells",
+              "pull-up bar",
+              "home"
+            ],
+            "content": "For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.",
+            "score": 7.7
+          }
+        ],
+        "formatted_knowledge": "[1] Hypertrophy recommendations with dumbbells and machines\ncategory: hypertrophy\ntags: hypertrophy, intermediate, dumbbells, machines\ncontent: For hypertrophy with dumbbells and machines, build a balanced plan around presses, rows, split squats or leg press, hinges, lateral raises and arm work. Use moderate repetition ranges, controlled form and enough weekly volume without forcing failure on every set.\n\n[2] Strength plan with barbell, rack and bench\ncategory: initial_plan\ntags: strength, intermediate, barbell, rack, bench\ncontent: If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.\n\n[3] Beginner general plan with dumbbells and pull-up bar\ncategory: initial_plan\ntags: beginner, general, dumbbells, pull-up bar, home\ncontent: For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve."
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "assess_restrictions",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "intermediate",
+            "equipment": [
+              "dumbbells",
+              "bench",
+              "bands"
+            ],
+            "restrictions": [
+              "shoulder discomfort on overhead range"
+            ]
+          },
+          "session_history": [
+            {
+              "date": "2026-03-18",
+              "exercises": [
+                {
+                  "name": "Dumbbell Press",
+                  "sets_planned": 4,
+                  "sets_completed": 4,
+                  "reps": "10/10/10/9",
+                  "weight_kg": 24.0,
+                  "rpe": 8
+                }
+              ],
+              "sleep_hours": 7.5,
+              "fatigue_level": 4,
+              "notes": "Mostly fine"
+            }
+          ],
+          "current_session": {
+            "date": "2026-03-21",
+            "exercises": [
+              {
+                "name": "Dumbbell Press",
+                "sets_planned": 4,
+                "sets_completed": 4,
+                "reps": "10/10/9/8",
+                "weight_kg": 24.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 7.0,
+            "fatigue_level": 5,
+            "notes": "Mild shoulder discomfort overhead, not sharp"
+          }
+        }
+      },
+      "result": {
+        "restrictions_present": true,
+        "limiting_factors": [
+          "shoulder discomfort on overhead range"
+        ],
+        "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки.",
+        "suggested_exercise_cautions": [
+          "С осторожностью использовать жимы над головой",
+          "Избегать провоцирующей амплитуды в жимовых движениях"
+        ]
+      },
+      "source": "forced_completion"
+    }
+  ]
+}
