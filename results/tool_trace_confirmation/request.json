@@ -1,0 +1,30 @@
+{
+  "user_profile": {
+    "goal": "strength",
+    "experience_level": "intermediate",
+    "equipment": [
+      "штанга",
+      "гантели",
+      "скамья"
+    ],
+    "restrictions": [
+      "дискомфорт в колене"
+    ]
+  },
+  "current_session": {
+    "date": "2026-03-31",
+    "exercises": [
+      {
+        "name": "Присед",
+        "sets_completed": 3,
+        "sets_planned": 3,
+        "reps": "6,6,6",
+        "weight_kg": 90,
+        "rpe": 7
+      }
+    ],
+    "sleep_hours": 8,
+    "fatigue_level": 4,
+    "notes": "есть небольшой дискомфорт в колене, но без резкой боли"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "mode": "adaptation",
+  "input_summary": {
+    "brief_goal": "strength",
+    "experience_level": "intermediate",
+    "equipment_summary": "штанга, гантели, скамья",
+    "restrictions_summary": "нет ограничений",
+    "has_history": false,
+    "has_current_session": true
+  },
+  "progress_assessment": {
+    "progress_detected": true,
+    "supporting_facts": [
+      "Жим лёжа: все подходы выполнены при RPE 7",
+      "Тяга в наклоне: все подходы выполнены при RPE 6"
+    ],
+    "recommended_progression": "Можно повысить нагрузку на 2.5-5% или добавить 1 повторение в основных упражнениях."
+  },
+  "overload_assessment": {
+    "overload_detected": false,
+    "overload_signals": [],
+    "recommended_adjustment": null
+  },
+  "medical_risk_assessment": {
+    "medical_risk_detected": false,
+    "risk_signals": [],
+    "refusal_required": false,
+    "refuse_reason": null
+  },
+  "restriction_assessment": {
+    "restrictions_present": false,
+    "limiting_factors": [],
+    "restriction_impact_summary": "Явные ограничения пользователя отсутствуют."
+  },
+  "decision_trace": {
+    "selected_policy": "progressive_overload",
+    "final_action": "increase_load",
+    "policy_reasoning": "Пользователь выполнил все подходы с RPE <= 7, что позволяет увеличить нагрузку."
+  },
+  "final_recommendation": {
+    "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 8.0 ч; усталость 3/10",
+    "decision": "increase_load",
+    "exercise_changes": [
+      {
+        "exercise_name": "Жим лёжа",
+        "change_type": "modify",
+        "details": "change: увеличить вес на 2.5-5%"
+      },
+      {
+        "exercise_name": "Тяга в наклоне",
+        "change_type": "modify",
+        "details": "change: увеличить вес на 2.5-5%"
+      }
+    ],
+    "reasoning": "Пользователь успешно завершил тренировку с хорошими показателями, что позволяет безопасно увеличить нагрузку.",
+    "long_term_recommendation": "Продолжать следить за прогрессом и корректировать нагрузку в зависимости от самочувствия.",
+    "safety_warnings": [
+      "Следить за самочувствием и не допускать перегрузок."
+    ],
+    "refused": false,
+    "refuse_reason": null
+  }
+}

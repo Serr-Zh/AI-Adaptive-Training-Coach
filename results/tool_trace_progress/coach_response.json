@@ -1,0 +1,13 @@
+{
+  "mode": "adaptation",
+  "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 8.0 ч; усталость 3/10",
+  "next_session": {
+    "decision": "increase_load",
+    "exercise_changes": [],
+    "reasoning": "Учитывая успешное выполнение всех подходов и низкий уровень усталости, рекомендуется увеличить нагрузку."
+  },
+  "long_term_recommendation": "Продолжать следить за прогрессом и корректировать нагрузку в зависимости от самочувствия.",
+  "safety_warnings": [],
+  "refused": false,
+  "refuse_reason": null
+}

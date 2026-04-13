@@ -1,0 +1,315 @@
+{
+  "tool_calls": [
+    {
+      "tool_name": "build_training_context",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": [
+              "дискомфорт в колене"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Присед",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "6,6,6",
+                "weight_kg": 90,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8,
+            "fatigue_level": 4,
+            "notes": "есть небольшой дискомфорт в колене, но без резкой боли"
+          }
+        }
+      },
+      "result": {
+        "mode": "adaptation",
+        "brief_goal": "strength",
+        "experience_level": "intermediate",
+        "equipment_summary": "штанга, гантели, скамья",
+        "restrictions_summary": "дискомфорт в колене",
+        "has_history": false,
+        "has_current_session": true,
+        "latest_session_excerpt": "2026-03-31: Присед: 3/3 подходов, reps=6,6,6, rpe=7; сон 8.0 ч; усталость 4/10; заметки: есть небольшой дискомфорт в колене, но без резкой боли",
+        "history_size": 0
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": [
+              "дискомфорт в колене"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Присед",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "6,6,6",
+                "weight_kg": 90,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8,
+            "fatigue_level": 4,
+            "notes": "есть небольшой дискомфорт в колене, но без резкой боли"
+          }
+        }
+      },
+      "result": {
+        "progress_detected": true,
+        "supporting_facts": [
+          "Присед: все подходы выполнены при RPE 7"
+        ],
+        "recommended_progression": "Можно повысить нагрузку на 2.5-5% или добавить 1 повторение в основных упражнениях.",
+        "overload_detected": false,
+        "overload_signals": [],
+        "recommended_adjustment": null,
+        "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 8.0 ч; усталость 4/10"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": [
+              "дискомфорт в колене"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Присед",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "6,6,6",
+                "weight_kg": 90,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8,
+            "fatigue_level": 4,
+            "notes": "есть небольшой дискомфорт в колене, но без резкой боли"
+          }
+        }
+      },
+      "result": {
+        "medical_risk_detected": false,
+        "risk_signals": [],
+        "refusal_required": false,
+        "refuse_reason": null
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_restrictions",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": [
+              "дискомфорт в колене"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Присед",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "6,6,6",
+                "weight_kg": 90,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8,
+            "fatigue_level": 4,
+            "notes": "есть небольшой дискомфорт в колене, но без резкой боли"
+          }
+        }
+      },
+      "result": {
+        "restrictions_present": true,
+        "limiting_factors": [
+          "дискомфорт в колене"
+        ],
+        "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки.",
+        "suggested_exercise_cautions": [
+          "Ограничить глубокие приседания под высокой нагрузкой",
+          "С осторожностью использовать выпады и плиометрику"
+        ]
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "retrieve_training_knowledge",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": [
+              "дискомфорт в колене"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Присед",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "6,6,6",
+                "weight_kg": 90.0,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8.0,
+            "fatigue_level": 4,
+            "notes": "есть небольшой дискомфорт в колене, но без резкой боли"
+          }
+        },
+        "top_k": 3
+      },
+      "result": {
+        "query": "goal Goal.strength experience ExperienceLevel.intermediate equipment штанга гантели скамья restrictions дискомфорт в колене exercises Присед есть небольшой дискомфорт в колене, но без резкой боли progression increase load",
+        "documents": [
+          {
+            "title": "Strength plan with barbell, rack and bench",
+            "category": "initial_plan",
+            "tags": [
+              "strength",
+              "intermediate",
+              "barbell",
+              "rack",
+              "bench"
+            ],
+            "content": "If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.",
+            "score": 16.3
+          },
+          {
+            "title": "Progressive overload after confident execution",
+            "category": "adaptation",
+            "tags": [
+              "adaptation",
+              "progression",
+              "increase load",
+              "rpe 7"
+            ],
+            "content": "If the athlete completes all planned sets with solid technique and RPE at or below 7, a small progression in the next session is acceptable. Increase load slightly, add a repetition, or keep the same load with tighter execution.",
+            "score": 6.6
+          },
+          {
+            "title": "Knee pain and no deep squats",
+            "category": "restrictions",
+            "tags": [
+              "restriction",
+              "knee pain",
+              "no deep squats",
+              "replace exercise"
+            ],
+            "content": "With knee pain or a restriction against deep squats, avoid recommending deep squat patterns. Prefer box squat to pain-free depth, split squat with reduced range, hip hinge patterns, glute bridge, Romanian deadlift, step-up with conservative depth and leg work that does not aggravate symptoms.",
+            "score": 6.5
+          }
+        ],
+        "formatted_knowledge": "[1] Strength plan with barbell, rack and bench\ncategory: initial_plan\ntags: strength, intermediate, barbell, rack, bench\ncontent: If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.\n\n[2] Progressive overload after confident execution\ncategory: adaptation\ntags: adaptation, progression, increase load, rpe 7\ncontent: If the athlete completes all planned sets with solid technique and RPE at or below 7, a small progression in the next session is acceptable. Increase load slightly, add a repetition, or keep the same load with tighter execution.\n\n[3] Knee pain and no deep squats\ncategory: restrictions\ntags: restriction, knee pain, no deep squats, replace exercise\ncontent: With knee pain or a restriction against deep squats, avoid recommending deep squat patterns. Prefer box squat to pain-free depth, split squat with reduced range, hip hinge patterns, glute bridge, Romanian deadlift, step-up with conservative depth and leg work that does not aggravate symptoms."
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "request_confirmation",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": [
+              "дискомфорт в колене"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Присед",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "6,6,6",
+                "weight_kg": 90.0,
+                "rpe": 7
+              }
+            ],
+            "sleep_hours": 8.0,
+            "fatigue_level": 4,
+            "notes": "есть небольшой дискомфорт в колене, но без резкой боли"
+          }
+        },
+        "medical_risk_detected": false
+      },
+      "result": {
+        "confirmation_required": true,
+        "confirmation_reason": "Во входе есть неоднозначные жалобы на дискомфорт без явного описания острой травмы. Без подтверждения состояния нельзя повышать нагрузку.",
+        "safe_default_action": "maintain"
+      },
+      "source": "forced_completion"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "user_profile": {
+    "goal": "hypertrophy",
+    "experience_level": "beginner",
+    "equipment": [
+      "гантели",
+      "турник"
+    ],
+    "restrictions": []
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "tool_calls": [
+    {
+      "tool_name": "build_training_context",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": []
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Жим лёжа",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "8,8,8",
+                "weight_kg": 70,
+                "rpe": 7
+              },
+              {
+                "name": "Тяга в наклоне",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "10,10,10",
+                "weight_kg": 50,
+                "rpe": 6
+              }
+            ],
+            "sleep_hours": 8,
+            "fatigue_level": 3,
+            "notes": "тренировка прошла уверенно"
+          }
+        }
+      },
+      "result": {
+        "mode": "adaptation",
+        "brief_goal": "strength",
+        "experience_level": "intermediate",
+        "equipment_summary": "штанга, гантели, скамья",
+        "restrictions_summary": "нет ограничений",
+        "has_history": false,
+        "has_current_session": true,
+        "latest_session_excerpt": "2026-03-31: Жим лёжа: 3/3 подходов, reps=8,8,8, rpe=7; Тяга в наклоне: 3/3 подходов, reps=10,10,10, rpe=6; сон 8.0 ч; усталость 3/10; заметки: тренировка прошла уверенно",
+        "history_size": 0
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": []
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Жим лёжа",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "8,8,8",
+                "weight_kg": 70,
+                "rpe": 7
+              },
+              {
+                "name": "Тяга в наклоне",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "10,10,10",
+                "weight_kg": 50,
+                "rpe": 6
+              }
+            ],
+            "sleep_hours": 8,
+            "fatigue_level": 3,
+            "notes": "тренировка прошла уверенно"
+          }
+        }
+      },
+      "result": {
+        "progress_detected": true,
+        "supporting_facts": [
+          "Жим лёжа: все подходы выполнены при RPE 7",
+          "Тяга в наклоне: все подходы выполнены при RPE 6"
+        ],
+        "recommended_progression": "Можно повысить нагрузку на 2.5-5% или добавить 1 повторение в основных упражнениях.",
+        "overload_detected": false,
+        "overload_signals": [],
+        "recommended_adjustment": null,
+        "session_assessment": "Есть признаки готовности к небольшой прогрессии; сон 8.0 ч; усталость 3/10"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": []
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Жим лёжа",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "8,8,8",
+                "weight_kg": 70,
+                "rpe": 7
+              },
+              {
+                "name": "Тяга в наклоне",
+                "sets_completed": 3,
+                "sets_planned": 3,
+                "reps": "10,10,10",
+                "weight_kg": 50,
+                "rpe": 6
+              }
+            ],
+            "sleep_hours": 8,
+            "fatigue_level": 3,
+            "notes": "тренировка прошла уверенно"
+          }
+        }
+      },
+      "result": {
+        "medical_risk_detected": false,
+        "risk_signals": [],
+        "refusal_required": false,
+        "refuse_reason": null
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "retrieve_training_knowledge",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": []
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Жим лёжа",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "8,8,8",
+                "weight_kg": 70.0,
+                "rpe": 7
+              },
+              {
+                "name": "Тяга в наклоне",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "10,10,10",
+                "weight_kg": 50.0,
+                "rpe": 6
+              }
+            ],
+            "sleep_hours": 8.0,
+            "fatigue_level": 3,
+            "notes": "тренировка прошла уверенно"
+          }
+        },
+        "top_k": 3
+      },
+      "result": {
+        "query": "goal Goal.strength experience ExperienceLevel.intermediate equipment штанга гантели скамья exercises Жим лёжа Тяга в наклоне тренировка прошла уверенно progression increase load progression increase load",
+        "documents": [
+          {
+            "title": "Strength plan with barbell, rack and bench",
+            "category": "initial_plan",
+            "tags": [
+              "strength",
+              "intermediate",
+              "barbell",
+              "rack",
+              "bench"
+            ],
+            "content": "If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.",
+            "score": 17.3
+          },
+          {
+            "title": "Hypertrophy recommendations with dumbbells and machines",
+            "category": "hypertrophy",
+            "tags": [
+              "hypertrophy",
+              "intermediate",
+              "dumbbells",
+              "machines"
+            ],
+            "content": "For hypertrophy with dumbbells and machines, build a balanced plan around presses, rows, split squats or leg press, hinges, lateral raises and arm work. Use moderate repetition ranges, controlled form and enough weekly volume without forcing failure on every set.",
+            "score": 6.9
+          },
+          {
+            "title": "Beginner general plan with dumbbells and pull-up bar",
+            "category": "initial_plan",
+            "tags": [
+              "beginner",
+              "general",
+              "dumbbells",
+              "pull-up bar",
+              "home"
+            ],
+            "content": "For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.",
+            "score": 6.7
+          }
+        ],
+        "formatted_knowledge": "[1] Strength plan with barbell, rack and bench\ncategory: initial_plan\ntags: strength, intermediate, barbell, rack, bench\ncontent: If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.\n\n[2] Hypertrophy recommendations with dumbbells and machines\ncategory: hypertrophy\ntags: hypertrophy, intermediate, dumbbells, machines\ncontent: For hypertrophy with dumbbells and machines, build a balanced plan around presses, rows, split squats or leg press, hinges, lateral raises and arm work. Use moderate repetition ranges, controlled form and enough weekly volume without forcing failure on every set.\n\n[3] Beginner general plan with dumbbells and pull-up bar\ncategory: initial_plan\ntags: beginner, general, dumbbells, pull-up bar, home\ncontent: For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve."
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "assess_restrictions",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": []
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Жим лёжа",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "8,8,8",
+                "weight_kg": 70.0,
+                "rpe": 7
+              },
+              {
+                "name": "Тяга в наклоне",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "10,10,10",
+                "weight_kg": 50.0,
+                "rpe": 6
+              }
+            ],
+            "sleep_hours": 8.0,
+            "fatigue_level": 3,
+            "notes": "тренировка прошла уверенно"
+          }
+        }
+      },
+      "result": {
+        "restrictions_present": false,
+        "limiting_factors": [],
+        "restriction_impact_summary": "Явные ограничения пользователя отсутствуют.",
+        "suggested_exercise_cautions": []
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "request_confirmation",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "strength",
+            "experience_level": "intermediate",
+            "equipment": [
+              "штанга",
+              "гантели",
+              "скамья"
+            ],
+            "restrictions": []
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Жим лёжа",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "8,8,8",
+                "weight_kg": 70.0,
+                "rpe": 7
+              },
+              {
+                "name": "Тяга в наклоне",
+                "sets_planned": 3,
+                "sets_completed": 3,
+                "reps": "10,10,10",
+                "weight_kg": 50.0,
+                "rpe": 6
+              }
+            ],
+            "sleep_hours": 8.0,
+            "fatigue_level": 3,
+            "notes": "тренировка прошла уверенно"
+          }
+        },
+        "medical_risk_detected": false
+      },
+      "result": {
+        "confirmation_required": false,
+        "confirmation_reason": null,
+        "safe_default_action": "maintain"
+      },
+      "source": "forced_completion"
+    }
+  ]
+}

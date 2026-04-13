@@ -1,0 +1,307 @@
+{
+  "tool_calls": [
+    {
+      "tool_name": "build_training_context",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "гантели"
+            ],
+            "restrictions": [
+              "травма поясницы"
+            ]
+          },
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Румынская тяга",
+                "sets_completed": 1,
+                "sets_planned": 3,
+                "reps": "10",
+                "weight_kg": 30,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6,
+            "fatigue_level": 7,
+            "notes": "острая боль в пояснице во время движения"
+          },
+          "session_history": []
+        }
+      },
+      "result": {
+        "mode": "adaptation",
+        "brief_goal": "general",
+        "experience_level": "beginner",
+        "equipment_summary": "гантели",
+        "restrictions_summary": "травма поясницы",
+        "has_history": false,
+        "has_current_session": true,
+        "latest_session_excerpt": "2026-03-31: Румынская тяга: 1/3 подходов, reps=10, rpe=8; сон 6.0 ч; усталость 7/10; заметки: острая боль в пояснице во время движения",
+        "history_size": 0
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "гантели"
+            ],
+            "restrictions": [
+              "травма поясницы"
+            ]
+          },
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Румынская тяга",
+                "sets_completed": 1,
+                "sets_planned": 3,
+                "reps": "10",
+                "weight_kg": 30,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6,
+            "fatigue_level": 7,
+            "notes": "острая боль в пояснице во время движения"
+          },
+          "session_history": []
+        }
+      },
+      "result": {
+        "progress_detected": false,
+        "supporting_facts": [],
+        "recommended_progression": null,
+        "overload_detected": true,
+        "overload_signals": [
+          "Румынская тяга: выполнено 1 из 3 подходов"
+        ],
+        "recommended_adjustment": "reduce_volume",
+        "session_assessment": "Есть признаки перегрузки; сон 6.0 ч; усталость 7/10"
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "гантели"
+            ],
+            "restrictions": [
+              "травма поясницы"
+            ]
+          },
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Румынская тяга",
+                "sets_completed": 1,
+                "sets_planned": 3,
+                "reps": "10",
+                "weight_kg": 30,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6,
+            "fatigue_level": 7,
+            "notes": "острая боль в пояснице во время движения"
+          },
+          "session_history": []
+        }
+      },
+      "result": {
+        "medical_risk_detected": true,
+        "risk_signals": [
+          "Обнаружен маркер: острая боль",
+          "Обнаружен маркер: травма"
+        ],
+        "refusal_required": true,
+        "refuse_reason": "Обнаружены признаки острой боли, травмы или иного медицинского риска. Нужна очная оценка состояния, а не тренировочная рекомендация."
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "retrieve_training_knowledge",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "гантели"
+            ],
+            "restrictions": [
+              "травма поясницы"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Румынская тяга",
+                "sets_planned": 3,
+                "sets_completed": 1,
+                "reps": "10",
+                "weight_kg": 30.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6.0,
+            "fatigue_level": 7,
+            "notes": "острая боль в пояснице во время движения"
+          }
+        },
+        "top_k": 3
+      },
+      "result": {
+        "query": "goal Goal.general experience ExperienceLevel.beginner equipment гантели restrictions травма поясницы exercises Румынская тяга острая боль в пояснице во время движения underperformance reduce volume",
+        "documents": [
+          {
+            "title": "Beginner general plan with dumbbells and pull-up bar",
+            "category": "initial_plan",
+            "tags": [
+              "beginner",
+              "general",
+              "dumbbells",
+              "pull-up bar",
+              "home"
+            ],
+            "content": "For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.",
+            "score": 13.1
+          },
+          {
+            "title": "Sharp lower back pain during pulling",
+            "category": "safety",
+            "tags": [
+              "medical risk",
+              "lower back",
+              "sharp pain",
+              "refusal"
+            ],
+            "content": "Sharp lower back pain during deadlift, row or hinge work is a medical risk signal. The system should not prescribe ordinary progression or routine adaptation. It should refuse normal training recommendation and advise caution.",
+            "score": 8.4
+          },
+          {
+            "title": "High fatigue, poor sleep and underperformance",
+            "category": "adaptation",
+            "tags": [
+              "adaptation",
+              "fatigue",
+              "sleep",
+              "reduce intensity",
+              "reduce volume"
+            ],
+            "content": "If sleep is below 6 hours, fatigue is high, RPE is above 9, or the athlete misses planned sets, treat this as overload. The next session should usually reduce intensity by roughly 10-15 percent or reduce volume by removing some sets and accessories.",
+            "score": 6.9
+          }
+        ],
+        "formatted_knowledge": "[1] Beginner general plan with dumbbells and pull-up bar\ncategory: initial_plan\ntags: beginner, general, dumbbells, pull-up bar, home\ncontent: For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.\n\n[2] Sharp lower back pain during pulling\ncategory: safety\ntags: medical risk, lower back, sharp pain, refusal\ncontent: Sharp lower back pain during deadlift, row or hinge work is a medical risk signal. The system should not prescribe ordinary progression or routine adaptation. It should refuse normal training recommendation and advise caution.\n\n[3] High fatigue, poor sleep and underperformance\ncategory: adaptation\ntags: adaptation, fatigue, sleep, reduce intensity, reduce volume\ncontent: If sleep is below 6 hours, fatigue is high, RPE is above 9, or the athlete misses planned sets, treat this as overload. The next session should usually reduce intensity by roughly 10-15 percent or reduce volume by removing some sets and accessories."
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "assess_restrictions",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "гантели"
+            ],
+            "restrictions": [
+              "травма поясницы"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Румынская тяга",
+                "sets_planned": 3,
+                "sets_completed": 1,
+                "reps": "10",
+                "weight_kg": 30.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6.0,
+            "fatigue_level": 7,
+            "notes": "острая боль в пояснице во время движения"
+          }
+        }
+      },
+      "result": {
+        "restrictions_present": true,
+        "limiting_factors": [
+          "травма поясницы"
+        ],
+        "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки.",
+        "suggested_exercise_cautions": [
+          "Избегать тяжёлых тяг и осевой нагрузки при симптомах",
+          "Снизить нагрузку на тазовый шарнир и контролировать технику"
+        ]
+      },
+      "source": "forced_completion"
+    },
+    {
+      "tool_name": "request_confirmation",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "general",
+            "experience_level": "beginner",
+            "equipment": [
+              "гантели"
+            ],
+            "restrictions": [
+              "травма поясницы"
+            ]
+          },
+          "session_history": [],
+          "current_session": {
+            "date": "2026-03-31",
+            "exercises": [
+              {
+                "name": "Румынская тяга",
+                "sets_planned": 3,
+                "sets_completed": 1,
+                "reps": "10",
+                "weight_kg": 30.0,
+                "rpe": 8
+              }
+            ],
+            "sleep_hours": 6.0,
+            "fatigue_level": 7,
+            "notes": "острая боль в пояснице во время движения"
+          }
+        },
+        "medical_risk_detected": true
+      },
+      "result": {
+        "confirmation_required": false,
+        "confirmation_reason": null,
+        "safe_default_action": "refuse"
+      },
+      "source": "forced_completion"
+    }
+  ]
+}

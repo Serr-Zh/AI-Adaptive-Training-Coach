@@ -408,3 +408,106 @@ def sgr_to_coach_response(sgr: CoachSGRResponse) -> CoachResponse:
         refused=sgr.final_recommendation.refused,
         refuse_reason=sgr.final_recommendation.refuse_reason,
     )
+
+from typing import Literal, Optional
+
+from pydantic import BaseModel, Field
+
+
+class ToolRequestSnapshot(BaseModel):
+    user_profile: UserProfile
+    session_history: list[TrainingSession] = Field(default_factory=list)
+    current_session: Optional[TrainingSession] = None
+
+
+class BuildTrainingContextInput(BaseModel):
+    request: ToolRequestSnapshot
+
+
+class BuildTrainingContextOutput(BaseModel):
+    mode: Literal["initial_plan", "adaptation"]
+    brief_goal: str
+    experience_level: Literal["beginner", "intermediate", "advanced"]
+    equipment_summary: str
+    restrictions_summary: str
+    has_history: bool
+    has_current_session: bool
+    latest_session_excerpt: Optional[str] = None
+    history_size: int = 0
+
+
+class RetrievedKnowledgeItem(BaseModel):
+    title: str
+    category: str
+    tags: list[str] = Field(default_factory=list)
+    content: str
+    score: float = 0.0
+
+
+class RetrieveTrainingKnowledgeInput(BaseModel):
+    request: ToolRequestSnapshot
+    top_k: int = Field(default=3, ge=1, le=10)
+
+
+class RetrieveTrainingKnowledgeOutput(BaseModel):
+    query: str
+    documents: list[RetrievedKnowledgeItem] = Field(default_factory=list)
+    formatted_knowledge: str = ""
+
+
+class AssessRestrictionsInput(BaseModel):
+    request: ToolRequestSnapshot
+
+
+class AssessRestrictionsOutput(BaseModel):
+    restrictions_present: bool
+    limiting_factors: list[str] = Field(default_factory=list)
+    restriction_impact_summary: str
+    suggested_exercise_cautions: list[str] = Field(default_factory=list)
+
+
+class AssessTrainingLoadInput(BaseModel):
+    request: ToolRequestSnapshot
+
+
+class AssessTrainingLoadOutput(BaseModel):
+    progress_detected: bool
+    supporting_facts: list[str] = Field(default_factory=list)
+    recommended_progression: Optional[str] = None
+    overload_detected: bool
+    overload_signals: list[str] = Field(default_factory=list)
+    recommended_adjustment: Optional[Literal["reduce_intensity", "reduce_volume"]] = None
+    session_assessment: Optional[str] = None
+
+
+class AssessMedicalRiskInput(BaseModel):
+    request: ToolRequestSnapshot
+
+
+class AssessMedicalRiskOutput(BaseModel):
+    medical_risk_detected: bool
+    risk_signals: list[str] = Field(default_factory=list)
+    refusal_required: bool
+    refuse_reason: Optional[str] = None
+
+
+class RequestConfirmationInput(BaseModel):
+    request: ToolRequestSnapshot
+    medical_risk_detected: bool = False
+
+
+class RequestConfirmationOutput(BaseModel):
+    confirmation_required: bool
+    confirmation_reason: Optional[str] = None
+    safe_default_action: Literal["maintain", "modify_for_restrictions", "refuse"] = "maintain"
+
+
+class ToolCallRecord(BaseModel):
+    tool_name: str
+    arguments: dict = Field(default_factory=dict)
+    result: dict = Field(default_factory=dict)
+    source: Literal["model_function_call", "local_fallback", "forced_completion"]
+
+
+class AgentExecutionTrace(BaseModel):
+    tool_calls: list[ToolCallRecord] = Field(default_factory=list)

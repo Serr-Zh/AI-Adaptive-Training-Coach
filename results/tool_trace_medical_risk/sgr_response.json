@@ -1,0 +1,56 @@
+{
+  "mode": "adaptation",
+  "input_summary": {
+    "brief_goal": "general",
+    "experience_level": "beginner",
+    "equipment_summary": "гантели",
+    "restrictions_summary": "травма поясницы",
+    "has_history": false,
+    "has_current_session": true
+  },
+  "progress_assessment": {
+    "progress_detected": false,
+    "supporting_facts": [],
+    "recommended_progression": null
+  },
+  "overload_assessment": {
+    "overload_detected": true,
+    "overload_signals": [
+      "Румынская тяга: выполнено 1 из 3 подходов"
+    ],
+    "recommended_adjustment": "reduce_volume"
+  },
+  "medical_risk_assessment": {
+    "medical_risk_detected": true,
+    "risk_signals": [
+      "Обнаружен маркер: острая боль",
+      "Обнаружен маркер: травма"
+    ],
+    "refusal_required": true,
+    "refuse_reason": "Обнаружены признаки острой боли, травмы или иного медицинского риска. Нужна очная оценка состояния, а не тренировочная рекомендация."
+  },
+  "restriction_assessment": {
+    "restrictions_present": true,
+    "limiting_factors": [
+      "травма поясницы"
+    ],
+    "restriction_impact_summary": "Ограничения нужно учитывать при выборе упражнений и объёма нагрузки. Требуются безопасные модификации упражнений и осторожное повышение нагрузки."
+  },
+  "decision_trace": {
+    "selected_policy": "medical_refusal",
+    "final_action": "refuse",
+    "policy_reasoning": "Обнаружены признаки острой боли и травмы, что требует отказа от тренировочной рекомендации."
+  },
+  "final_recommendation": {
+    "session_assessment": "Есть признаки перегрузки; сон 6.0 ч; усталость 7/10",
+    "decision": "refuse",
+    "exercise_changes": [],
+    "reasoning": "Обнаружены признаки острой боли, травмы или иного медицинского риска. Нужна очная оценка состояния, а не тренировочная рекомендация.",
+    "long_term_recommendation": "Обратитесь к врачу для оценки состояния поясницы перед продолжением тренировок.",
+    "safety_warnings": [
+      "Избегайте упражнений, вызывающих острую боль в пояснице."
+    ],
+    "refused": true,
+    "refuse_reason": "Обнаружены признаки острой боли, травмы или иного медицинского риска. Нужна очная оценка состояния, а не тренировочная рекомендация."
+  }
+}

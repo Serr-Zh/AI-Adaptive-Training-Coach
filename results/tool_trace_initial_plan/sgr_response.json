@@ -1,0 +1,47 @@
+{
+  "mode": "initial_plan",
+  "input_summary": {
+    "brief_goal": "hypertrophy",
+    "experience_level": "beginner",
+    "equipment_summary": "гантели, турник",
+    "restrictions_summary": "нет ограничений",
+    "has_history": false,
+    "has_current_session": false
+  },
+  "progress_assessment": {
+    "progress_detected": false,
+    "supporting_facts": [],
+    "recommended_progression": null
+  },
+  "overload_assessment": {
+    "overload_detected": false,
+    "overload_signals": [],
+    "recommended_adjustment": null
+  },
+  "medical_risk_assessment": {
+    "medical_risk_detected": false,
+    "risk_signals": [],
+    "refusal_required": false,
+    "refuse_reason": null
+  },
+  "restriction_assessment": {
+    "restrictions_present": false,
+    "limiting_factors": [],
+    "restriction_impact_summary": "Явные ограничения пользователя отсутствуют."
+  },
+  "decision_trace": {
+    "selected_policy": "initial_plan_generation",
+    "final_action": "create_initial_plan",
+    "policy_reasoning": "Нет ограничений и медицинских рисков, можно создать начальный план."
+  },
+  "final_recommendation": {
+    "session_assessment": "История и текущая тренировка отсутствуют, оценивается только стартовый план.",
+    "decision": "create_initial_plan",
+    "exercise_changes": [],
+    "reasoning": "Рекомендуется использовать простые полные тренировки 2-3 раза в неделю с акцентом на основные упражнения.",
+    "long_term_recommendation": "Включить гоблет-приседания, жим гантелей, тягу гантелей, румынскую тягу с легким весом, жим над головой и подтягивания с поддержкой.",
+    "safety_warnings": [],
+    "refused": false,
+    "refuse_reason": null
+  }
+}

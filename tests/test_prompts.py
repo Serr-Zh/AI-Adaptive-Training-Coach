@@ -1,10 +1,18 @@
+import json
 import sys
 from pathlib import Path
+
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-import json
-from prompts import SYSTEM_PROMPT, build_user_prompt
-
+from prompts import (
+    FINAL_SYSTEM_PROMPT,
+    TOOL_SYSTEM_PROMPT,
+    SYSTEM_PROMPT,
+    build_final_user_prompt,
+    build_structured_input,
+    build_tool_user_prompt,
+    build_user_prompt,
+)
 
 
 def print_header(title: str) -> None:
@@ -13,40 +21,16 @@ def print_header(title: str) -> None:
     print("=" * 100)
 
 
-
 def assert_true(condition: bool, message: str) -> None:
     if not condition:
         raise AssertionError(message)
     print(f"[OK] {message}")
 
 
-
-def check_system_prompt() -> None:
-    print_header("ПРОВЕРКА SYSTEM_PROMPT")
-
-    assert_true(isinstance(SYSTEM_PROMPT, str), "SYSTEM_PROMPT является строкой")
-    assert_true(len(SYSTEM_PROMPT) > 0, "SYSTEM_PROMPT не пустой")
-    assert_true("<role>" in SYSTEM_PROMPT, "В SYSTEM_PROMPT есть блок <role>")
-    assert_true("<goal>" in SYSTEM_PROMPT, "В SYSTEM_PROMPT есть блок <goal>")
-    assert_true(
-        "<response_format>" in SYSTEM_PROMPT,
-        "В SYSTEM_PROMPT есть блок <response_format>",
-    )
-    assert_true(
-        "</response_format>" in SYSTEM_PROMPT,
-        "В SYSTEM_PROMPT корректно закрывается блок <response_format>",
-    )
-    assert_true(
-        "<retrieval_rules>" in SYSTEM_PROMPT,
-        "В SYSTEM_PROMPT есть блок <retrieval_rules>",
-    )
-
-
-
 def build_initial_plan_request() -> dict:
     return {
         "user_profile": {
-            "goal": "набрать мышечную массу",
+            "goal": "hypertrophy",
             "experience_level": "beginner",
             "equipment": ["гантели", "турник"],
             "restrictions": [],
@@ -54,11 +38,10 @@ def build_initial_plan_request() -> dict:
     }
 
 
-
 def build_adaptation_request() -> dict:
     return {
         "user_profile": {
-            "goal": "увеличить силовые показатели",
+            "goal": "strength",
             "experience_level": "intermediate",
             "equipment": ["штанга", "гантели", "скамья"],
             "restrictions": ["дискомфорт в колене"],
@@ -73,22 +56,13 @@ def build_adaptation_request() -> dict:
                     "reps": "8,8,8",
                     "weight_kg": 70,
                     "rpe": 7,
-                },
-                {
-                    "name": "Присед",
-                    "sets_completed": 2,
-                    "sets_planned": 4,
-                    "reps": "8,7",
-                    "weight_kg": 80,
-                    "rpe": 9.5,
-                },
+                }
             ],
-            "sleep_hours": 5.5,
-            "fatigue_level": 8,
-            "notes": "было тяжело, колено беспокоит",
+            "sleep_hours": 8,
+            "fatigue_level": 3,
+            "notes": "тренировка прошла уверенно",
         },
     }
-
 
 
 def build_long_history_request() -> dict:
@@ -115,7 +89,7 @@ def build_long_history_request() -> dict:
 
     return {
         "user_profile": {
-            "goal": "снижение веса",
+            "goal": "general",
             "experience_level": "advanced",
             "equipment": ["велотренажер", "гантели"],
             "restrictions": [],
@@ -124,152 +98,143 @@ def build_long_history_request() -> dict:
     }
 
 
+def check_system_prompts() -> None:
+    print_header("ПРОВЕРКА SYSTEM PROMPTS")
 
-def extract_json_inside_input_data(prompt_text: str) -> dict:
-    start_tag = "<input_data>"
-    end_tag = "</input_data>"
-
-    start = prompt_text.find(start_tag)
-    end = prompt_text.find(end_tag)
-
-    if start == -1 or end == -1:
-        raise AssertionError("Не найдены теги <input_data> ... </input_data>")
-
-    block = prompt_text[start + len(start_tag):end].strip()
-
-    prefix = "Ниже приведены входные данные для анализа.\nИспользуй только их."
-    if prefix in block:
-        block = block.replace(prefix, "", 1).strip()
-
-    try:
-        parsed = json.loads(block)
-    except json.JSONDecodeError as exc:
-        raise AssertionError(
-            f"JSON внутри <input_data> невалиден: {exc}"
-        ) from exc
-
-    return parsed
-
-
-
-def check_initial_plan_prompt() -> None:
-    print_header("ПРОВЕРКА INITIAL_PLAN")
-
-    request_data = build_initial_plan_request()
-    prompt_text = build_user_prompt(request_data)
-
-    assert_true("<input_data>" in prompt_text, "Есть открывающий тег <input_data>")
-    assert_true("</input_data>" in prompt_text, "Есть закрывающий тег </input_data>")
     assert_true(
-        "<mode_instruction>" in prompt_text,
-        "Есть открывающий тег <mode_instruction>",
+        "build_training_context" in TOOL_SYSTEM_PROMPT,
+        "TOOL_SYSTEM_PROMPT содержит указание на build_training_context",
     )
     assert_true(
-        "</mode_instruction>" in prompt_text,
-        "Есть закрывающий тег </mode_instruction>",
+        "request_confirmation" in TOOL_SYSTEM_PROMPT,
+        "TOOL_SYSTEM_PROMPT содержит confirmation policy",
     )
     assert_true(
-        "<output_instruction>" in prompt_text,
-        "Есть открывающий тег <output_instruction>",
-    )
-    assert_true(
-        "</output_instruction>" in prompt_text,
-        "Есть закрывающий тег </output_instruction>",
-    )
-    assert_true(
-        'Используй mode = "initial_plan".' in prompt_text,
-        'В mode_instruction указан режим "initial_plan"',
-    )
-    assert_true(
-        "<retrieved_knowledge>" in prompt_text,
-        "Для initial_plan retrieval-блок добавляется в prompt",
+        "TOOL_PHASE_DONE" in TOOL_SYSTEM_PROMPT,
+        "TOOL_SYSTEM_PROMPT содержит правило завершения tool phase",
     )
 
-    parsed_input = extract_json_inside_input_data(prompt_text)
+    assert_true(
+        "<response_format>" in FINAL_SYSTEM_PROMPT,
+        "FINAL_SYSTEM_PROMPT содержит блок response_format",
+    )
+    assert_true(
+        "<critical_schema_rule>" in FINAL_SYSTEM_PROMPT,
+        "FINAL_SYSTEM_PROMPT содержит блок critical_schema_rule",
+    )
+    assert_true(
+        "<medical_safety_rules>" in FINAL_SYSTEM_PROMPT,
+        "FINAL_SYSTEM_PROMPT содержит блок medical_safety_rules",
+    )
+    assert_true(
+        "<sgr_steps>" in FINAL_SYSTEM_PROMPT,
+        "FINAL_SYSTEM_PROMPT содержит блок sgr_steps",
+    )
+    assert_true(
+        'decision_trace.final_action' in FINAL_SYSTEM_PROMPT,
+        "FINAL_SYSTEM_PROMPT фиксирует ограничения на final_action",
+    )
+    assert_true(
+        "medical_risk" in FINAL_SYSTEM_PROMPT,
+        "FINAL_SYSTEM_PROMPT содержит правила medical risk",
+    )
 
     assert_true(
-        parsed_input["mode"] == "initial_plan",
-        'JSON внутри <input_data> содержит mode = "initial_plan"',
-    )
-    assert_true(
-        parsed_input["current_session"] is None,
-        "Для initial_plan current_session равен None",
-    )
-    assert_true(
-        parsed_input["session_history"] == [],
-        "Для initial_plan session_history пустой",
+        isinstance(SYSTEM_PROMPT, str) and len(SYSTEM_PROMPT) > 0,
+        "SYSTEM_PROMPT сохранён для обратной совместимости",
     )
 
 
+def check_structured_input() -> None:
+    print_header("ПРОВЕРКА build_structured_input")
 
-def check_adaptation_prompt() -> None:
-    print_header("ПРОВЕРКА ADAPTATION")
+    mode, payload = build_structured_input(build_long_history_request())
 
-    request_data = build_adaptation_request()
-    prompt_text = build_user_prompt(request_data)
+    assert_true(
+        mode == "adaptation",
+        'mode корректно определяется как "adaptation"',
+    )
+    assert_true(
+        len(payload["session_history"]) == 5,
+        "История обрезается до последних 5 сессий",
+    )
+    assert_true(
+        payload["session_history"][0]["date"] == "2026-03-12",
+        "Обрезка истории начинается с корректной даты",
+    )
+    assert_true(
+        payload["session_history"][-1]["date"] == "2026-03-16",
+        "Обрезка истории заканчивается корректной датой",
+    )
 
+
+def check_tool_prompt() -> None:
+    print_header("ПРОВЕРКА TOOL PROMPT")
+
+    prompt_text = build_tool_user_prompt(build_initial_plan_request())
+
+    assert_true("<input_data>" in prompt_text, "В tool prompt есть блок input_data")
+    assert_true("TOOL_PHASE_DONE" in prompt_text, "В tool prompt есть инструкция завершения tool phase")
+    assert_true('"mode": "initial_plan"' in prompt_text, "В tool prompt сериализуется mode=initial_plan")
+    assert_true("Не возвращай здесь финальный SGR JSON" in prompt_text, "В tool prompt есть запрет на финальный SGR JSON")
+
+
+def check_final_prompt() -> None:
+    print_header("ПРОВЕРКА FINAL PROMPT")
+
+    tool_outputs = {
+        "build_training_context": {
+            "mode": "adaptation",
+            "brief_goal": "strength",
+            "experience_level": "intermediate",
+            "equipment_summary": "штанга, гантели, скамья",
+            "restrictions_summary": "дискомфорт в колене",
+            "has_history": False,
+            "has_current_session": True,
+            "latest_session_excerpt": "demo",
+            "history_size": 0,
+        }
+    }
+
+    prompt_text = build_final_user_prompt(build_adaptation_request(), tool_outputs)
+
+    assert_true("<tool_outputs>" in prompt_text, "В final prompt есть блок tool_outputs")
+    assert_true("build_training_context" in prompt_text, "В final prompt попадают результаты инструментов")
+    assert_true('"mode": "adaptation"' in prompt_text, "В final prompt сериализуется adaptation-кейс")
+    assert_true(
+        "Заполни reasoning-схему строго по этапам" in prompt_text,
+        "В final prompt есть инструкция по строгому заполнению SGR",
+    )
+    assert_true(
+        "medical risk" in prompt_text.lower(),
+        "В final prompt есть safety-инструкция по medical risk",
+    )
+
+
+def check_legacy_prompt_compatibility() -> None:
+    print_header("ПРОВЕРКА ОБРАТНОЙ СОВМЕСТИМОСТИ")
+
+    prompt_text = build_user_prompt(build_adaptation_request())
+
+    assert_true("<input_data>" in prompt_text, "build_user_prompt сохраняет блок input_data")
+    assert_true("<retrieved_knowledge>" in prompt_text, "build_user_prompt сохраняет retrieval-блок")
+    assert_true("<mode_instruction>" in prompt_text, "build_user_prompt сохраняет mode_instruction")
+    assert_true("<output_instruction>" in prompt_text, "build_user_prompt сохраняет output_instruction")
     assert_true(
         'Используй mode = "adaptation".' in prompt_text,
-        'В mode_instruction указан режим "adaptation"',
+        'build_user_prompt корректно фиксирует mode = "adaptation"',
     )
-    assert_true(
-        "<retrieved_knowledge>" in prompt_text,
-        "Для adaptation retrieval-блок добавляется в prompt",
-    )
-    assert_true(
-        "reduce intensity" in prompt_text.lower() or "knee" in prompt_text.lower(),
-        "В prompt попадает содержимое, найденное ретривером",
-    )
-
-    parsed_input = extract_json_inside_input_data(prompt_text)
-
-    assert_true(
-        parsed_input["mode"] == "adaptation",
-        'JSON внутри <input_data> содержит mode = "adaptation"',
-    )
-    assert_true(
-        parsed_input["current_session"] is not None,
-        "Для adaptation current_session присутствует",
-    )
-    assert_true(
-        parsed_input["user_profile"]["goal"] == "увеличить силовые показатели",
-        "Поля user_profile корректно сериализуются в JSON",
-    )
-
-
-
-def check_history_trimming() -> None:
-    print_header("ПРОВЕРКА ОБРЕЗКИ ИСТОРИИ ДО ПОСЛЕДНИХ 5 СЕССИЙ")
-
-    request_data = build_long_history_request()
-    prompt_text = build_user_prompt(request_data)
-    parsed_input = extract_json_inside_input_data(prompt_text)
-
-    history = parsed_input["session_history"]
-
-    assert_true(
-        len(history) == 5,
-        "В пользовательский промпт попадают только последние 5 тренировок",
-    )
-    assert_true(
-        history[0]["date"] == "2026-03-12",
-        "Первая сохранённая запись после обрезки корректна",
-    )
-    assert_true(
-        history[-1]["date"] == "2026-03-16",
-        "Последняя сохранённая запись после обрезки корректна",
-    )
-
 
 
 def main() -> None:
-    check_system_prompt()
-    check_initial_plan_prompt()
-    check_adaptation_prompt()
-    check_history_trimming()
+    check_system_prompts()
+    check_structured_input()
+    check_tool_prompt()
+    check_final_prompt()
+    check_legacy_prompt_compatibility()
 
     print_header("ИТОГ")
-    print("Все проверки prompts.py пройдены успешно.")
+    print("Все проверки prompts.py для tool-calling версии пройдены успешно.")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,28 @@
+{
+  "user_profile": {
+    "goal": "general",
+    "experience_level": "beginner",
+    "equipment": [
+      "гантели"
+    ],
+    "restrictions": [
+      "травма поясницы"
+    ]
+  },
+  "current_session": {
+    "date": "2026-03-31",
+    "exercises": [
+      {
+        "name": "Румынская тяга",
+        "sets_completed": 1,
+        "sets_planned": 3,
+        "reps": "10",
+        "weight_kg": 30,
+        "rpe": 8
+      }
+    ],
+    "sleep_hours": 6,
+    "fatigue_level": 7,
+    "notes": "острая боль в пояснице во время движения"
+  }
+}

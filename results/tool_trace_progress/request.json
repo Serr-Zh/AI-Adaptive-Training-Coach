@@ -1,0 +1,36 @@
+{
+  "user_profile": {
+    "goal": "strength",
+    "experience_level": "intermediate",
+    "equipment": [
+      "штанга",
+      "гантели",
+      "скамья"
+    ],
+    "restrictions": []
+  },
+  "current_session": {
+    "date": "2026-03-31",
+    "exercises": [
+      {
+        "name": "Жим лёжа",
+        "sets_completed": 3,
+        "sets_planned": 3,
+        "reps": "8,8,8",
+        "weight_kg": 70,
+        "rpe": 7
+      },
+      {
+        "name": "Тяга в наклоне",
+        "sets_completed": 3,
+        "sets_planned": 3,
+        "reps": "10,10,10",
+        "weight_kg": 50,
+        "rpe": 6
+      }
+    ],
+    "sleep_hours": 8,
+    "fatigue_level": 3,
+    "notes": "тренировка прошла уверенно"
+  }
+}
