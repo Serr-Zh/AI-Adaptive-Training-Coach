@@ -1,0 +1,18 @@
+{
+  "dataset_name": "its-myrto/fitness-question-answers",
+  "task": "Question Answering / Abstractive QA / Supervised Fine-Tuning",
+  "source_columns": [
+    "Question",
+    "Answer"
+  ],
+  "output_columns": [
+    "prompt",
+    "completion",
+    "text"
+  ],
+  "train_size": 868,
+  "validation_size": 97,
+  "validation_ratio": 0.1,
+  "seed": 42,
+  "system_prompt": "You are an AI fitness coach. Answer the user's fitness question clearly, safely, and practically. Do not provide medical diagnosis. If the question contains pain, injury, or medical symptoms, recommend consulting a qualified professional."
+}

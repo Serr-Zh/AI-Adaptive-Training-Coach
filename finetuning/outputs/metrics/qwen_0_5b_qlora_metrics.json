@@ -1,0 +1,74 @@
+{
+  "experiment_name": "qwen_0_5b_qlora",
+  "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
+  "task": "Question Answering / Abstractive QA / Supervised Fine-Tuning",
+  "method": "LoRA",
+  "train_size": 868,
+  "validation_size": 97,
+  "training_time_seconds": 80.66263914108276,
+  "training_time_minutes": 1.3443773190180461,
+  "train_metrics": {
+    "train_runtime": 58.7282,
+    "train_samples_per_second": 3.406,
+    "train_steps_per_second": 0.426,
+    "total_flos": 45653571296256.0,
+    "train_loss": 2.0819897079467773,
+    "epoch": 0.2304147465437788
+  },
+  "eval_metrics": {
+    "eval_loss": 1.4153573513031006,
+    "eval_runtime": 6.3538,
+    "eval_samples_per_second": 15.267,
+    "eval_steps_per_second": 15.267,
+    "epoch": 0.2304147465437788
+  },
+  "eval_loss": 1.4153573513031006,
+  "perplexity": 4.1179577606449485,
+  "lora": {
+    "r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_config": {
+    "output_dir": "finetuning/outputs/adapters/qwen_0_5b_qlora",
+    "metrics_dir": "finetuning/outputs/metrics",
+    "num_train_epochs": 2,
+    "max_steps": 25,
+    "per_device_train_batch_size": 1,
+    "per_device_eval_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0002,
+    "max_seq_length": 512,
+    "logging_steps": 10,
+    "eval_steps": 25,
+    "save_steps": 25,
+    "seed": 42,
+    "fp16": true,
+    "bf16": false,
+    "gradient_checkpointing": true
+  },
+  "quantization": {
+    "use_4bit": false,
+    "bnb_4bit_compute_dtype": "float16",
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_use_double_quant": true
+  },
+  "adapter_output_dir": "finetuning/outputs/adapters/qwen_0_5b_qlora",
+  "environment": {
+    "python_version": "3.12.13",
+    "platform": "Linux-6.6.113+-x86_64-with-glibc2.35",
+    "torch_version": "2.10.0+cu128",
+    "gpu": {
+      "cuda_available": true,
+      "gpu_count": 1,
+      "gpu_name": "Tesla T4",
+      "total_memory_gb": 14.56
+    }
+  }
+}

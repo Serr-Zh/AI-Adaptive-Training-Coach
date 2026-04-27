@@ -3,3 +3,14 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+finetuning/outputs/adapters/**/adapter_model.safetensors
+finetuning/outputs/adapters/**/pytorch_model.bin
+finetuning/outputs/adapters/**/model.safetensors
+finetuning/outputs/adapters/**/checkpoint-*/
+finetuning/outputs/adapters/**/optimizer.pt
+finetuning/outputs/adapters/**/scheduler.pt
+finetuning/outputs/adapters/**/rng_state.pth
+
+finetuning/.cache/
+finetuning/tmp/

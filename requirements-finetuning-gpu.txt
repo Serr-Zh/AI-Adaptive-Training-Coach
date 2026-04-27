@@ -1,0 +1,12 @@
+torch
+transformers
+datasets
+accelerate
+peft
+trl
+evaluate
+rouge-score
+scikit-learn
+pandas
+matplotlib
+pyyaml
