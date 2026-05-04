@@ -1,0 +1,499 @@
+{
+  "accepted_examples": 120,
+  "coverage": {
+    "equipment_type": [
+      {
+        "actual_percent": 20.0,
+        "actual_share": 0.2,
+        "count": 24,
+        "deviation_pp": 0.0,
+        "target_percent": 20.0,
+        "target_share": 0.2,
+        "value": "bodyweight",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 25.0,
+        "actual_share": 0.25,
+        "count": 30,
+        "deviation_pp": 0.0,
+        "target_percent": 25.0,
+        "target_share": 0.25,
+        "value": "home_minimal",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 40.0,
+        "actual_share": 0.4,
+        "count": 48,
+        "deviation_pp": 0.0,
+        "target_percent": 40.0,
+        "target_share": 0.4,
+        "value": "gym",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 15.0,
+        "actual_share": 0.15,
+        "count": 18,
+        "deviation_pp": 0.0,
+        "target_percent": 15.0,
+        "target_share": 0.15,
+        "value": "mixed",
+        "within_tolerance": true
+      }
+    ],
+    "expected_policy": [
+      {
+        "actual_percent": 35.0,
+        "actual_share": 0.35,
+        "count": 42,
+        "deviation_pp": 0.0,
+        "target_percent": 35.0,
+        "target_share": 0.35,
+        "value": "initial_plan_generation",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 15.0,
+        "actual_share": 0.15,
+        "count": 18,
+        "deviation_pp": 0.0,
+        "target_percent": 15.0,
+        "target_share": 0.15,
+        "value": "progressive_overload",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 20.0,
+        "actual_share": 0.2,
+        "count": 24,
+        "deviation_pp": 0.0,
+        "target_percent": 20.0,
+        "target_share": 0.2,
+        "value": "overload_reduction",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 10.0,
+        "actual_share": 0.1,
+        "count": 12,
+        "deviation_pp": 0.0,
+        "target_percent": 10.0,
+        "target_share": 0.1,
+        "value": "restriction_limited",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 10.0,
+        "actual_share": 0.1,
+        "count": 12,
+        "deviation_pp": 0.0,
+        "target_percent": 10.0,
+        "target_share": 0.1,
+        "value": "maintain_plan",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 10.0,
+        "actual_share": 0.1,
+        "count": 12,
+        "deviation_pp": 0.0,
+        "target_percent": 10.0,
+        "target_share": 0.1,
+        "value": "medical_refusal",
+        "within_tolerance": true
+      }
+    ],
+    "experience_level": [
+      {
+        "actual_percent": 35.0,
+        "actual_share": 0.35,
+        "count": 42,
+        "deviation_pp": 0.0,
+        "target_percent": 35.0,
+        "target_share": 0.35,
+        "value": "beginner",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 45.0,
+        "actual_share": 0.45,
+        "count": 54,
+        "deviation_pp": 0.0,
+        "target_percent": 45.0,
+        "target_share": 0.45,
+        "value": "intermediate",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 20.0,
+        "actual_share": 0.2,
+        "count": 24,
+        "deviation_pp": 0.0,
+        "target_percent": 20.0,
+        "target_share": 0.2,
+        "value": "advanced",
+        "within_tolerance": true
+      }
+    ],
+    "feature": [
+      {
+        "actual_percent": 35.0,
+        "actual_share": 0.35,
+        "count": 42,
+        "deviation_pp": 0.0,
+        "target_percent": 35.0,
+        "target_share": 0.35,
+        "value": "initial_plan_generation",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 15.0,
+        "actual_share": 0.15,
+        "count": 18,
+        "deviation_pp": 0.0,
+        "target_percent": 15.0,
+        "target_share": 0.15,
+        "value": "progressive_overload",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 20.0,
+        "actual_share": 0.2,
+        "count": 24,
+        "deviation_pp": 0.0,
+        "target_percent": 20.0,
+        "target_share": 0.2,
+        "value": "overload_reduction",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 10.0,
+        "actual_share": 0.1,
+        "count": 12,
+        "deviation_pp": 0.0,
+        "target_percent": 10.0,
+        "target_share": 0.1,
+        "value": "restriction_handling",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 10.0,
+        "actual_share": 0.1,
+        "count": 12,
+        "deviation_pp": 0.0,
+        "target_percent": 10.0,
+        "target_share": 0.1,
+        "value": "maintain_plan",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 10.0,
+        "actual_share": 0.1,
+        "count": 12,
+        "deviation_pp": 0.0,
+        "target_percent": 10.0,
+        "target_share": 0.1,
+        "value": "medical_safety_refusal",
+        "within_tolerance": true
+      }
+    ],
+    "goal": [
+      {
+        "actual_percent": 30.0,
+        "actual_share": 0.3,
+        "count": 36,
+        "deviation_pp": 0.0,
+        "target_percent": 30.0,
+        "target_share": 0.3,
+        "value": "hypertrophy",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 30.0,
+        "actual_share": 0.3,
+        "count": 36,
+        "deviation_pp": 0.0,
+        "target_percent": 30.0,
+        "target_share": 0.3,
+        "value": "strength",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 20.0,
+        "actual_share": 0.2,
+        "count": 24,
+        "deviation_pp": 0.0,
+        "target_percent": 20.0,
+        "target_share": 0.2,
+        "value": "endurance",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 20.0,
+        "actual_share": 0.2,
+        "count": 24,
+        "deviation_pp": 0.0,
+        "target_percent": 20.0,
+        "target_share": 0.2,
+        "value": "general",
+        "within_tolerance": true
+      }
+    ],
+    "language": [
+      {
+        "actual_percent": 90.0,
+        "actual_share": 0.9,
+        "count": 108,
+        "deviation_pp": 0.0,
+        "target_percent": 90.0,
+        "target_share": 0.9,
+        "value": "ru",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 10.0,
+        "actual_share": 0.1,
+        "count": 12,
+        "deviation_pp": 0.0,
+        "target_percent": 10.0,
+        "target_share": 0.1,
+        "value": "en",
+        "within_tolerance": true
+      }
+    ],
+    "mode": [
+      {
+        "actual_percent": 35.0,
+        "actual_share": 0.35,
+        "count": 42,
+        "deviation_pp": 0.0,
+        "target_percent": 35.0,
+        "target_share": 0.35,
+        "value": "initial_plan",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 65.0,
+        "actual_share": 0.65,
+        "count": 78,
+        "deviation_pp": 0.0,
+        "target_percent": 65.0,
+        "target_share": 0.65,
+        "value": "adaptation",
+        "within_tolerance": true
+      }
+    ],
+    "restriction_type": [
+      {
+        "actual_percent": 40.0,
+        "actual_share": 0.4,
+        "count": 48,
+        "deviation_pp": 0.0,
+        "target_percent": 40.0,
+        "target_share": 0.4,
+        "value": "none",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 15.0,
+        "actual_share": 0.15,
+        "count": 18,
+        "deviation_pp": 0.0,
+        "target_percent": 15.0,
+        "target_share": 0.15,
+        "value": "knee",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 15.0,
+        "actual_share": 0.15,
+        "count": 18,
+        "deviation_pp": 0.0,
+        "target_percent": 15.0,
+        "target_share": 0.15,
+        "value": "lower_back",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 15.0,
+        "actual_share": 0.15,
+        "count": 18,
+        "deviation_pp": 0.0,
+        "target_percent": 15.0,
+        "target_share": 0.15,
+        "value": "shoulder_neck",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 15.0,
+        "actual_share": 0.15,
+        "count": 18,
+        "deviation_pp": 0.0,
+        "target_percent": 15.0,
+        "target_share": 0.15,
+        "value": "schedule_recovery",
+        "within_tolerance": true
+      }
+    ],
+    "safety_case": [
+      {
+        "actual_percent": 75.0,
+        "actual_share": 0.75,
+        "count": 90,
+        "deviation_pp": 0.0,
+        "target_percent": 75.0,
+        "target_share": 0.75,
+        "value": "safe",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 15.0,
+        "actual_share": 0.15,
+        "count": 18,
+        "deviation_pp": 0.0,
+        "target_percent": 15.0,
+        "target_share": 0.15,
+        "value": "ambiguous_discomfort",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 10.0,
+        "actual_share": 0.1,
+        "count": 12,
+        "deviation_pp": 0.0,
+        "target_percent": 10.0,
+        "target_share": 0.1,
+        "value": "medical_refusal",
+        "within_tolerance": true
+      }
+    ],
+    "session_signal": [
+      {
+        "actual_percent": 35.0,
+        "actual_share": 0.35,
+        "count": 42,
+        "deviation_pp": 0.0,
+        "target_percent": 35.0,
+        "target_share": 0.35,
+        "value": "no_history",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 15.0,
+        "actual_share": 0.15,
+        "count": 18,
+        "deviation_pp": 0.0,
+        "target_percent": 15.0,
+        "target_share": 0.15,
+        "value": "progress",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 20.0,
+        "actual_share": 0.2,
+        "count": 24,
+        "deviation_pp": 0.0,
+        "target_percent": 20.0,
+        "target_share": 0.2,
+        "value": "overload",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 20.0,
+        "actual_share": 0.2,
+        "count": 24,
+        "deviation_pp": 0.0,
+        "target_percent": 20.0,
+        "target_share": 0.2,
+        "value": "neutral",
+        "within_tolerance": true
+      },
+      {
+        "actual_percent": 10.0,
+        "actual_share": 0.1,
+        "count": 12,
+        "deviation_pp": 0.0,
+        "target_percent": 10.0,
+        "target_share": 0.1,
+        "value": "incomplete",
+        "within_tolerance": true
+      }
+    ]
+  },
+  "filter_reasons": {
+    "duplicate_request": 2,
+    "gym_without_equipment": 1,
+    "low_quality_prompt": 1,
+    "project_request_validation_error:ValidationError": 1,
+    "project_sgr_validation_error:ValidationError": 1
+  },
+  "filtered_share": 0.047619,
+  "generation_version": "1.1.0",
+  "raw_examples": 126,
+  "rejected_examples": 6,
+  "target_distributions": {
+    "equipment_type": {
+      "bodyweight": 0.2,
+      "gym": 0.4,
+      "home_minimal": 0.25,
+      "mixed": 0.15
+    },
+    "expected_policy": {
+      "initial_plan_generation": 0.35,
+      "maintain_plan": 0.1,
+      "medical_refusal": 0.1,
+      "overload_reduction": 0.2,
+      "progressive_overload": 0.15,
+      "restriction_limited": 0.1
+    },
+    "experience_level": {
+      "advanced": 0.2,
+      "beginner": 0.35,
+      "intermediate": 0.45
+    },
+    "feature": {
+      "initial_plan_generation": 0.35,
+      "maintain_plan": 0.1,
+      "medical_safety_refusal": 0.1,
+      "overload_reduction": 0.2,
+      "progressive_overload": 0.15,
+      "restriction_handling": 0.1
+    },
+    "goal": {
+      "endurance": 0.2,
+      "general": 0.2,
+      "hypertrophy": 0.3,
+      "strength": 0.3
+    },
+    "language": {
+      "en": 0.1,
+      "ru": 0.9
+    },
+    "mode": {
+      "adaptation": 0.65,
+      "initial_plan": 0.35
+    },
+    "restriction_type": {
+      "knee": 0.15,
+      "lower_back": 0.15,
+      "none": 0.4,
+      "schedule_recovery": 0.15,
+      "shoulder_neck": 0.15
+    },
+    "safety_case": {
+      "ambiguous_discomfort": 0.15,
+      "medical_refusal": 0.1,
+      "safe": 0.75
+    },
+    "session_signal": {
+      "incomplete": 0.1,
+      "neutral": 0.2,
+      "no_history": 0.35,
+      "overload": 0.2,
+      "progress": 0.15
+    }
+  },
+  "target_examples": 120
+}

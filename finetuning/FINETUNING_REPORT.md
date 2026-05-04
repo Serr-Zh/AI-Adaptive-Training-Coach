@@ -227,16 +227,13 @@ quality_score = 1 / perplexity
 
 Файл графика:
 
-```text
-finetuning/outputs/plots/price_quality_scatter.png
-```
+![Кривая цена/качество](outputs/plots/price_quality_scatter.png)
 
 Дополнительные графики:
 
-```text
-finetuning/outputs/plots/eval_loss_by_experiment.png
-finetuning/outputs/plots/perplexity_by_experiment.png
-```
+![Validation loss по экспериментам](outputs/plots/eval_loss_by_experiment.png)
+
+![Perplexity по экспериментам](outputs/plots/perplexity_by_experiment.png)
 
 По диаграмме цена/качество лучшей точкой является `qwen_1_5b_lora_r16`, так как эта конфигурация имеет максимальное значение `1 / perplexity` при небольшом увеличении времени обучения относительно базового `qwen_1_5b_qlora`.
 
