@@ -1,0 +1,2 @@
+﻿config_name,requests,mean_ttft_s,median_ttft_s,p95_ttft_s,mean_tpot_s,median_tpot_s,p95_tpot_s,mean_total_time_s,median_total_time_s
+ctx_c1024_t4_b512_ub512,15,0.271502,0.268066,0.307605,0.021758,0.020976,0.024196,2.425875,2.356927

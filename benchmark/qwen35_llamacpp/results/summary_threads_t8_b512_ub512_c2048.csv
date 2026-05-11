@@ -1,0 +1,2 @@
+﻿config_name,requests,mean_ttft_s,median_ttft_s,p95_ttft_s,mean_tpot_s,median_tpot_s,p95_tpot_s,mean_total_time_s,median_total_time_s
+threads_t8_b512_ub512_c2048,15,0.230483,0.222874,0.296555,0.018703,0.018289,0.020494,2.082349,2.041114

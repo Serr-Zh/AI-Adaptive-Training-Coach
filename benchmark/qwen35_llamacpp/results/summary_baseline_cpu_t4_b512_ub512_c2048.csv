@@ -1,0 +1,2 @@
+﻿config_name,requests,mean_ttft_s,median_ttft_s,p95_ttft_s,mean_tpot_s,median_tpot_s,p95_tpot_s,mean_total_time_s,median_total_time_s
+baseline_cpu_t4_b512_ub512_c2048,15,0.275305,0.275817,0.319726,0.021434,0.021039,0.022707,2.397497,2.385254

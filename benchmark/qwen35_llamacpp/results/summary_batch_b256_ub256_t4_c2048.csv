@@ -1,0 +1,2 @@
+﻿config_name,requests,mean_ttft_s,median_ttft_s,p95_ttft_s,mean_tpot_s,median_tpot_s,p95_tpot_s,mean_total_time_s,median_total_time_s
+batch_b256_ub256_t4_c2048,15,0.275755,0.267610,0.312790,0.021435,0.021097,0.023019,2.398138,2.375065

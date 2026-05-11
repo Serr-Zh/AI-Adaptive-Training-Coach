@@ -1,0 +1,2 @@
+﻿config_name,requests,mean_ttft_s,median_ttft_s,p95_ttft_s,mean_tpot_s,median_tpot_s,p95_tpot_s,mean_total_time_s,median_total_time_s
+mlock_t4_b512_ub512_c2048,15,0.284033,0.279605,0.326952,0.022199,0.021981,0.023470,2.482018,2.467518

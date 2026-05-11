@@ -1,0 +1,2 @@
+﻿config_name,requests,mean_ttft_s,median_ttft_s,p95_ttft_s,mean_tpot_s,median_tpot_s,p95_tpot_s,mean_total_time_s,median_total_time_s
+final_cpu_t8_b512_ub512_c2048,25,0.229948,0.222154,0.252633,0.018153,0.018222,0.018909,2.027313,2.032667
