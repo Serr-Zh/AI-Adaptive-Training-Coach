@@ -107,7 +107,28 @@ services:
       timeout: 5s
       retries: 10
       start_period: 1s
-
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      litellm:
+        condition: service_started
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      LOAD_TEST_MODE: ${LOAD_TEST_MODE:-true}
+      LLM_BASE_URL: http://litellm:4000/v1
+      LLM_API_KEY: ${LLM_API_KEY:-sk-local-master-key}
+      LLM_MODEL: ${LLM_MODEL:-coach-model}
+      LLM_MAX_TOKENS: ${LLM_MAX_TOKENS:-768}
+      LANGFUSE_BASE_URL: http://langfuse-web:3000
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      NO_PROXY: localhost,127.0.0.1,::1,litellm,langfuse-web
+      no_proxy: localhost,127.0.0.1,::1,litellm,langfuse-web
+      
   minio:
     image: docker.io/chainguard/minio:latest    
     restart: always
@@ -185,10 +206,12 @@ services:
         condition: service_healthy
     ports:
       - "4000:4000"
+    env_file:
+      - .env
     environment:
       LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY}
       DATABASE_URL: ${LITELLM_DATABASE_URL}
-      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
+      POLZA_AI_API_KEY: ${POLZA_AI_API_KEY}
     volumes:
       - ./litellm_config.yaml:/app/config.yaml
     command: ["--config", "/app/config.yaml", "--host", "0.0.0.0", "--port", "4000"]

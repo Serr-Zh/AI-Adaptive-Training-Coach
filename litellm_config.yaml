@@ -1,8 +1,9 @@
 model_list:
   - model_name: coach-model
     litellm_params:
-      model: openrouter/qwen/qwen3.5-35b-a3b
-      api_key: os.environ/OPENROUTER_API_KEY
+      model: openai/qwen/qwen3.5-flash-02-23
+      api_base: https://polza.ai/api/v1
+      api_key: os.environ/POLZA_AI_API_KEY
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY

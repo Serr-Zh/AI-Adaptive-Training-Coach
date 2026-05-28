@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 .venv/
 venv/
-
+.pytest_cache/
 finetuning/outputs/adapters/**/adapter_model.safetensors
 finetuning/outputs/adapters/**/pytorch_model.bin
 finetuning/outputs/adapters/**/model.safetensors
