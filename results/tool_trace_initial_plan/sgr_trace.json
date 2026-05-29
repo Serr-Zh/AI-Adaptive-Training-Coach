@@ -31,59 +31,6 @@
       "source": "model_function_call"
     },
     {
-      "tool_name": "assess_training_load",
-      "arguments": {
-        "request": {
-          "user_profile": {
-            "goal": "hypertrophy",
-            "experience_level": "beginner",
-            "equipment": [
-              "гантели",
-              "турник"
-            ],
-            "restrictions": []
-          },
-          "session_history": [],
-          "current_session": null
-        }
-      },
-      "result": {
-        "progress_detected": false,
-        "supporting_facts": [],
-        "recommended_progression": null,
-        "overload_detected": false,
-        "overload_signals": [],
-        "recommended_adjustment": null,
-        "session_assessment": "История и текущая тренировка отсутствуют, оценивается только стартовый план."
-      },
-      "source": "model_function_call"
-    },
-    {
-      "tool_name": "assess_medical_risk",
-      "arguments": {
-        "request": {
-          "user_profile": {
-            "goal": "hypertrophy",
-            "experience_level": "beginner",
-            "equipment": [
-              "гантели",
-              "турник"
-            ],
-            "restrictions": []
-          },
-          "session_history": [],
-          "current_session": null
-        }
-      },
-      "result": {
-        "medical_risk_detected": false,
-        "risk_signals": [],
-        "refusal_required": false,
-        "refuse_reason": null
-      },
-      "source": "model_function_call"
-    },
-    {
       "tool_name": "retrieve_training_knowledge",
       "arguments": {
         "request": {
@@ -144,7 +91,60 @@
         ],
         "formatted_knowledge": "[1] Beginner general plan with dumbbells and pull-up bar\ncategory: initial_plan\ntags: beginner, general, dumbbells, pull-up bar, home\ncontent: For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve.\n\n[2] Bodyweight and pull-up bar only\ncategory: equipment\ntags: equipment, bodyweight, pull-up bar, general\ncontent: If equipment is limited to bodyweight and a pull-up bar, recommendations should stay within pull-up variations, rows under a sturdy setup, push-ups, split squats, lunges, hinges without a barbell, planks and tempo-based progression. Do not prescribe barbell lifts.\n\n[3] Hypertrophy recommendations with dumbbells and machines\ncategory: hypertrophy\ntags: hypertrophy, intermediate, dumbbells, machines\ncontent: For hypertrophy with dumbbells and machines, build a balanced plan around presses, rows, split squats or leg press, hinges, lateral raises and arm work. Use moderate repetition ranges, controlled form and enough weekly volume without forcing failure on every set."
       },
-      "source": "forced_completion"
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_training_load",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "beginner",
+            "equipment": [
+              "гантели",
+              "турник"
+            ],
+            "restrictions": []
+          },
+          "session_history": [],
+          "current_session": null
+        }
+      },
+      "result": {
+        "progress_detected": false,
+        "supporting_facts": [],
+        "recommended_progression": null,
+        "overload_detected": false,
+        "overload_signals": [],
+        "recommended_adjustment": null,
+        "session_assessment": "История и текущая тренировка отсутствуют, оценивается только стартовый план."
+      },
+      "source": "model_function_call"
+    },
+    {
+      "tool_name": "assess_medical_risk",
+      "arguments": {
+        "request": {
+          "user_profile": {
+            "goal": "hypertrophy",
+            "experience_level": "beginner",
+            "equipment": [
+              "гантели",
+              "турник"
+            ],
+            "restrictions": []
+          },
+          "session_history": [],
+          "current_session": null
+        }
+      },
+      "result": {
+        "medical_risk_detected": false,
+        "risk_signals": [],
+        "refusal_required": false,
+        "refuse_reason": null
+      },
+      "source": "model_function_call"
     },
     {
       "tool_name": "assess_restrictions",

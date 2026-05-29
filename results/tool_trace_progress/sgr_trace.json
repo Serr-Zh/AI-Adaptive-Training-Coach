@@ -178,22 +178,22 @@
             "exercises": [
               {
                 "name": "Жим лёжа",
-                "sets_planned": 3,
                 "sets_completed": 3,
+                "sets_planned": 3,
                 "reps": "8,8,8",
-                "weight_kg": 70.0,
+                "weight_kg": 70,
                 "rpe": 7
               },
               {
                 "name": "Тяга в наклоне",
-                "sets_planned": 3,
                 "sets_completed": 3,
+                "sets_planned": 3,
                 "reps": "10,10,10",
-                "weight_kg": 50.0,
+                "weight_kg": 50,
                 "rpe": 6
               }
             ],
-            "sleep_hours": 8.0,
+            "sleep_hours": 8,
             "fatigue_level": 3,
             "notes": "тренировка прошла уверенно"
           }
@@ -244,7 +244,7 @@
         ],
         "formatted_knowledge": "[1] Strength plan with barbell, rack and bench\ncategory: initial_plan\ntags: strength, intermediate, barbell, rack, bench\ncontent: If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.\n\n[2] Hypertrophy recommendations with dumbbells and machines\ncategory: hypertrophy\ntags: hypertrophy, intermediate, dumbbells, machines\ncontent: For hypertrophy with dumbbells and machines, build a balanced plan around presses, rows, split squats or leg press, hinges, lateral raises and arm work. Use moderate repetition ranges, controlled form and enough weekly volume without forcing failure on every set.\n\n[3] Beginner general plan with dumbbells and pull-up bar\ncategory: initial_plan\ntags: beginner, general, dumbbells, pull-up bar, home\ncontent: For a beginner with dumbbells and a pull-up bar, use simple full-body sessions 2-3 times per week. Prioritize goblet squat, dumbbell bench press or floor press, dumbbell row, Romanian deadlift with light weight, overhead press, and assisted pull-up or inverted row. Start with moderate volume and leave 2-3 reps in reserve."
       },
-      "source": "forced_completion"
+      "source": "model_function_call"
     },
     {
       "tool_name": "assess_restrictions",

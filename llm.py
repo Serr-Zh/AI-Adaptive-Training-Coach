@@ -1,3 +1,4 @@
+import asyncio
 import json
 import logging
 import os
@@ -9,7 +10,7 @@ from typing import Any
 from dotenv import load_dotenv
 from langfuse import get_client, propagate_attributes
 from langfuse.openai import AsyncOpenAI
-from openai import BadRequestError
+from openai import APIStatusError, BadRequestError, RateLimitError
 
 from models import (
     AgentExecutionTrace,
@@ -37,6 +38,35 @@ load_dotenv(Path(__file__).resolve().parent / ".env")
 logger = logging.getLogger(__name__)
 
 _openai_client: AsyncOpenAI | None = None
+
+_RETRYABLE_STATUS_CODES = {429, 500, 502, 503}
+_MAX_RETRIES = 4
+_BASE_DELAY_S = 2.0
+
+
+async def _retry_with_backoff(coro_factory, *args, **kwargs):
+    for attempt in range(_MAX_RETRIES + 1):
+        try:
+            return await coro_factory(*args, **kwargs)
+        except RateLimitError as exc:
+            if attempt == _MAX_RETRIES:
+                raise
+            status = getattr(getattr(exc, "response", None), "status_code", None)
+            delay = _BASE_DELAY_S * (2 ** attempt)
+            logger.warning(
+                "Rate limit (status=%s), retry %d/%d через %.1fs",
+                status, attempt + 1, _MAX_RETRIES, delay,
+            )
+            await asyncio.sleep(delay)
+        except APIStatusError as exc:
+            if exc.status_code not in _RETRYABLE_STATUS_CODES or attempt == _MAX_RETRIES:
+                raise
+            delay = _BASE_DELAY_S * (2 ** attempt)
+            logger.warning(
+                "API error (status=%s), retry %d/%d через %.1fs",
+                exc.status_code, attempt + 1, _MAX_RETRIES, delay,
+            )
+            await asyncio.sleep(delay)
 
 
 def get_training_llm_client() -> AsyncOpenAI:
@@ -657,7 +687,8 @@ async def _run_tool_calling_phase(
                         "max_tokens": max_tokens,
                     },
                 ) as iteration_span:
-                    response = await client.chat.completions.create(
+                    response = await _retry_with_backoff(
+                        client.chat.completions.create,
                         model=model_name,
                         temperature=0,
                         messages=messages,
@@ -825,7 +856,8 @@ async def _request_model_response(
     max_tokens = _get_max_tokens()
 
     try:
-        response = await client.chat.completions.create(
+        response = await _retry_with_backoff(
+            client.chat.completions.create,
             model=model_name,
             temperature=temperature,
             messages=messages,
@@ -850,7 +882,8 @@ async def _request_model_response(
         )
 
     try:
-        response = await client.chat.completions.create(
+        response = await _retry_with_backoff(
+            client.chat.completions.create,
             model=model_name,
             temperature=temperature,
             messages=messages,
@@ -875,7 +908,8 @@ async def _request_model_response(
         }
     ]
 
-    response = await client.chat.completions.create(
+    response = await _retry_with_backoff(
+        client.chat.completions.create,
         model=model_name,
         temperature=temperature,
         messages=plain_json_messages,

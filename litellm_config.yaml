@@ -4,6 +4,15 @@ model_list:
       model: openai/qwen/qwen3.5-flash-02-23
       api_base: https://polza.ai/api/v1
       api_key: os.environ/POLZA_AI_API_KEY
+      rpm: 10
+      num_retries: 3
+  - model_name: coach-model
+    litellm_params:
+      model: openai/qwen/qwen3.6-flash
+      api_base: https://polza.ai/api/v1
+      api_key: os.environ/POLZA_AI_API_KEY
+      rpm: 10
+      num_retries: 3
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
@@ -12,3 +21,5 @@ general_settings:
 litellm_settings:
   drop_params: true
   set_verbose: false
+  num_retries: 3
+  request_timeout: 120

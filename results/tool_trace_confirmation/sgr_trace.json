@@ -22,8 +22,8 @@
             "exercises": [
               {
                 "name": "Присед",
-                "sets_completed": 3,
                 "sets_planned": 3,
+                "sets_completed": 3,
                 "reps": "6,6,6",
                 "weight_kg": 90,
                 "rpe": 7
@@ -70,8 +70,8 @@
             "exercises": [
               {
                 "name": "Присед",
-                "sets_completed": 3,
                 "sets_planned": 3,
+                "sets_completed": 3,
                 "reps": "6,6,6",
                 "weight_kg": 90,
                 "rpe": 7
@@ -118,8 +118,8 @@
             "exercises": [
               {
                 "name": "Присед",
-                "sets_completed": 3,
                 "sets_planned": 3,
+                "sets_completed": 3,
                 "reps": "6,6,6",
                 "weight_kg": 90,
                 "rpe": 7
@@ -161,8 +161,8 @@
             "exercises": [
               {
                 "name": "Присед",
-                "sets_completed": 3,
                 "sets_planned": 3,
+                "sets_completed": 3,
                 "reps": "6,6,6",
                 "weight_kg": 90,
                 "rpe": 7
@@ -212,11 +212,11 @@
                 "sets_planned": 3,
                 "sets_completed": 3,
                 "reps": "6,6,6",
-                "weight_kg": 90.0,
+                "weight_kg": 90,
                 "rpe": 7
               }
             ],
-            "sleep_hours": 8.0,
+            "sleep_hours": 8,
             "fatigue_level": 4,
             "notes": "есть небольшой дискомфорт в колене, но без резкой боли"
           }
@@ -266,7 +266,7 @@
         ],
         "formatted_knowledge": "[1] Strength plan with barbell, rack and bench\ncategory: initial_plan\ntags: strength, intermediate, barbell, rack, bench\ncontent: If the goal is strength and the user has a barbell, rack and bench, the initial plan should center around squat, bench press, deadlift or hinge variation, overhead press and rows. Use relatively low repetitions, stable technique and conservative weekly progression.\n\n[2] Progressive overload after confident execution\ncategory: adaptation\ntags: adaptation, progression, increase load, rpe 7\ncontent: If the athlete completes all planned sets with solid technique and RPE at or below 7, a small progression in the next session is acceptable. Increase load slightly, add a repetition, or keep the same load with tighter execution.\n\n[3] Knee pain and no deep squats\ncategory: restrictions\ntags: restriction, knee pain, no deep squats, replace exercise\ncontent: With knee pain or a restriction against deep squats, avoid recommending deep squat patterns. Prefer box squat to pain-free depth, split squat with reduced range, hip hinge patterns, glute bridge, Romanian deadlift, step-up with conservative depth and leg work that does not aggravate symptoms."
       },
-      "source": "forced_completion"
+      "source": "model_function_call"
     },
     {
       "tool_name": "request_confirmation",
