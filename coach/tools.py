@@ -4,7 +4,7 @@ from typing import Any, Callable, Type
 
 from pydantic import BaseModel
 
-from models import (
+from coach.models import (
     AgentExecutionTrace,
     AssessMedicalRiskInput,
     AssessMedicalRiskOutput,
@@ -22,7 +22,7 @@ from models import (
     ToolCallRecord,
     ToolRequestSnapshot,
 )
-from retriever import build_retrieval_query, format_retrieved_knowledge, retrieve_for_request
+from coach.retriever import build_retrieval_query, format_retrieved_knowledge, retrieve_for_request
 
 
 ACUTE_MEDICAL_KEYWORDS = {

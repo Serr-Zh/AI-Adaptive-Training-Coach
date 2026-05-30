@@ -1,6 +1,6 @@
 import json
 
-from retriever import format_retrieved_knowledge, retrieve_for_request
+from coach.retriever import format_retrieved_knowledge, retrieve_for_request
 
 
 # =============================================================================

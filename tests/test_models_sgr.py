@@ -3,7 +3,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from models import (
+from coach.models import (
     CoachResponse,
     CoachSGRResponse,
     sgr_to_coach_response,

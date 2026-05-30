@@ -20,17 +20,20 @@ AI Adaptive Training Coach - API-сервис для генерации стар
 
 | Компонент | Файл | Назначение |
 |---|---|---|
-| FastAPI API | `main.py` | HTTP endpoints: `/coach`, `/health`, `/schema`, `/info`, `/run` |
-| Pydantic-модели | `models.py` | Входной контракт, SGR-схема, итоговый `CoachResponse`, trace-модели |
-| LLM runtime | `llm.py` | Двухфазный agent runtime, structured output, Langfuse spans, fallback-логика |
-| Prompts | `prompts.py` | Tool orchestration prompt и финальный SGR prompt |
-| Tools | `tools.py` | Локальные инструменты анализа контекста, нагрузки, ограничений и medical risk |
-| Retriever | `retriever.py` | Лексический поиск по локальной базе знаний |
+| FastAPI API | `app/main.py` | HTTP endpoints: `/coach`, `/health`, `/schema`, `/info`, `/run` |
+| API-модели | `app/models.py` | `InfoResponse`, `RunRequest`, `RunResponse`, `InputType`, `ContentPart` |
+| API-адаптер | `app/adapter.py` | Адаптер Locust payload → CoachRequest |
+| Pydantic-модели | `coach/models.py` | Входной контракт, SGR-схема, итоговый `CoachResponse`, trace-модели |
+| LLM runtime | `coach/llm.py` | Двухфазный agent runtime, structured output, Langfuse spans, fallback-логика |
+| Prompts | `coach/prompts.py` | Tool orchestration prompt и финальный SGR prompt |
+| Tools | `coach/tools.py` | Локальные инструменты анализа контекста, нагрузки, ограничений и medical risk |
+| Retriever | `coach/retriever.py` | Лексический поиск по локальной базе знаний |
+| Evaluation | `coach/evaluation.py` | Пайплайн автоматической оценки качества агента |
 | Knowledge base | `data/knowledge_base.json` | Доменные знания для training decisions |
-| LiteLLM config | `litellm_config.yaml` | Роутинг модели `coach-model` через LiteLLM |
+| LiteLLM config | `litellm_config.yaml` | Роутинг модели `coach-model` через LiteLLM с fallback |
 | Docker | `Dockerfile`, `docker-compose.yaml` | Контейнеризация приложения и инфраструктуры |
 | Load testing | `locustfile.py`, `README_locust.md` | Нагрузочный тест по unified API `/info` + `/run` |
-| Evaluation | `evaluation_pipeline.py`, `scripts/run_agent_eval.py` | Автоматическая оценка качества агента |
+| Eval scripts | `scripts/run_agent_eval.py` | Запуск agent evaluation |
 
 ## Как работает agent runtime
 
@@ -308,26 +311,31 @@ python scripts/run_tool_agent_scenarios.py
 
 ```text
 .
-├── main.py                    # FastAPI app
-├── models.py                  # API, SGR and tool schemas
-├── llm.py                     # Agent runtime and Langfuse tracing
-├── prompts.py                 # Tool and final prompts
-├── tools.py                   # Local tool implementations
-├── retriever.py               # Lexical retriever over local knowledge base
-├── locustfile.py              # Locust load test scenario
-├── locust_models.py           # Unified API models for /info and /run
-├── locust_adapter.py          # Adapter from Locust payload to CoachRequest
-├── data/                      # Knowledge base, eval cases and datasets
-├── examples/                  # Ready-to-send API request examples
-├── scripts/                   # Eval, benchmark and utility scripts
-├── tests/                     # Local checks and scenario tests
-├── results/                   # Generated eval outputs and traces
-├── artifacts/                 # Reports and project artifacts
-├── benchmark/                 # Retriever and inference benchmarks
-├── finetuning/                # Fine-tuning scripts and reports
+├── app/                        # API layer (FastAPI)
+│   ├── main.py                 # FastAPI app: /health, /info, /run, /coach, /schema
+│   ├── models.py               # Unified API models: InfoResponse, RunRequest, RunResponse
+│   └── adapter.py              # Adapter: Locust payload → CoachRequest
+├── coach/                      # Business logic
+│   ├── models.py               # CoachRequest, CoachResponse, SGR schemas, tool schemas
+│   ├── llm.py                  # Agent runtime, Langfuse tracing, retry with backoff
+│   ├── prompts.py              # Tool orchestration prompt, final SGR prompt
+│   ├── tools.py                # Local tool implementations
+│   ├── retriever.py            # Lexical retriever over knowledge base
+│   └── evaluation.py           # Agent evaluation pipeline
+├── data/                       # Knowledge base, eval cases, datasets
+├── examples/                   # Ready-to-send API request examples
+├── scripts/                    # Eval, benchmark and utility scripts
+├── tests/                      # Local checks and scenario tests
+├── results/                    # Generated eval outputs and traces
+├── artifacts/                  # Reports and project artifacts
+├── benchmark/                  # Retriever and inference benchmarks
+├── finetuning/                 # Fine-tuning scripts and reports
+├── locustfile.py               # Locust load test scenario
+├── run.py                      # Uvicorn entrypoint
 ├── Dockerfile
 ├── docker-compose.yaml
 ├── litellm_config.yaml
+├── README.md
 ├── README_locust.md
 ├── README_eval_v2.md
 └── requirements.txt

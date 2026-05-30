@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(ROOT))
 
-from retriever import retrieve_documents  # noqa: E402
+from coach.retriever import retrieve_documents  # noqa: E402
 
 BENCHMARK_DIR = ROOT / "benchmark"
 QUERIES_PATH = BENCHMARK_DIR / "queries.jsonl"

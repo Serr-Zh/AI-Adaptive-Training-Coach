@@ -12,20 +12,20 @@ from langfuse import get_client, propagate_attributes
 from langfuse.openai import AsyncOpenAI
 from openai import APIStatusError, BadRequestError, RateLimitError
 
-from models import (
+from coach.models import (
     AgentExecutionTrace,
     CoachResponse,
     CoachSGRResponse,
     ToolCallRecord,
     sgr_to_coach_response,
 )
-from prompts import (
+from coach.prompts import (
     FINAL_SYSTEM_PROMPT,
     TOOL_SYSTEM_PROMPT,
     build_final_user_prompt,
     build_tool_user_prompt,
 )
-from tools import (
+from coach.tools import (
     dump_tool_result,
     execute_tool,
     get_openai_tool_definitions,
@@ -33,7 +33,7 @@ from tools import (
 )
 
 
-load_dotenv(Path(__file__).resolve().parent / ".env")
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 logger = logging.getLogger(__name__)
 

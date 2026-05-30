@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from retriever import build_retrieval_query, format_retrieved_knowledge, retrieve_for_request
+from coach.retriever import build_retrieval_query, format_retrieved_knowledge, retrieve_for_request
 
 
 def assert_true(condition: bool, message: str) -> None:

@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from evaluation_pipeline import (
+from coach.evaluation import (
     ROOT,
     aggregate_results,
     load_cases,

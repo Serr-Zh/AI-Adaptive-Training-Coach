@@ -4,7 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-KB_PATH = Path(__file__).resolve().parent / "data" / "knowledge_base.json"
+KB_PATH = Path(__file__).resolve().parent.parent / "data" / "knowledge_base.json"
 TOKEN_RE = re.compile(r"[A-Za-zА-Яа-яЁё0-9_+-]+")
 STOPWORDS = {
     "и", "или", "в", "во", "на", "по", "для", "с", "со", "к", "из", "под", "при",

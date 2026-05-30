@@ -5,7 +5,7 @@ import sys
 
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from llm import get_coach_response_with_trace, get_sgr_response_with_trace
+from coach.llm import get_coach_response_with_trace, get_sgr_response_with_trace
 
 
 RESULTS_DIR = Path("results")

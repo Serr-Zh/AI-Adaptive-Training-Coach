@@ -9,7 +9,7 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 
 DEFAULT_RESULTS_DIRNAME = "agent_eval"
 DEFAULT_REQUIRED_TOOLS = [
@@ -354,8 +354,8 @@ def make_case_row(
 
 
 async def run_case_direct(case: dict[str, Any]) -> dict[str, Any]:
-    from llm import get_sgr_response_with_trace
-    from models import sgr_to_coach_response
+    from coach.llm import get_sgr_response_with_trace
+    from coach.models import sgr_to_coach_response
 
     started_at = time.perf_counter()
     try:

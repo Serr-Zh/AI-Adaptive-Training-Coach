@@ -1,12 +1,12 @@
 # Нагрузочное тестирование API (Locust)
 
-Этот документ описывает, как запускать нагрузочное тестирование для сервиса `AI Adaptive Training Coach` с помощью `Locust`.
+Этот документ описывает, как запускать нагрузочное тестирование для сервиса `AI Adaptive Training Coach` с помощью `Locust` по шаблону `locust-api-template`.
 
 ## Что именно тестируется
 
-- Endpoint `GET /info` (вес задачи: 1)
-- Endpoint `POST /run` (вес задачи: 10)
-- Формат ответа `/run`: ожидается JSON со `status = "success"`
+- Endpoint `GET /health` — возвращает `{"status":"ok"}`
+- Endpoint `GET /info` — возвращает `input_type`, `input_schema`, `output_schema`
+- Endpoint `POST /run` — принимает `content` (строка или список) + `extra_body`, возвращает `{"status":"success","result":...,"error":null}`
 
 Логика нагрузки находится в `locustfile.py`.
 
@@ -44,7 +44,13 @@ pip install "locust>=2.0"
 
 ## Запуск теста
 
-### Вариант 1: Web UI
+### Headless (рекомендуется для отчетов)
+
+```bash
+locust -f locustfile.py --host http://localhost:8000 --headless -u 10 -r 2 -t 60s --only-summary
+```
+
+### Web UI
 
 ```bash
 locust -f locustfile.py --host http://localhost:8000
@@ -52,31 +58,18 @@ locust -f locustfile.py --host http://localhost:8000
 
 Далее открыть UI: `http://localhost:8089`
 
-### Вариант 2: Headless (рекомендуется для отчетов)
-
-```bash
-locust -f locustfile.py --host http://localhost:8000 --headless -u 10 -r 2 -t 60s
-```
-
-Где:
-
-- `-u` — число виртуальных пользователей
-- `-r` — скорость спауна пользователей в секунду
-- `-t` — длительность теста
-
 ## Рекомендуемые профили запуска
 
 - Smoke: `-u 1 -r 1 -t 60s`
-- Short load: `-u 3 -r 1 -t 120s`
+- Short load: `-u 2 -r 1 -t 20s`
 - Basic load: `-u 10 -r 2 -t 60s`
-- Endurance light: `-u 10 -r 2 -t 180s`
 
 ## Сохранение лога в файл
 
 PowerShell:
 
 ```powershell
-locust -f locustfile.py --host http://localhost:8000 --headless -u 10 -r 2 -t 60s |
+locust -f locustfile.py --host http://localhost:8000 --headless -u 10 -r 2 -t 60s --only-summary |
   Tee-Object -FilePath "artifacts/locust/locust_10_users_60s.txt"
 ```
 
@@ -86,23 +79,32 @@ locust -f locustfile.py --host http://localhost:8000 --headless -u 10 -r 2 -t 60
 - В сводке `# fails = 0` для `GET /info` и `POST /run`
 - Нет секции `Error report` или она пустая
 
-## Типовые причины падения
+## Режимы работы
 
-1. `status = "error"` в `/run` из-за лимитов внешней LLM (429/402).
-2. Сервис возвращает невалидный JSON.
-3. `input_type` в `/info` отличается от ожидаемого (`text`).
+### LOAD_TEST_MODE=true (без LLM)
 
-Важно: текущий `locustfile.py` проверяет `input_type == "text"`.
+В `.env` установлен `LOAD_TEST_MODE=true`. В этом режиме `/run` возвращает стабильный тестовый ответ без вызова внешней LLM. Используется для проверки API-контракта, сериализации и устойчивости сервиса.
 
-## Режим для стабильного нагрузочного теста
+### LOAD_TEST_MODE=false (реальный вызов LLM)
 
-Для изоляции от внешней LLM используйте `LOAD_TEST_MODE=true`.
+Для проверки что реальные LLM-вызовы работают через `/run`, временно переключите:
 
-В проекте это уже задано:
+```bash
+# В .env: LOAD_TEST_MODE=false
+docker compose up --build -d app
+```
 
-- `.env` (`LOAD_TEST_MODE=true`)
-- `docker-compose.yaml` для сервиса `app`
+Каждый запрос к `/run` вызывает LLM через LiteLLM с tool-calling, что занимает ~30-50 секунд. При 10 пользователях за 60 секунд проходит ~10 запросов (вместо ~460 с заглушкой). Стоимость: ~18₽ за прогон.
 
-В этом режиме `/run` возвращает тестовый ответ и не вызывает внешнюю модель.
+После проверки верните `LOAD_TEST_MODE=true` и пересоберите.
+
+## Структура файлов для Locust
+
+| Файл | Назначение |
+|---|---|
+| `app/main.py` | FastAPI endpoints: `/health`, `/info`, `/run` |
+| `app/models.py` | `InfoResponse`, `RunRequest`, `RunResponse`, `InputType`, `ContentPart` |
+| `app/adapter.py` | Адаптер Locust payload → CoachRequest |
+| `locustfile.py` | Locust-сценарий |
 
 

@@ -3,10 +3,10 @@ import os
 
 from fastapi import FastAPI, HTTPException
 
-from llm import get_coach_response
-from models import CoachRequest, CoachResponse
-from locust_models import InfoResponse, InputType, RunRequest, RunResponse
-from locust_adapter import build_coach_request_from_locust
+from coach.llm import get_coach_response
+from coach.models import CoachRequest, CoachResponse
+from app.models import InfoResponse, InputType, RunRequest, RunResponse, ContentPartText
+from app.adapter import build_coach_request_from_locust
 
 app = FastAPI(
     title="AI Adaptive Training Coach",
@@ -163,10 +163,19 @@ async def info():
 @app.post("/run", response_model=RunResponse)
 async def run(request: RunRequest):
     try:
-        if not isinstance(request.content, str):
+        if isinstance(request.content, str):
+            text = request.content
+        else:
+            text = None
+            for part in request.content:
+                if isinstance(part, ContentPartText):
+                    text = part.text
+                    break
+
+        if text is None:
             return RunResponse(
                 status="error",
-                error="Сервис поддерживает только текстовый content.",
+                error="Текст не передан. Отправьте content как строку или список с text-частью.",
             )
 
         scenario = request.extra_body.get("scenario", "initial_plan")
@@ -200,9 +209,10 @@ async def run(request: RunRequest):
 
     except Exception as e:
         if is_litellm_budget_exceeded_error(e):
-            raise HTTPException(
-                status_code=402,
-                detail=f"Дневной бюджет LiteLLM превышен. Исходная ошибка: {str(e)}",
+            return RunResponse(
+                status="error",
+                result=None,
+                error=f"Дневной бюджет LiteLLM превышен. Исходная ошибка: {str(e)}",
             )
 
         return RunResponse(

@@ -26,7 +26,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 try:  # pragma: no cover - depends on original project environment
-    from models import CoachRequest, CoachSGRResponse  # type: ignore
+    from coach.models import CoachRequest, CoachSGRResponse  # type: ignore
 except Exception:  # pragma: no cover - standalone fallback
     CoachRequest = None  # type: ignore
     CoachSGRResponse = None  # type: ignore

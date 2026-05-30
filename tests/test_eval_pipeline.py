@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from evaluation_pipeline import aggregate_results, build_case_checks, normalize_case, validate_coach_shape, validate_sgr_shape
+from coach.evaluation import aggregate_results, build_case_checks, normalize_case, validate_coach_shape, validate_sgr_shape
 
 
 def assert_true(condition: bool, message: str) -> None:

@@ -6,8 +6,8 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from llm import get_coach_response, get_sgr_response
-from models import CoachResponse, CoachSGRResponse
+from coach.llm import get_coach_response, get_sgr_response
+from coach.models import CoachResponse, CoachSGRResponse
 
 
 def print_header(title: str) -> None:

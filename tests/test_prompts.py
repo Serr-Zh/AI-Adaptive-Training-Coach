@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from prompts import (
+from coach.prompts import (
     FINAL_SYSTEM_PROMPT,
     TOOL_SYSTEM_PROMPT,
     SYSTEM_PROMPT,

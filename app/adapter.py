@@ -1,7 +1,7 @@
 from datetime import date
 from typing import Any
 
-from models import CoachRequest
+from coach.models import CoachRequest
 
 
 def build_coach_request_from_locust(content: str, extra_body: dict[str, Any]) -> CoachRequest:
