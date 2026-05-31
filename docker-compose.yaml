@@ -216,6 +216,17 @@ services:
       - ./litellm_config.yaml:/app/config.yaml
     command: ["--config", "/app/config.yaml", "--host", "0.0.0.0", "--port", "4000"]
 
+  locust:
+    build: .
+    depends_on:
+      app:
+        condition: service_started
+    environment:
+      LOCUST_HOST: http://app:8000
+    entrypoint: ["locust", "-f", "locustfile.py"]
+    profiles:
+      - loadtest
+
 volumes:
   langfuse_postgres_data:
     driver: local

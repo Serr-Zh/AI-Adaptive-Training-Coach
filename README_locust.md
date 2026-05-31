@@ -36,7 +36,7 @@ curl http://localhost:8000/health
 
 ## Установка Locust
 
-Если Locust еще не установлен:
+Если Locust еще не установлен на хосте:
 
 ```bash
 pip install "locust>=2.0"
@@ -44,19 +44,51 @@ pip install "locust>=2.0"
 
 ## Запуск теста
 
-### Headless (рекомендуется для отчетов)
+Есть три способа запуска Locust.
+
+### Вариант 1: Locust на хосте (рекомендуется, соответствует заданию)
+
+Сначала поднимите сервис:
 
 ```bash
-locust -f locustfile.py --host http://localhost:8000 --headless -u 10 -r 2 -t 60s --only-summary
+docker compose up --build -d
 ```
 
-### Web UI
+Web-интерфейс:
 
 ```bash
 locust -f locustfile.py --host http://localhost:8000
 ```
 
-Далее открыть UI: `http://localhost:8089`
+Открыть UI: `http://localhost:8089`
+
+Headless:
+
+```bash
+locust -f locustfile.py --host http://localhost:8000 \
+  --headless -u 10 -r 2 -t 60s
+```
+
+### Вариант 2: Отдельный Docker-контейнер Locust
+
+Не требует установки Locust на хост. Использует тот же Dockerfile:
+
+```bash
+# Headless
+docker compose run locust --headless -u 10 -r 2 -t 60s --only-summary
+
+# Web-интерфейс
+docker compose run -p 8089:8089 locust
+```
+
+### Вариант 3: Через app-контейнер
+
+Если Locust недоступен на хосте и нет отдельного контейнера:
+
+```bash
+docker compose -f docker-compose.yaml exec -T app locust -f locustfile.py \
+  --host http://127.0.0.1:8000 --headless -u 1 -r 1 -t 20s --only-summary
+```
 
 ## Рекомендуемые профили запуска
 

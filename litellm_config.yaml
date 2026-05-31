@@ -8,7 +8,7 @@ model_list:
       num_retries: 3
   - model_name: coach-model
     litellm_params:
-      model: openai/qwen/qwen3.6-flash
+      model: openai/deepseek/deepseek-v4-flash
       api_base: https://polza.ai/api/v1
       api_key: os.environ/POLZA_AI_API_KEY
       rpm: 10
