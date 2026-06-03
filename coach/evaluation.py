@@ -1,5 +1,4 @@
 
-import asyncio
 import csv
 import json
 import math
@@ -392,17 +391,6 @@ def _numeric_bool_mean(rows: list[dict[str, Any]], key: str, only_status_ok: boo
     return round(sum(filtered) / len(filtered), 4)
 
 
-def _numeric_subset_mean(rows: list[dict[str, Any]], key: str) -> float | None:
-    filtered = []
-    for row in rows:
-        value = row.get(key)
-        if isinstance(value, bool):
-            filtered.append(1.0 if value else 0.0)
-    if not filtered:
-        return None
-    return round(sum(filtered) / len(filtered), 4)
-
-
 def aggregate_results(rows: list[dict[str, Any]], retriever_eval_path: Path | None = None) -> dict[str, Any]:
     total = len(rows)
     ok_rows = [row for row in rows if row.get("status") == "ok"]
@@ -446,8 +434,8 @@ def aggregate_results(rows: list[dict[str, Any]], retriever_eval_path: Path | No
             "schema_valid_rate": _numeric_bool_mean(rows, "schema_valid"),
             "scenario_rule_accuracy": _numeric_bool_mean(rows, "scenario_pass"),
             "decision_consistency_rate": _numeric_bool_mean(rows, "consistency_ok"),
-            "safety_accuracy": _numeric_subset_mean(rows, "safety_case_pass"),
-            "restriction_compliance": _numeric_subset_mean(rows, "restriction_case_pass"),
+            "safety_accuracy": _numeric_bool_mean(rows, "safety_case_pass", only_status_ok=False),
+            "restriction_compliance": _numeric_bool_mean(rows, "restriction_case_pass", only_status_ok=False),
             "tool_coverage_rate": round(required_tool_hits / required_tool_total, 4) if required_tool_total else None,
             "tool_precision_rate": round(forbidden_tool_avoided / forbidden_tool_total, 4) if forbidden_tool_total else None,
         },
@@ -474,7 +462,6 @@ def write_csv(rows: list[dict[str, Any]], path: Path) -> None:
             "scenario",
             "title",
             "status",
-            "http_status",
             "elapsed_ms",
             "mode",
             "decision",
@@ -542,30 +529,21 @@ def write_case_artifacts(rows: list[dict[str, Any]], output_dir: Path) -> None:
 
 def build_report_markdown(summary: dict[str, Any], rows: list[dict[str, Any]]) -> str:
     aggregate = summary["aggregate"]
+    agg_keys = [
+        "total_cases", "ok_cases", "error_cases", "api_success_rate",
+        "mean_latency_ms", "median_latency_ms", "p95_latency_ms",
+        "json_valid_rate", "schema_valid_rate", "scenario_rule_accuracy",
+        "decision_consistency_rate", "safety_accuracy",
+        "restriction_compliance", "tool_coverage_rate", "tool_precision_rate",
+    ]
     lines = [
         "# Agent Evaluation Report",
         "",
         "## Aggregate metrics",
         "",
-        f"- total_cases: {aggregate.get('total_cases')}",
-        f"- ok_cases: {aggregate.get('ok_cases')}",
-        f"- error_cases: {aggregate.get('error_cases')}",
-        f"- api_success_rate: {aggregate.get('api_success_rate')}",
-        f"- mean_latency_ms: {aggregate.get('mean_latency_ms')}",
-        f"- median_latency_ms: {aggregate.get('median_latency_ms')}",
-        f"- p95_latency_ms: {aggregate.get('p95_latency_ms')}",
-        f"- json_valid_rate: {aggregate.get('json_valid_rate')}",
-        f"- schema_valid_rate: {aggregate.get('schema_valid_rate')}",
-        f"- scenario_rule_accuracy: {aggregate.get('scenario_rule_accuracy')}",
-        f"- decision_consistency_rate: {aggregate.get('decision_consistency_rate')}",
-        f"- safety_accuracy: {aggregate.get('safety_accuracy')}",
-        f"- restriction_compliance: {aggregate.get('restriction_compliance')}",
-        f"- tool_coverage_rate: {aggregate.get('tool_coverage_rate')}",
-        f"- tool_precision_rate: {aggregate.get('tool_precision_rate')}",
-        "",
-        "## Per-scenario summary",
-        "",
     ]
+    for key in agg_keys:
+        lines.append(f"- {key}: {aggregate.get(key)}")
 
     for scenario, payload in summary.get("per_scenario", {}).items():
         lines.extend([

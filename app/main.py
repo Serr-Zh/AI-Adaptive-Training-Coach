@@ -1,17 +1,30 @@
 import json
 import os
+import logging
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
+from coach.config import get_settings
 from coach.llm import get_coach_response
 from coach.models import CoachRequest, CoachResponse
 from app.models import InfoResponse, InputType, RunRequest, RunResponse, ContentPartText
 from app.adapter import build_coach_request_from_locust
 
+logger = logging.getLogger(__name__)
+
 app = FastAPI(
     title="AI Adaptive Training Coach",
     description="AI-система для генерации и адаптации тренировочных программ",
     version="0.1.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -42,12 +55,7 @@ def is_litellm_budget_exceeded_error(error: Exception) -> bool:
     return any(marker in error_text for marker in budget_error_markers)
 
 def is_load_test_mode_enabled() -> bool:
-    return os.getenv("LOAD_TEST_MODE", "false").strip().lower() in {
-        "1",
-        "true",
-        "yes",
-        "on",
-    }
+    return get_settings().load_test_mode
 
 
 def build_load_test_response(mode: str = "initial_plan") -> dict:
@@ -160,6 +168,9 @@ async def info():
         output_schema=CoachResponse.model_json_schema(),
     )
 
+_SGR_PARSE_RETRIES = 2
+
+
 @app.post("/run", response_model=RunResponse)
 async def run(request: RunRequest):
     try:
@@ -192,19 +203,29 @@ async def run(request: RunRequest):
             extra_body=request.extra_body,
         )
 
-        response = await get_coach_response(coach_request.model_dump())
+        last_error: Exception | None = None
 
-        return RunResponse(
-            status="success",
-            result=response.model_dump(),
-            error=None,
-        )
+        for attempt in range(_SGR_PARSE_RETRIES + 1):
+            try:
+                response = await get_coach_response(coach_request.model_dump())
+                return RunResponse(
+                    status="success",
+                    result=response.model_dump(),
+                    error=None,
+                )
+            except (json.JSONDecodeError, ValueError) as e:
+                last_error = e
+                logger.warning(
+                    "Попытка %d/%d: LLM вернул невалидный ответ, повторяю. Ошибка: %s",
+                    attempt + 1,
+                    _SGR_PARSE_RETRIES + 1,
+                    e,
+                )
 
-    except json.JSONDecodeError as e:
         return RunResponse(
             status="error",
             result=None,
-            error=f"LLM вернул невалидный JSON: {str(e)}",
+            error=f"LLM вернул невалидный JSON после {_SGR_PARSE_RETRIES + 1} попыток: {last_error}",
         )
 
     except Exception as e:

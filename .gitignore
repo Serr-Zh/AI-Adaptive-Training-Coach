@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 venv/
 locust-api-template-main/
+SKILL.md
 .pytest_cache/
 finetuning/outputs/adapters/**/adapter_model.safetensors
 finetuning/outputs/adapters/**/pytorch_model.bin

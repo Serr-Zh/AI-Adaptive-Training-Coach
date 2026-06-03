@@ -99,11 +99,8 @@ def _request_to_snapshot(data: dict[str, Any] | ToolRequestSnapshot) -> ToolRequ
     return ToolRequestSnapshot.model_validate(data)
 
 
-def _exercise_names(snapshot: ToolRequestSnapshot) -> list[str]:
-    session = snapshot.current_session or (snapshot.session_history[-1] if snapshot.session_history else None)
-    if not session:
-        return []
-    return [exercise.name for exercise in session.exercises]
+def _latest_session(snapshot: ToolRequestSnapshot) -> Any | None:
+    return snapshot.current_session or (snapshot.session_history[-1] if snapshot.session_history else None)
 
 
 def _notes_text(snapshot: ToolRequestSnapshot) -> str:
@@ -125,7 +122,7 @@ def _contains_any(text: str, keywords: set[str]) -> list[str]:
 
 
 def _summarize_latest_session(snapshot: ToolRequestSnapshot) -> str | None:
-    session = snapshot.current_session or (snapshot.session_history[-1] if snapshot.session_history else None)
+    session = _latest_session(snapshot)
     if session is None:
         return None
 
@@ -225,7 +222,7 @@ def assess_restrictions(args: AssessRestrictionsInput) -> AssessRestrictionsOutp
 
 def assess_training_load(args: AssessTrainingLoadInput) -> AssessTrainingLoadOutput:
     snapshot = args.request
-    session = snapshot.current_session or (snapshot.session_history[-1] if snapshot.session_history else None)
+    session = _latest_session(snapshot)
     if session is None:
         return AssessTrainingLoadOutput(
             progress_detected=False,
@@ -434,15 +431,16 @@ def execute_tool(tool_name: str, arguments: dict[str, Any]) -> BaseModel:
 
 def run_local_tool_pipeline(request_data: dict[str, Any]) -> tuple[dict[str, dict], AgentExecutionTrace]:
     snapshot = ToolRequestSnapshot.model_validate(request_data)
+    snap_dict = snapshot.model_dump()
     trace = AgentExecutionTrace(tool_calls=[])
     outputs: dict[str, dict] = {}
 
     ordered_calls: list[tuple[str, dict[str, Any]]] = [
-        ("build_training_context", {"request": snapshot.model_dump()}),
-        ("retrieve_training_knowledge", {"request": snapshot.model_dump(), "top_k": 3}),
-        ("assess_restrictions", {"request": snapshot.model_dump()}),
-        ("assess_training_load", {"request": snapshot.model_dump()}),
-        ("assess_medical_risk", {"request": snapshot.model_dump()}),
+        ("build_training_context", {"request": snap_dict}),
+        ("retrieve_training_knowledge", {"request": snap_dict, "top_k": 3}),
+        ("assess_restrictions", {"request": snap_dict}),
+        ("assess_training_load", {"request": snap_dict}),
+        ("assess_medical_risk", {"request": snap_dict}),
     ]
 
     for tool_name, arguments in ordered_calls:
@@ -452,13 +450,13 @@ def run_local_tool_pipeline(request_data: dict[str, Any]) -> tuple[dict[str, dic
             ToolCallRecord(
                 tool_name=tool_name,
                 arguments=arguments,
-                result=result.model_dump(),
+                result=outputs[tool_name],
                 source="local_fallback",
             )
         )
 
     confirmation_args = {
-        "request": snapshot.model_dump(),
+        "request": snap_dict,
         "medical_risk_detected": outputs["assess_medical_risk"]["medical_risk_detected"],
     }
     confirmation_result = execute_tool("request_confirmation", confirmation_args)
@@ -467,7 +465,7 @@ def run_local_tool_pipeline(request_data: dict[str, Any]) -> tuple[dict[str, dic
         ToolCallRecord(
             tool_name="request_confirmation",
             arguments=confirmation_args,
-            result=confirmation_result.model_dump(),
+            result=outputs["request_confirmation"],
             source="local_fallback",
         )
     )

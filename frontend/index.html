@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Training Coach</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f1117;--card:#1a1d27;--border:#2a2d3a;--text:#e4e4e7;--muted:#8b8d97;--accent:#6366f1;--accent-hover:#818cf8;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:24px}
+h1{font-size:28px;font-weight:700;margin-bottom:4px}
+.subtitle{color:var(--muted);font-size:14px;margin-bottom:32px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+.card h2{font-size:18px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.col{flex:1;min-width:200px}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:500}
+select,input,textarea{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none;transition:border .2s}
+select:focus,input:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:60px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 14px;background:var(--bg);border:1px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;transition:all .2s;user-select:none}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip:hover{border-color:var(--accent-hover)}
+.btn{padding:12px 28px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--accent-hover)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text);padding:8px 16px;font-size:13px;border-radius:8px;cursor:pointer;transition:all .2s}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:var(--red);border-color:var(--red)}
+.divider{height:1px;background:var(--border);margin:20px 0}
+.result-card{border-left:4px solid var(--accent);padding-left:20px}
+.result-card.refused{border-left-color:var(--red)}
+.result-card.warning{border-left-color:var(--yellow)}
+.result-card.ok{border-left-color:var(--green)}
+.badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green)}
+.badge-yellow{background:rgba(234,179,8,.15);color:var(--yellow)}
+.badge-red{background:rgba(239,68,68,.15);color:var(--red)}
+.badge-blue{background:rgba(99,102,241,.15);color:var(--accent)}
+.warning-list{margin-top:12px}
+.warning-item{padding:10px 14px;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);border-radius:8px;margin-bottom:8px;font-size:14px;color:var(--yellow)}
+.exercise-row{display:flex;gap:12px;align-items:end;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--border)}
+.exercise-row:last-child{border-bottom:none}
+.exercise-row .col{min-width:120px}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hidden{display:none}
+.session-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px}
+.session-block h3{font-size:14px;color:var(--muted);margin-bottom:10px}
+.mode-tabs{display:flex;gap:8px;margin-bottom:20px}
+.mode-tab{padding:8px 20px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--text);transition:all .2s}
+.mode-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.mode-tab:hover{border-color:var(--accent-hover)}
+.hero{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.hero-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--accent),#a855f7);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px}
+footer{text-align:center;padding:40px 0 20px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+<div class="hero-icon">🏋️</div>
+<div>
+<h1>AI Training Coach</h1>
+<p class="subtitle">Адаптивный ИИ-тренер: генерация и адаптация тренировочных программ</p>
+</div>
+</div>
+
+<div class="mode-tabs">
+<button class="mode-tab active" onclick="setMode('initial')">Стартовый план</button>
+<button class="mode-tab" onclick="setMode('adaptation')">Адаптация тренировки</button>
+</div>
+
+<div class="card">
+<h2>👤 Профиль пользователя</h2>
+<div class="row">
+<div class="col">
+<label>Цель</label>
+<select id="goal">
+<option value="hypertrophy">Гипертрофия</option>
+<option value="strength">Сила</option>
+<option value="endurance">Выносливость</option>
+<option value="general">Общая физическая подготовка</option>
+</select>
+</div>
+<div class="col">
+<label>Уровень подготовки</label>
+<select id="experience">
+<option value="beginner">Начинающий</option>
+<option value="intermediate">Средний</option>
+<option value="advanced">Продвинутый</option>
+</select>
+</div>
+</div>
+<div style="margin-top:16px">
+<label>Оборудование</label>
+<div class="chips" id="equipment-chips"></div>
+</div>
+<div style="margin-top:16px">
+<label>Ограничения</label>
+<textarea id="restrictions" placeholder="Например: боль в колене, без становой тяги (каждое с новой строки)"></textarea>
+</div>
+</div>
+
+<div id="adaptation-section" class="hidden">
+<div class="card">
+<h2>📊 Текущая тренировка</h2>
+<div class="row" style="margin-bottom:12px">
+<div class="col">
+<label>Дата</label>
+<input type="date" id="session-date">
+</div>
+<div class="col">
+<label>Часов сна</label>
+<input type="number" id="sleep-hours" min="0" max="24" step="0.5" placeholder="7.5">
+</div>
+<div class="col">
+<label>Усталость (1-10)</label>
+<input type="number" id="fatigue" min="1" max="10" placeholder="5">
+</div>
+</div>
+<div>
+<label>Заметки</label>
+<textarea id="session-notes" placeholder="Как прошла тренировка..."></textarea>
+</div>
+</div>
+
+<div class="card">
+<h2>💪 Упражнения</h2>
+<div id="exercises-list"></div>
+<button class="btn-outline" onclick="addExercise()" style="margin-top:12px">+ Добавить упражнение</button>
+</div>
+</div>
+
+<div style="display:flex;gap:12px;align-items:center">
+<button class="btn" id="submit-btn" onclick="submit()">Получить рекомендацию</button>
+<span id="loading" class="hidden"><span class="spinner"></span> Генерация...</span>
+</div>
+
+<div id="result-section" class="hidden" style="margin-top:24px">
+<div class="card result-card" id="result-card">
+<h2 id="result-title">📋 Результат</h2>
+<div style="margin-bottom:16px">
+<span class="badge badge-blue" id="badge-mode"></span>
+<span class="badge" id="badge-decision"></span>
+</div>
+<div id="session-assessment" class="hidden" style="margin-bottom:16px">
+<label>Оценка тренировки</label>
+<p id="assessment-text" style="margin-top:4px;line-height:1.6"></p>
+</div>
+<div style="margin-bottom:16px">
+<label>Решение</label>
+<p id="decision-text" style="margin-top:4px;font-size:16px;font-weight:600"></p>
+</div>
+<div style="margin-bottom:16px">
+<label>Обоснование</label>
+<p id="reasoning-text" style="margin-top:4px;line-height:1.6;color:var(--muted)"></p>
+</div>
+<div id="changes-section" class="hidden" style="margin-bottom:16px">
+<label>Изменения упражнений</label>
+<div id="changes-list" style="margin-top:8px"></div>
+</div>
+<div id="recommendation-section" class="hidden" style="margin-bottom:16px">
+<label>Рекомендация на микроцикл</label>
+<p id="recommendation-text" style="margin-top:4px;line-height:1.6"></p>
+</div>
+<div id="warnings-section" class="hidden">
+<label>⚠️ Предупреждения</label>
+<div class="warning-list" id="warnings-list"></div>
+</div>
+<div id="refused-section" class="hidden" style="margin-top:16px">
+<div style="padding:16px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px">
+<strong style="color:var(--red)">🚫 Отказ</strong>
+<p id="refuse-text" style="margin-top:8px;line-height:1.6"></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="error-section" class="hidden" style="margin-top:24px">
+<div class="card" style="border-left:4px solid var(--red);padding-left:20px">
+<h2 style="color:var(--red)">Ошибка</h2>
+<p id="error-text" style="margin-top:8px;line-height:1.6"></p>
+</div>
+</div>
+
+<footer>AI Adaptive Training Coach • Powered by Qwen + LiteLLM + Langfuse</footer>
+</div>
+
+<script>
+const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
+const EQUIPMENT_LIST = ['штанга', 'гантели', 'скамья', 'турник', 'тренажёры', 'силовая рама', 'гантели (дома)', 'коврик'];
+let currentMode = 'initial';
+let exerciseCount = 0;
+
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('adaptation-section').classList.toggle('hidden', mode === 'initial');
+}
+
+function initChips() {
+  const container = document.getElementById('equipment-chips');
+  EQUIPMENT_LIST.forEach(item => {
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.textContent = item;
+    chip.onclick = () => chip.classList.toggle('active');
+    container.appendChild(chip);
+  });
+}
+
+function addExercise() {
+  exerciseCount++;
+  const id = exerciseCount;
+  const list = document.getElementById('exercises-list');
+  const block = document.createElement('div');
+  block.className = 'exercise-row';
+  block.id = `exercise-${id}`;
+  block.innerHTML = `
+    <div class="col"><label>Упражнение</label><input type="text" class="ex-name" placeholder="Жим лёжа"></div>
+    <div class="col" style="min-width:80px"><label>Планы</label><input type="number" class="ex-planned" min="1" value="3"></div>
+    <div class="col" style="min-width:80px"><label>Сделано</label><input type="number" class="ex-completed" min="0" value="3"></div>
+    <div class="col" style="min-width:80px"><label>Повторы</label><input type="text" class="ex-reps" placeholder="8,8,8"></div>
+    <div class="col" style="min-width:80px"><label>Вес (кг)</label><input type="number" class="ex-weight" min="0" step="0.5" placeholder="60"></div>
+    <div class="col" style="min-width:70px"><label>RPE</label><input type="number" class="ex-rpe" min="1" max="10" placeholder="7"></div>
+    <button class="btn-outline btn-danger" onclick="document.getElementById('exercise-${id}').remove()" style="margin-bottom:2px">✕</button>
+  `;
+  list.appendChild(block);
+}
+
+function buildRequest() {
+  const equipment = [];
+  document.querySelectorAll('#equipment-chips .chip.active').forEach(c => equipment.push(c.textContent));
+  const restrictions = document.getElementById('restrictions').value.trim().split('\n').filter(r => r.trim());
+  
+  const profile = {
+    goal: document.getElementById('goal').value,
+    experience_level: document.getElementById('experience').value,
+    equipment,
+    restrictions
+  };
+
+  const request = {
+    user_profile: profile,
+    session_history: [],
+    current_session: null,
+    temperature: 0.3
+  };
+
+  if (currentMode === 'adaptation') {
+    const exercises = [];
+    document.querySelectorAll('.exercise-row').forEach(row => {
+      const name = row.querySelector('.ex-name').value.trim();
+      if (!name) return;
+      exercises.push({
+        name,
+        sets_planned: parseInt(row.querySelector('.ex-planned').value) || 3,
+        sets_completed: parseInt(row.querySelector('.ex-completed').value) || 3,
+        reps: row.querySelector('.ex-reps').value || '8',
+        weight_kg: row.querySelector('.ex-weight').value ? parseFloat(row.querySelector('.ex-weight').value) : null,
+        rpe: row.querySelector('.ex-rpe').value ? parseInt(row.querySelector('.ex-rpe').value) : null
+      });
+    });
+
+    request.current_session = {
+      date: document.getElementById('session-date').value || new Date().toISOString().split('T')[0],
+      exercises,
+      sleep_hours: document.getElementById('sleep-hours').value ? parseFloat(document.getElementById('sleep-hours').value) : null,
+      fatigue_level: document.getElementById('fatigue').value ? parseInt(document.getElementById('fatigue').value) : null,
+      notes: document.getElementById('session-notes').value || null
+    };
+  }
+
+  return request;
+}
+
+async function submit() {
+  const btn = document.getElementById('submit-btn');
+  const loading = document.getElementById('loading');
+  const resultSection = document.getElementById('result-section');
+  const errorSection = document.getElementById('error-section');
+  
+  btn.disabled = true;
+  loading.classList.remove('hidden');
+  resultSection.classList.add('hidden');
+  errorSection.classList.add('hidden');
+
+  const request = buildRequest();
+
+  try {
+    const resp = await fetch(`${API_URL}/coach`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(request)
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json();
+      throw new Error(err.detail || JSON.stringify(err));
+    }
+
+    const data = await resp.json();
+    showResult(data);
+  } catch (e) {
+    errorSection.classList.remove('hidden');
+    document.getElementById('error-text').textContent = e.message;
+  } finally {
+    btn.disabled = false;
+    loading.classList.add('hidden');
+  }
+}
+
+function showResult(data) {
+  const section = document.getElementById('result-section');
+  const card = document.getElementById('result-card');
+  section.classList.remove('hidden');
+
+  card.className = 'card result-card';
+  if (data.refused) card.classList.add('refused');
+  else if (data.safety_warnings && data.safety_warnings.length) card.classList.add('warning');
+  else card.classList.add('ok');
+
+  document.getElementById('badge-mode').textContent = data.mode === 'initial_plan' ? 'Стартовый план' : 'Адаптация';
+  
+  const decisionBadge = document.getElementById('badge-decision');
+  decisionBadge.textContent = data.next_session.decision;
+  decisionBadge.className = 'badge';
+  if (data.refused) decisionBadge.classList.add('badge-red');
+  else if (data.safety_warnings && data.safety_warnings.length) decisionBadge.classList.add('badge-yellow');
+  else decisionBadge.classList.add('badge-green');
+
+  const assessDiv = document.getElementById('session-assessment');
+  if (data.session_assessment) {
+    assessDiv.classList.remove('hidden');
+    document.getElementById('assessment-text').textContent = data.session_assessment;
+  } else assessDiv.classList.add('hidden');
+
+  document.getElementById('decision-text').textContent = data.next_session.decision;
+  document.getElementById('reasoning-text').textContent = data.next_session.reasoning;
+
+  const changesDiv = document.getElementById('changes-section');
+  const changesList = document.getElementById('changes-list');
+  if (data.next_session.exercise_changes && data.next_session.exercise_changes.length) {
+    changesDiv.classList.remove('hidden');
+    changesList.innerHTML = data.next_session.exercise_changes.map(c => `
+      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;margin-bottom:6px;font-size:14px">
+        <strong>${c.exercise_name}</strong> — ${c.change_type}: ${c.details}
+      </div>
+    `).join('');
+  } else changesDiv.classList.add('hidden');
+
+  const recDiv = document.getElementById('recommendation-section');
+  if (data.long_term_recommendation) {
+    recDiv.classList.remove('hidden');
+    document.getElementById('recommendation-text').textContent = data.long_term_recommendation;
+  } else recDiv.classList.add('hidden');
+
+  const warnDiv = document.getElementById('warnings-section');
+  const warnList = document.getElementById('warnings-list');
+  if (data.safety_warnings && data.safety_warnings.length) {
+    warnDiv.classList.remove('hidden');
+    warnList.innerHTML = data.safety_warnings.map(w => `<div class="warning-item">⚠️ ${w}</div>`).join('');
+  } else warnDiv.classList.add('hidden');
+
+  const refusedDiv = document.getElementById('refused-section');
+  if (data.refused) {
+    refusedDiv.classList.remove('hidden');
+    document.getElementById('refuse-text').textContent = data.refuse_reason || 'Запрос отклонён по соображениям безопасности';
+  } else refusedDiv.classList.add('hidden');
+
+  section.scrollIntoView({ behavior: 'smooth' });
+}
+
+initChips();
+document.getElementById('session-date').value = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>

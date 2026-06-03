@@ -394,11 +394,7 @@ def sgr_to_coach_response(sgr: CoachSGRResponse) -> CoachResponse:
         next_session=NextSessionPlan(
             decision=sgr.final_recommendation.decision,
             exercise_changes=[
-                ExerciseChange(
-                    exercise_name=change.exercise_name,
-                    change_type=change.change_type,
-                    details=change.details,
-                )
+                ExerciseChange(**change.model_dump())
                 for change in sgr.final_recommendation.exercise_changes
             ],
             reasoning=sgr.final_recommendation.reasoning,
@@ -408,11 +404,6 @@ def sgr_to_coach_response(sgr: CoachSGRResponse) -> CoachResponse:
         refused=sgr.final_recommendation.refused,
         refuse_reason=sgr.final_recommendation.refuse_reason,
     )
-
-from typing import Literal, Optional
-
-from pydantic import BaseModel, Field
-
 
 class ToolRequestSnapshot(BaseModel):
     user_profile: UserProfile
